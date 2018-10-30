@@ -21,6 +21,7 @@ verb_7 = input("Submit a verb")
 adj_3 = input("Submit an adjective")
 adj_4("Please submit an adjective")
 
+
 print("Thanksgiving is a classic %s holiday that %s %s values. Everywhere I go, I can %s jokes" % (adj_1,verb_1,adj_1, verb_2))
 print("calling it the %s of %s and %s, with some family on the side. That is actually how I would" % (noun_1, noun_2, noun_3))
 print("describe my Thanksgivings. The %s Thanksgiving that many recognize was in %s," % (number_1, number_2))
@@ -31,3 +32,4 @@ print("well as teaching the %s how to survive in New England. %s was the %s to t
 print("prayers and did his/her best to %s everything, and I believe he/she was successful. Later," % verb_6)
 print("Presidents George Washington, Abraham Lincoln, and FDR would make Thanksgiving what we")
 print("%s it as today, and all %s children enjoy getting the day off to be free." % (verb_7, adj_4))
+

@@ -1,3 +1,4 @@
+"""
 print("Hello World, I am alive")
 
 # This is a comment. This has no effect on the code
@@ -53,3 +54,52 @@ print("I have a car called %s. It is a %s." % (car_name, car_type))
 real_age = int(input("How old are you again?"))
 hidden_age = real_age + 5
 print("This is your real age: %d" % hidden_age)
+
+
+This is a multi line comment
+anything between the "s is not run
+"""
+
+
+# Functions
+def sayIt():
+    print("Hello World!")
+
+
+
+sayIt()
+sayIt()
+sayIt()
+
+
+# f(x) = 2x+3
+def f(x):
+    print(2*x + 3)
+
+
+f(1)
+f(2)
+f(5000)
+
+
+# Distance Formula
+def dist(x1, y1, x2, y2):
+    dist = ((x1-x2)**2 + (y1-y2)**2)**(1/2)
+    print(dist)
+
+dist(0, 0, 3, 4)
+dist(0, 0, 8, 15)
+
+
+# Loops
+"""for i in range(510):   # range 5 is list of numbers 0-4
+    sayIt()
+"""
+for i in range(10):
+    print(i + 1)
+
+
+for i in range(5):
+    f(i)
+
+# While loops
