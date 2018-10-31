@@ -1,6 +1,6 @@
 adj_1 = input("Please submit an adjective:")
 verb_1 = input("Please submit a verb ending with s:")
-verb_2 = input("Please submit a past tense verb:")
+verb_2 = input("Please submit a verb:")
 noun_1 = input("Submit a plural noun:")
 noun_2 = input("Submit a plural noun:")
 noun_3 = input("Submit a noun:")
@@ -32,4 +32,3 @@ print("well as teaching the %s how to survive in New England. %s was the %s to t
 print("prayers and did his/her best to %s everything, and I believe he/she was successful. Later," % verb_6)
 print("Presidents George Washington, Abraham Lincoln, and FDR would make Thanksgiving what we")
 print("%s it as today, and all %s children enjoy getting the day off to be free." % (verb_7, adj_4))
-
