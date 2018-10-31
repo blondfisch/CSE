@@ -90,11 +90,11 @@ def dist(x1, y1, x2, y2):
 dist(0, 0, 3, 4)
 dist(0, 0, 8, 15)
 
-
 # Loops
 """for i in range(510):   # range 5 is list of numbers 0-4
     sayIt()
 """
+# For Loops
 for i in range(10):
     print(i + 1)
 
@@ -103,3 +103,39 @@ for i in range(5):
     f(i)
 
 # While loops
+a = 1
+while a < 10:
+    print(a)
+    a += 2  # This is the same as saying a = a + 1
+
+
+"""
+For loops - Use when you know EXACTLY  how many iterations
+While loops - Use when you DON'T know how many iterations
+"""
+
+#  Control Structures (If statements)
+sunny = False
+if sunny:
+    print("Go outside")
+
+
+def grade_calc(percentage):
+    if percentage >= 90:
+        return "A"
+    elif percentage >= 80:
+        return "B"
+    elif percentage >= 70:
+        return "C"
+    elif percentage >= 60:
+        return "D"
+    else:
+        return "F"
+
+
+your_grade = grade_calc(82)
+print(your_grade)
+
+#   "Random" Notes
+import random   #This should be on line 1
+print(random.randint(0, 100))
