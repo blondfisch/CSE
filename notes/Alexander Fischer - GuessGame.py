@@ -8,3 +8,11 @@ if difficulty.lower() == "easy":
 else:
     number = random.randint(0, 100)
     print("I have a random number between 0 and 100. You have 5 guesses to figure it out.")
+
+guess = int(input("Type in a number"))
+if number > guess:
+    print("Guess higher")
+    guess = int(input("Guess again"))
+else:
+    print("Guess lower.")
+    guess = int(input("Guess again"))
