@@ -1,11 +1,10 @@
 import random
-wordList = [['e', 'd', 'i', 's', 'o', 'n'], ['t', 'i', 'g', 'e', 'r'], ['w', 'i', 'e', 'b', 'e']]
+wordList = [["e", "d", "i", "s", "o", "n"], ["t", "i", "g", "e", "r"], ["w", "i", "e", "b", "e"]]
 wordidx = random.randint(0, len(wordList) - 1)
 word = wordList[wordidx]
-#   print(word)
+print(word)
 guesseslft = 6
-letterslft = 0
-len(wordList[wordidx])  # This is the length of the list
+letterslft = len(wordList[wordidx])  # This is the length of the list
 while guesseslft > 0 and letterslft > 0:
     print("Guesses left: %d" % guesseslft)
     print("Letters left: %d" % letterslft)
