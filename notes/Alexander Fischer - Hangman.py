@@ -4,8 +4,10 @@ word = random.choice(wordList)
 word_listform = list(word)
 #   print(word)
 guesseslft = 6
+prior_guesses = []
 #   print(word_listform)
-disp_list = ["_" * len(word)]
+disp_list = "_ " * len(word)
+wordidx = 0
 print(disp_list)
 letterslft = len(word)  # This is the length of the list
 while guesseslft > 0 and letterslft > 0:
@@ -15,9 +17,17 @@ while guesseslft > 0 and letterslft > 0:
     print("Letters left: %d" % letterslft)
     guessltr = input("Guess a letter")
     if guessltr in word_listform:
-        print("Correct")
-        letterslft -= 1
-        disp_list.append(guessltr)
+        if guessltr not in prior_guesses:
+            print("Correct")
+            letterslft -= 1
+            prior_guesses.append(guessltr)
+            wordidx = word.index(guessltr)
+            print(wordidx)
+            for guessltr in range(0, len(word)):
+                disp_list.insert(wordidx, guessltr)
+        else:
+            print("You already guessed that. Guess again.")
+            guessltr = input("Guess a letter")
     else:
         print("Incorrect")
         guesseslft -= 1
