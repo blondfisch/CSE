@@ -18,15 +18,18 @@ while guesseslft > 0 and letterslft > 0:
     if guessltr in word_listform:
         wordidx = word.index(guessltr)
         if guessltr not in prior_guesses:
-           while guessltr in word_listform:
-            print("Correct")
-            letterslft -= 1
+            """while guessltr in word_listform:
+                print("Correct")
+
+                print(wordidx)
+
+                word_listform.pop(wordidx)
+                wordidx = word.index(guessltr)
+"""
             prior_guesses.append(guessltr)
-            print(wordidx)
             disp_list.pop(wordidx)
             disp_list.insert(wordidx, guessltr)
-            word_listform.pop(wordidx)
-               
+            letterslft -= 1
         else:
             print("You already guessed that. Guess again.")
     else:
