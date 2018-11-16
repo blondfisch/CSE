@@ -9,6 +9,7 @@ prior_guesses = []
 disp_list = ["_"] * len(word)
 wordidx = 0
 letterslft = len(word)  # This is the length of the list
+wordmax = 0
 while guesseslft > 0 and letterslft > 0:
     print(' '.join(disp_list))
     #   print(prior_guesses)
@@ -16,21 +17,21 @@ while guesseslft > 0 and letterslft > 0:
     print("Letters left: %d" % letterslft)
     guessltr = input("Guess a letter")
     if guessltr in word_listform:
-        wordidx = word.index(guessltr)
+        wordidx = word
+        wordmax = word.max(guessltr)
         if guessltr not in prior_guesses:
-            """while guessltr in word_listform:
-                print("Correct")
 
-                print(wordidx)
+            for guessltr in word_listform   #[i for i, j in enumerate(a) if j == m:
+                if wordidx == word.index(guessltr):
+                    disp_list.pop(wordmax)
+                    disp_list.inset(wordmax, guessltr)
+                    prior_guesses.append(guessltr)
+                    disp_list.pop(wordidx)
+                    disp_list.insert(wordidx, guessltr)
+                    letterslft -= 1
 
-                word_listform.pop(wordidx)
-                wordidx = word.index(guessltr)
-"""
-            prior_guesses.append(guessltr)
-            disp_list.pop(wordidx)
-            disp_list.insert(wordidx, guessltr)
-            letterslft -= 1
         else:
+
             print("You already guessed that. Guess again.")
     else:
         print("Incorrect")
