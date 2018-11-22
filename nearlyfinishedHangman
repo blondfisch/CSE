@@ -1,0 +1,30 @@
+import random
+wordList = ["tiger", "edison", "wiebe"]
+word = random.choice(wordList)
+word_listform = list(word)
+#   print(word)
+guesseslft = 6
+prior_guesses = []
+#   print(word_listform)
+disp_list = ["_"] * len(word)
+wordidx = 0
+letterslft = len(word)  # This is the length of the list
+while guesseslft > 0 and letterslft > 0:
+    print(' '.join(disp_list))
+    #   print(prior_guesses)
+    print("Guesses left: %d" % guesseslft)
+    print("Letters left: %d" % letterslft)
+    guessltr = input("Guess a letter")
+    for letter in range(len(word_listform)):
+        if guessltr == word_listform[letter]:
+            disp_list[letter] = guessltr  # replace all letters in the chosen word that match the players guess
+
+        if guessltr not in word_listform:
+            guesseslft -= 1
+
+if guesseslft == 0:
+    print("You ran out of turns. Heisenwiebe won.")
+    print("The actual word was %s" % word)
+if letterslft == 0:
+    print("Congratulations! You guessed the word!")
+    print("The word was %s" % word)
