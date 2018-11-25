@@ -15,12 +15,18 @@ while guesseslft > 0 and letterslft > 0:
     print("Guesses left: %d" % guesseslft)
     print("Letters left: %d" % letterslft)
     guessltr = input("Guess a letter")
-    for letter in range(len(word_listform)):
-        if guessltr == word_listform[letter]:
-            disp_list[letter] = guessltr  # replace all letters in the chosen word that match the players guess
-
-        if guessltr not in word_listform:
-            guesseslft -= 1
+    if guessltr not in prior_guesses:
+        for letter in range(len(word_listform)):
+            if guessltr == word_listform[letter]:
+                disp_list[letter] = guessltr  # replace all letters in the chosen word that match the players guess
+                letterslft -= 1
+                prior_guesses.append(guessltr)
+    else:
+        print("You already guessed that.")
+    if guessltr not in word_listform:
+        guesseslft -= 1
+        print("Incorrect")
+        prior_guesses.append(guessltr)
 
 if guesseslft == 0:
     print("You ran out of turns. Heisenwiebe won.")
