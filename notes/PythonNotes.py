@@ -149,3 +149,36 @@ print(3 != 4)
 a = 3   # A is set to 3
 a == 3 # Is a equal to 3
 """
+
+# Creating a list
+colors = ["blue", "turquoise", "cyan", "pink", "orange", "black", "red", "wiebe", "grape doctor", "thanosBoi", "food"]
+print(colors[0])
+
+# Length of list
+print("There are %d things in the list." % len(colors))
+
+# Changing elements in a list
+colors[1] = "Chocolate Covered Maple Smoked Bacon Soda"
+print(colors[1])
+
+# Looping through lists
+for item in colors:
+    print(item)
+
+'''
+Make a list with 7 items
+change the 3rd thing in the list
+print the item print the full list
+'''
+list = ["Jack", "Chocolate", "Smoked", "Maple", "Smoked", "Bacon", "Soda"]
+list[2] = "Covered"
+print(list[2])
+for thing in list:
+    print(thing)
+print("The last thing in the list is %s" % list[len(list) - 1])
+
+# Slicing a List
+print(list[1:3])
+print(list[1:5])
+print(list[1:])
+print(list[:4])
