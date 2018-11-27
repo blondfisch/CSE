@@ -169,8 +169,8 @@ for item in colors:
 Make a list with 7 items
 change the 3rd thing in the list
 print the item print the full list
-'''
-list = ["Jack", "Chocolate", "Smoked", "Maple", "Smoked", "Bacon", "Soda"]
+
+myList = ["Jack", "Chocolate", "Smoked", "Maple", "Smoked", "Bacon", "Soda"]
 list[2] = "Covered"
 print(list[2])
 for thing in list:
@@ -182,3 +182,65 @@ print(list[1:3])
 print(list[1:5])
 print(list[1:])
 print(list[:4])
+'''
+
+food_list = ["Chocolate covered maple smoked bacon soda", "sushi", "rocks", "cow tongues", "chicken feet", "popcorn",
+              "chocolate", "maple syrup", "corn dogs", "livers - we don't discriminate", "salmon", "ice cream",
+              "turkey", "beef", "chicken", "salads", "fried oreo bacon", "fried bacon oreo", "pumpkin spice bacon",
+              "pasta", "pasta soda", "pirate soda", "peppermint oreos", "double stuffed oreos", "bacon oreos",
+             "pancakes", "eggs", "pie"]
+print(len(food_list))
+
+# Adding stuff to a list
+food_list.append("apple pie")
+food_list.append("waffles")
+# Notice that everything is object.method(parameters)
+print(food_list)
+food_list.insert(1, "eggo waffles")
+print(food_list)
+
+
+# Removing stuff from a list
+food_list.remove("salads")
+print(food_list)
+
+'''
+make a new list with 3 items
+add a 4th item to the list
+remove one of the first 3'''
+soda_list = ["cherry", "diet", "vanilla"]
+
+soda_list.append("Chocolate Covered Maple Smoked Bacon")
+soda_list.remove("diet")
+print(soda_list)
+
+
+# Tuples
+brands = ("apples", "Samsung", "HTC")   # Notice the parentheses
+
+# Also removing stuff from a list
+print(food_list)
+food_list.pop(0)
+print(food_list)
+
+# Find the index of an item
+print(food_list.index("chicken"))
+
+# changing things into a list
+string1 = "turquoise"
+list1 = list(string1)
+print(list1)
+
+for i in range(len(list1)): # i goes through all indices
+    if list1[i] == "u":  # if we find a U
+        list1.pop(i)    # remove the i-th index
+        list1.insert(i, "*")    # put a * there instead
+
+'''for character in list1:
+    if character == "u":
+        current_index = list1.index(character)
+        list1.pop(current_index)
+        list1.insert(current_index, "*")
+'''
+# Turn a list into a string
+print("".join(list1))
