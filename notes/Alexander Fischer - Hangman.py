@@ -1,5 +1,6 @@
 import random
 import string
+# defining variables
 wordList = ["tiger", "edison", "wiebe", "thanos", "pumpkin", "desktop", "database", "crossroads", "secret",
             "teacher", "redwood", "deliver", "computer", "political", "sadness"]
 word = random.choice(wordList)
@@ -16,7 +17,7 @@ while guesseslft > 0 and letterslft > 0:
     guessltr = input("Guess a letter")
     if guessltr not in prior_guesses:
         for letter in range(len(word_listform)):
-            # if guessltr == word_listform[letter]:
+            if guessltr == word_listform[letter]:
                 print("Correct")
                 disp_list[letter] = guessltr  # replace all letters in the chosen word that match the players guess
                 letterslft -= 1
