@@ -8,18 +8,14 @@ word_listform = list(word)
 guesseslft = 6
 prior_guesses = []
 disp_list = ["_"] * len(word)
-letterslft = len(word)  # This is the length of the list
-while guesseslft > 0 and letterslft > 0:
+while guesseslft > 0 and "_" in disp_list:
     print(' '.join(disp_list))
     print("Guesses left: %d" % guesseslft)
-    print("Letters left: %d" % letterslft)
     guessltr = input("Guess a letter")
     if guessltr not in prior_guesses:
         for letter in range(len(word_listform)):
             if guessltr == word_listform[letter]:
-                print("Correct")
                 disp_list[letter] = guessltr  # replace all letters in the chosen word that match the players guess
-                letterslft -= 1
                 prior_guesses.append(guessltr)
     else:
         print("You already guessed that.")
