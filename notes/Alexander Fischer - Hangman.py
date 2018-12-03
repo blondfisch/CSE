@@ -8,7 +8,6 @@ word_listform = list(word)
 guesseslft = 6
 prior_guesses = []
 disp_list = ["_"] * len(word)
-wordidx = 0
 letterslft = len(word)  # This is the length of the list
 while guesseslft > 0 and letterslft > 0:
     print(' '.join(disp_list))
