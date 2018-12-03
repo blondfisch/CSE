@@ -51,3 +51,35 @@ def challenge6(radi):
 
 print(challenge6(5))
 
+
+def challenge7(n):
+    return n + 11*n + 111*n
+
+
+print(challenge7(1))
+
+
+def challenge8(number):
+    if number in range(1850, 2150):
+        print("The number is within 150 of 2000")
+    elif number in range(2850, 3150):
+        print("That number is within 150 of 3000")
+    else:
+        print("That number is not even close to 2000 or 3000")
+
+
+print(challenge8(3001))
+
+
+def challenge9(letter):
+    vowel_list = ["a", "e", "i", "o", "u"]
+    if letter in vowel_list:
+        print("That is a vowel")
+    else:
+        print("The letter is not a vowel")
+
+
+print(challenge9("a"))
+
+
+def challenge10():
