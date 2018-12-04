@@ -95,11 +95,14 @@ def challenge10(integer):
 print(challenge10(31))
 
 
-def challenge11(a, b, c, d, e, f, g):
-    datetime.datetime.now
+def challenge11():
+    return datetime.datetime.now()
 
 
-def challenge12(a,b):
+print(str(challenge11()))
+
+
+def challenge12(a, b):
     return math.gcd(a, b)
 
 
