@@ -1,6 +1,5 @@
 import random
 import string
-# defining variables
 wordList = ["tiger", "edison", "wiebe", "thanos", "pumpkin", "desktop", "database", "crossroads", "secret",
             "teacher", "redwood", "deliver", "computer", "political", "sadness"]
 word = random.choice(wordList)
