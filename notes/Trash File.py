@@ -5,15 +5,10 @@ import datetime
 
 
 def challenge1():
-
     numbers = []
-    ",".join[numbers]
-    for i in range(2000, 3200):
-        if i % 7 == 0 and not i % 7 == 0:
+    for i in range(2000, 3201):
+        if i % 7 == 0 and i % 5 != 0:
             numbers.append(i)
             print(numbers)
-        else:
-            return False
-
 
 print(challenge1())
