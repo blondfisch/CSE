@@ -31,4 +31,4 @@ print(challenge2(3, 4, 5, 6, 8, 10, 60))
 
 theThing = input("T series will rule them all.")
 
-god.call(1)
+# god.call(1)
