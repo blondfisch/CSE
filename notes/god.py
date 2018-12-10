@@ -1,6 +1,14 @@
 import random
 import string
 import math
-from google import search
+import os
 
-ip = raw_input("What would you like to search for?")
+def callthing(god):
+    while god == 1:
+        return os.startfile("C:\Windows\WinSxS\wow64_microsoft-windows-calc_31bf3856ad364e35_10.0.15063.0_none_c52684c687eb7360\calc.exe")
+
+
+
+x = 1
+while x == 1:
+    callthing(1)
