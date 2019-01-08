@@ -25,6 +25,6 @@ while guesseslft > 0 and "_" in disp_list:
 if guesseslft == 0:
     print("You ran out of turns. Heisenwiebe won.")
     print("The actual word was %s" % word)
-if letterslft == 0:
+if "_" not in disp_list:
     print("Congratulations! You guessed the word!")
     print("The word was %s" % word)
