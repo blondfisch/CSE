@@ -1,20 +1,27 @@
 import random
 import string
-wordList = ["tiger", "edison", "wiebe", "thanos", "pumpkin", "desktop", "database", "crossroads", "secret",
-            "teacher", "redwood", "deliver", "computer", "political", "sadness"]
+wordList = ["tiger", "Edison", "Wiebe!", "Thanos!", "pumpkin", "desktop", "database", "crossroads", "secret!",
+            "teacher", "redwood", "deliver", "computer", "political", "sadness", "fight!"]
 word = random.choice(wordList)
 word_listform = list(word)
-guesseslft = 6
+guesseslft = 8
 prior_guesses = []
-disp_list = ["_"] * len(word)
+legal_letters = list(string.ascii_lowercase) + list(string.ascii_uppercase)
+print(legal_letters)
+disp_list = []
+for i in range(len(word_listform)):
+    if word_listform[i] in legal_letters:
+        disp_list += "_"
+    else:
+        disp_list += word_listform[i]
 while guesseslft > 0 and "_" in disp_list:
     print(' '.join(disp_list))
     print("Guesses left: %d" % guesseslft)
     guessltr = input("Guess a letter")
-    if guessltr not in prior_guesses:
+    if guessltr not in prior_guesses and guessltr in legal_letters and guessltr in word_listform or :
         for letter in range(len(word_listform)):
             if guessltr == word_listform[letter]:
-                disp_list[letter] = guessltr  # replace all letters in the chosen word that match the players guess
+                disp_list[letter] = word_listform[letter]
                 prior_guesses.append(guessltr)
     else:
         print("You already guessed that.")
