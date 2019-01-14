@@ -31,7 +31,7 @@ while guesseslft > 0 and "_" in disp_list:
             if guessltr == anti_letters[letter]:
                 disp_list[letter] = word_listform[letter]
                 prior_guesses.append(guessltr)
-    else:
+    elif guessltr in prior_guesses:
         print("You already guessed that.")
     if guessltr not in word_listform:
         guesseslft -= 1
