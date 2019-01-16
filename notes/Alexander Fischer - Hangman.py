@@ -1,7 +1,7 @@
 import random
 import string
-wordList = ["tiger", "Edison", "Wiebe!", "Thanos!", "pumpkin", "desktop", "database", "crossroads", "secret!",
-            "teacher", "redwood", "deliver", "computer", "political", "sadness", "fight!"]
+wordList = ["tiger", "Edison", "Wiebe!", "Thanos!", "pumpkin", "desktop", "database", "crossroads", "secret",
+            "teacher", "redwood", "deliver", "computer", "political", "sadness", "fight!", "Heisenweibe", "Victory!"]
 word = random.choice(wordList)
 word_listform = list(word)
 guesseslft = 8
@@ -10,7 +10,7 @@ legal_letters = list(string.ascii_letters)
 anti_letters = list(word.lower())
 totalword = anti_letters + word_listform
 disp_list = []
-print(word)
+
 for i in range(len(word_listform)):
     if word_listform[i] in legal_letters:
         disp_list += "_"
@@ -18,7 +18,6 @@ for i in range(len(word_listform)):
         disp_list += word_listform[i]
 solve = False
 num = 0
-
 while guesseslft > 0 and "_" in disp_list and solve is False:
     print(' '.join(disp_list))
     print("Guesses left: %d" % guesseslft)
@@ -31,10 +30,13 @@ while guesseslft > 0 and "_" in disp_list and solve is False:
                     num += 1
             if num == len(word_listform):
                 solve = True
-                disp_list = word_listform
             else:
                 print("Incorrect")
-    if "_" in disp_list and len(guessltr) == 1:
+                guesseslft -= 1
+        else:
+            guesseslft -= 1
+            print("Incorrect")
+    elif "_" in disp_list and len(guessltr) == 1:
         if guessltr not in prior_guesses and guessltr in legal_letters and guessltr in totalword:
             for letter in range(len(word_listform)):
                 if guessltr.lower() == word_listform[letter].lower():
@@ -43,6 +45,8 @@ while guesseslft > 0 and "_" in disp_list and solve is False:
 
         elif guessltr not in anti_letters and guessltr in legal_letters and guessltr not in word_listform:
             print("Incorrect")
+            prior_guesses.append(guessltr)
+            guesseslft -= 1
         elif guessltr in prior_guesses:
             print("You already guessed that.")
         elif guessltr not in legal_letters:
@@ -51,6 +55,5 @@ while guesseslft > 0 and "_" in disp_list and solve is False:
     if guesseslft == 0:
         print("You ran out of turns. Heisenwiebe won.")
         print("The actual word was %s" % word)
-
 print("Congratulations! You guessed the word!")
 print("The word was %s" % word)
