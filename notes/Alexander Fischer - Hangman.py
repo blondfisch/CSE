@@ -52,8 +52,10 @@ while guesseslft > 0 and "_" in disp_list and solve is False:
         elif guessltr not in legal_letters:
             guesseslft -= 1
             print("That is not a valid letter")
-    if guesseslft == 0:
-        print("You ran out of turns. Heisenwiebe won.")
-        print("The actual word was %s" % word)
+
+if guesseslft == 0:
+    print("You ran out of turns. Heisenwiebe won.")
+    print("The actual word was %s" % word)
+
 print("Congratulations! You guessed the word!")
 print("The word was %s" % word)
