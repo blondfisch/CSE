@@ -10,7 +10,6 @@ legal_letters = list(string.ascii_letters)
 anti_letters = list(word.swapcase())
 totalword = anti_letters + word_listform
 disp_list = []
-
 for i in range(len(word_listform)):
     if word_listform[i] in legal_letters:
         disp_list += "_"
@@ -52,10 +51,9 @@ while guesseslft > 0 and "_" in disp_list and solve is False:
         elif guessltr not in legal_letters:
             guesseslft -= 1
             print("That is not a valid letter")
-
 if guesseslft == 0:
     print("You ran out of turns. Heisenwiebe won.")
     print("The actual word was %s" % word)
-
-print("Congratulations! You guessed the word!")
-print("The word was %s" % word)
+if "_" not in disp_list:
+    print("Congratulations! You guessed the word!")
+    print("The word was %s" % word)
