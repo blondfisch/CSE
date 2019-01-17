@@ -1,7 +1,8 @@
 import random
 import string
 wordList = ["tiger", "Edison", "Wiebe!", "Thanos!", "pumpkin", "desktop", "database", "crossroads", "secret",
-            "teacher", "redwood", "deliver", "computer", "political", "sadness", "fight!", "Heisenweibe", "Victory!"]
+            "teacher", "redwood", "deliver", "computer", "political", "sadness", "fight!", "Heisenweibe", "Victory!",
+            "Muad'Weibe"]
 word = random.choice(wordList)
 word_listform = list(word)
 guesseslft = 8
