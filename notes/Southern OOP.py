@@ -7,6 +7,9 @@ class Dog:
         self.name = name
         self.age = age
 
+    def speak(self, sound):
+        return "{} says {}".format(self.name, sound)
+
 
 # Instantiate the Dog object
 philo = Dog("Philo", 5)
@@ -21,3 +24,4 @@ print("{} is {} and {} is {}.".format(
 # Is Philo a mammal?
 if philo.species == "mammal":
     print("{} is a {}!".format(philo.name, philo.species))
+print(philo.speak("Gruff"))
