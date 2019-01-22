@@ -1,9 +1,9 @@
-class Dog:
+'''class Dog:
 
     species = 'mammal'
 
     # Initializer / Instance Attributes
-    def __init__(self, name, age):
+    def __init__(self, name, age,):
         self.name = name
         self.age = age
 
@@ -24,4 +24,22 @@ print("{} is {} and {} is {}.".format(
 # Is Philo a mammal?
 if philo.species == "mammal":
     print("{} is a {}!".format(philo.name, philo.species))
-print(philo.speak("Gruff"))
+print(philo.speak("Toxic"))
+'''
+
+class PPL:
+    species = "Person"
+
+    def __init__(self, name, toxic, age):
+        self.name = name
+        self.toxic = toxic
+        self.age = age
+
+    def word(self, sound):
+        return "{0} says {1}. He is also {2}".format(self.name, sound, self.toxic)
+
+
+Jak = PPL("Jak", "super toxic", 15)
+
+print(Jak.word("I'm trash"))
+
