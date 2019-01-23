@@ -43,3 +43,10 @@ Jak = PPL("Jak", "super toxic", 15)
 
 print(Jak.word("I'm trash"))
 
+# The Dictionary
+
+dict1 = {"name": "Jak", "age": 14}
+
+print(dict1)
+dict1["age"] = 16
+print("{0} had a birthday! {0} is now {1} years old. No one likes math, especially {0}".format(dict1["name"], dict1["age"]))
