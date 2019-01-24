@@ -29,7 +29,8 @@ if philo.species == "mammal":
 print(philo.speak("Toxic"))
 '''
 
-class PPL:
+
+class PPL(object):
     species = "Person"
 
     def __init__(self, name, toxic, age):
@@ -49,6 +50,6 @@ print(Jak.word("I'm trash"))
 
 dict1 = {'age': {"Jack": 14, "Jak": god.call_god(), "Jac": 18, "Jacket": 645}}
 
-dict1['age']["Jack"] = 123
+# dict1['age']["Jak"]
 print(dict1)
 # print("{0} had a birthday! {0} is now {1} years old. No one likes math, especially {0}".format(dict1["name"], dict1["age"]))
