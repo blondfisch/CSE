@@ -11,17 +11,17 @@
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/CSE$Alexander_Fischer___Hangman.coverage" NAME="Alexander Fischer - Hangman Coverage Results" MODIFIED="1547745999314" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/notes" />
     <SUITE FILE_PATH="coverage/CSE$helloWorld.coverage" NAME="helloWorld Coverage Results" MODIFIED="1540312029285" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/notes" />
-    <SUITE FILE_PATH="coverage/CSE$Semester_2_Notes.coverage" NAME="Semester 2 Notes Coverage Results" MODIFIED="1546969328789" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/CSE$Semester_2_Notes.coverage" NAME="Semester 2 Notes Coverage Results" MODIFIED="1548783751984" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/CSE$Southern_OOP.coverage" NAME="Southern OOP Coverage Results" MODIFIED="1548351005358" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/notes" />
   </component>
   <component name="FUSProjectUsageTrigger">
     <session id="-856011063">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="12" />
+          <entry key="project.closed" value="14" />
           <entry key="project.open.time.44" value="1" />
           <entry key="project.open.time.46" value="1" />
-          <entry key="project.open.time.48" value="2" />
+          <entry key="project.open.time.48" value="3" />
           <entry key="project.open.time.5" value="1" />
           <entry key="project.open.time.50" value="1" />
           <entry key="project.open.time.51" value="1" />
@@ -34,20 +34,21 @@
           <entry key="project.open.time.75" value="1" />
           <entry key="project.open.time.76" value="1" />
           <entry key="project.open.time.8" value="1" />
+          <entry key="project.open.time.81" value="1" />
           <entry key="project.open.time.83" value="2" />
-          <entry key="project.opened" value="18" />
+          <entry key="project.opened" value="20" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="dummy" value="5" />
-          <entry key="py" value="5538" />
+          <entry key="py" value="6567" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="PLAIN_TEXT" value="5" />
-          <entry key="Python" value="5538" />
+          <entry key="Python" value="6567" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
@@ -78,11 +79,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/notes/Southern OOP.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="339">
-              <caret line="52" column="21" lean-forward="true" selection-start-line="52" selection-start-column="21" selection-end-line="52" selection-end-column="21" />
+            <state relative-caret-position="221">
+              <caret line="52" column="2" selection-start-line="52" selection-start-column="2" selection-end-line="52" selection-end-column="2" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
                 <marker date="1548436085386" expanded="true" signature="50:52" ph="..." />
@@ -92,11 +93,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Semester 2 Notes.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="9" selection-start-line="9" selection-end-line="9" />
+            <state relative-caret-position="17">
+              <caret line="80" column="21" lean-forward="true" selection-start-line="80" selection-start-column="21" selection-end-line="80" selection-end-column="21" />
             </state>
           </provider>
         </entry>
@@ -138,12 +139,12 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/notes/helloWorld.py" />
-        <option value="$PROJECT_DIR$/Semester 2 Notes.py" />
         <option value="$PROJECT_DIR$/notes/Jack's File.py" />
         <option value="$PROJECT_DIR$/notes/Alexander Fischer - Hangman.py" />
         <option value="$PROJECT_DIR$/notes/toxic.py" />
         <option value="$PROJECT_DIR$/notes/god.py" />
         <option value="$PROJECT_DIR$/notes/Southern OOP.py" />
+        <option value="$PROJECT_DIR$/Semester 2 Notes.py" />
       </list>
     </option>
   </component>
@@ -154,8 +155,8 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="12" />
-    <option name="y" value="5" />
+    <option name="x" value="11" />
+    <option name="y" value="17" />
     <option name="width" value="1340" />
     <option name="height" value="688" />
   </component>
@@ -164,6 +165,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -180,7 +182,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -202,7 +203,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.Southern OOP">
+  <component name="RunManager" selected="Python.Semester 2 Notes">
     <configuration name="Alexander Fischer - Hangman" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="CSE" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -299,9 +300,9 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.Semester 2 Notes" />
         <item itemvalue="Python.Southern OOP" />
         <item itemvalue="Python.Alexander Fischer - Hangman" />
-        <item itemvalue="Python.Semester 2 Notes" />
         <item itemvalue="Python.helloWorld" />
       </list>
     </recent_temporary>
@@ -320,15 +321,15 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="12" y="5" width="1340" height="688" extended-state="0" />
+    <frame x="11" y="17" width="1340" height="688" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.32578126" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.33671874" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32310468" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32310468" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -369,19 +370,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Semester 2 Notes.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" selection-start-line="9" selection-end-line="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/notes/toxic.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="7" column="52" selection-start-line="7" selection-start-column="52" selection-end-line="7" selection-end-column="52" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/notes/Southern OOP.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="52" column="2" selection-start-line="52" selection-start-column="2" selection-end-line="52" selection-end-column="2" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+            <marker date="1548436085386" expanded="true" signature="50:52" ph="..." />
+            <marker date="1548436085386" expanded="true" signature="50:56" ph="..." />
           </folding>
         </state>
       </provider>
@@ -393,15 +399,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/notes/Southern OOP.py">
+    <entry file="file://$PROJECT_DIR$/Semester 2 Notes.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="339">
-          <caret line="52" column="21" lean-forward="true" selection-start-line="52" selection-start-column="21" selection-end-line="52" selection-end-column="21" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-            <marker date="1548436085386" expanded="true" signature="50:52" ph="..." />
-            <marker date="1548436085386" expanded="true" signature="50:56" ph="..." />
-          </folding>
+        <state relative-caret-position="17">
+          <caret line="80" column="21" lean-forward="true" selection-start-line="80" selection-start-column="21" selection-end-line="80" selection-end-column="21" />
         </state>
       </provider>
     </entry>
