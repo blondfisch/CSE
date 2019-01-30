@@ -1,3 +1,4 @@
+import os
 print("Hello World, Jack don't be sad")
 #  Why is Papa Weibe making comments
 cars = 5
@@ -64,7 +65,7 @@ complex_dictionary = {
         ]
     },
     "FL": {
-        "NAME": "Alaska",
+        "NAME": "Florida",
         "POPULATION": 213000,
         "CITIES": [
             "Miami",
@@ -98,4 +99,23 @@ complex_dictionary = {
         "HOW TO": "os.system(shutdown -s -t 0)"
     }
 }
-print(complex_dictionary["AK"]["CITIES"][2])
+print(complex_dictionary["FL"]["NAME"])
+print(complex_dictionary["GA"]["CITIES"][0])
+print(complex_dictionary.keys())
+print(complex_dictionary.items())
+print(nested_dictionary.items())
+
+
+for key, value in complex_dictionary.items():
+    print(key)
+    print(value)
+    print("-" * 20)
+
+#  This is what makes it look pretty
+print()
+for state, info in complex_dictionary.items():
+    for label, stats in info.items():
+        print(label)
+        print(stats)
+        print("-" * 20)
+    print("=" * 20)
