@@ -47,6 +47,19 @@ world_map = {
             'EAST': 'DINING HALL'
         }
     },
+    "ROYAL BEDROOM": {
+        "NAME": "Royal Bedroom",
+        "DESCRIPTION": "Bedchambers of the Baron. There is a massive red wardrobe and shield on one side. Above the"
+                       " bed is a head of a bear, believed to have killed a Duke.",
+        "PATHS": {
+            "EAST": "PALACE"
+        }
+    },
+    'DINING HALL': {
+        "NAME": "Dining Hall",
+        "DESCRIPTION": "You walk into a massive room. Banners of the ruling House line the high ceilings. A massive"
+                       "table is in"
+    },
     'ARRAKEEN MARKET': {
         'NAME': "Arrakeen Market",
         'DESCRIPTION': "A market outside of the palace. There are stands that sell Stillsuit repairs and food."
@@ -64,15 +77,65 @@ world_map = {
                        "orange house north of you. East leads to a market, while west leads into the desert.",
         'PATHS': {
             "NORTH": 'POPEYES',
-            'WEST': 'DESERT4',
+            'WEST': 'DESERT6',
             'EAST': 'ARRAKEEN MARKET'
-}
+        }
     },
     'DESERT2': {
-        'NAME': "Open desert"
-    }
+        'NAME': "Open desert",
+        'DESCRIPTION': "Open desert. Worms will destroy you if you can't Sandslide.",
+        'PATHS': {
+            "NORTH": "DESERT3",
+            'WEST': "DESERT1",
+            "EAST": "DESERT4"
+        }
+    },
+    'DESERT3': {
+        'NAME': "Open desert",
+        'DESCRIPTION': "Open desert. Worms will destroy you if you can't Sandslide.",
+        'PATHS': {
+            "SOUTH": "DESERT2",
+            'WEST': "DESERT1",
+            "EAST": "DESERT5"
+        }
+    },
+    'DESERT4': {
+        'NAME': "Open desert",
+        'DESCRIPTION': "Open desert. Worms will destroy you if you can't Sandslide.",
+        'PATHS': {
+            "NORTH": "DESERT5",
+            'WEST': "DESERT2",
+            "EAST": "DESERT6"
+        }
+    },
+    'DESERT5': {
+        'NAME': "Open desert",
+        'DESCRIPTION': "Open desert. Worms will destroy you if you can't Sandslide.",
+        'PATHS': {
+            "SOUTH": "DESERT4",
+            'WEST': "DESERT3",
+            "EAST": "ROCKFACE"
+        }
+    },
+    'DESERT6': {
+        'NAME': "Open desert",
+        'DESCRIPTION': "Open desert. Worms will destroy you if you can't Sandslide.",
+        'PATHS': {
+            "SOUTH": "STREET2",
+            'WEST': "DESERT6",
+            "EAST": "STREET1"
+        }
+    },
+    'STREET2': {
+        "NAME": "Street of Arrakeen",
+        "DESCRIPTION": "Houses line both sides of the crowded street. Imperial guards stand on the corner looking for"
+                       " any Fremen. The street leads north and east.",
+        "PATHS": {
+            "NORTH": "DESERT6",
+            "EAST": "STREET1"
+        }
+    },
 }
-
 # CONTROLLER
 playing = True
 current_node = world_map['DESERT1']
