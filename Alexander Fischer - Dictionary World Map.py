@@ -57,8 +57,11 @@ world_map = {
     },
     'DINING HALL': {
         "NAME": "Dining Hall",
-        "DESCRIPTION": "You walk into a massive room. Banners of the ruling House line the high ceilings. A massive"
-                       "table is in"
+        "DESCRIPTION": "You walk into a massive room. Banners of the ruling Harkonnens line the high ceilings."
+                       " A massive wooden table is in the center of the room with food and water laid out.",
+        "PATHS": {
+            "WEST": "PALACE"
+        }
     },
     'ARRAKEEN MARKET': {
         'NAME': "Arrakeen Market",
@@ -135,6 +138,20 @@ world_map = {
             "EAST": "STREET1"
         }
     },
+    "ROCKFACE": {
+        "NAME": "Rock face",
+        "DESCRIPTION": "You find yourself standing in the desert facing a large sheet of rock blocking the north and "
+                       " east. You need to move quickly to avoid any patrols looking to kill you.",
+        "PATHS": {
+            "UP": "SIETCH BALBOA",
+            "WEST": "DESERT5",
+            "SOUTH": "PATROL STATION"
+        }
+    },
+    "PATROL STATION": {
+        "NAME": "Patrol Station",
+        "DESCRIPTION": ""
+    }
 }
 # CONTROLLER
 playing = True
