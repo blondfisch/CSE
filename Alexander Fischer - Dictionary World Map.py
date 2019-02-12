@@ -150,7 +150,15 @@ world_map = {
     },
     "PATROL STATION": {
         "NAME": "Patrol Station",
-        "DESCRIPTION": ""
+        "DESCRIPTION": "Imperial soldiers are all around the massive stone barracks. As you approach, one of the guards"
+                       "spots you. You quickly look around and notice that your only escape option is the north.",
+        "PATHS": {
+            "NORTH": "ROCKFACE"
+        }
+    },
+    "SIETCH BALBOA": {
+        "NAME": "Sietch Balboa",
+        "DESCRIPTION": "You find yourself at the entrance to another Fremen Sietch. "
     }
 }
 # CONTROLLER
