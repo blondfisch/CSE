@@ -1,6 +1,9 @@
-import os
+import math
+from notes.Special_Random import RandomWiebe
+
+
 class Phone(object):
-    def __init__(self, carrier, charge_left):
+    def __init__(self, carrier, charge_left=50):
         # These are attributes that a phone has.
         # These should all be relevant to our program
         self.screen = True
@@ -33,6 +36,25 @@ class Phone(object):
             print("You successfully make the phone call.")
             print("Your phone is now at %s." % self.battery_left)
 
+    def smash_phone(self):
+        if not self.screen:
+            print("SMASH!!!!!!!!")
+            print("It broke.")
+            self.screen = False
+        else:
+            print("Your screen can't be broken. What a god.")
+
 
 my_phone = Phone("ATT", 100)
 your_phone = Phone("Bell", 0)
+jacks_phone = Phone("Popeyes")
+default_phone = Phone("Verizon")
+
+my_phone.make_call(60)
+my_phone.make_call(10)
+my_phone.charge(100)
+my_phone.make_call(10)
+jacks_phone.smash_phone()
+jacks_phone.make_call(1)
+
+print(RandomWiebe.my_random())

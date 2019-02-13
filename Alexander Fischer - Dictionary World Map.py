@@ -3,7 +3,8 @@ import string
 world_map = {
     'DESERT1': {
         "NAME": "Open Desert",
-        'DESCRIPTION': "Desert surrounds you. Worms will destroy you if you can't Sandslide. There are caves to the north but"
+        'DESCRIPTION': "Desert surrounds you. Worms will destroy you if you can't Sandslide. "
+                       "There are caves to the north but"
                        " open desert to the south, east, and west.",
         'PATHS': {
             "NORTH": "SIETCH",
