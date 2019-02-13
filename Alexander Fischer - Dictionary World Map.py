@@ -3,7 +3,7 @@ import string
 world_map = {
     'DESERT1': {
         "NAME": "Open Desert",
-        'DESCRIPTION': "Open desert. Worms will destroy you if you can't Sandslide. There are caves to the north but"
+        'DESCRIPTION': "Desert surrounds you. Worms will destroy you if you can't Sandslide. There are caves to the north but"
                        " open desert to the south, east, and west.",
         'PATHS': {
             "NORTH": "SIETCH",
@@ -86,7 +86,7 @@ world_map = {
     },
     'DESERT2': {
         'NAME': "Open desert",
-        'DESCRIPTION': "Open desert. Worms will destroy you if you can't Sandslide.",
+        'DESCRIPTION': "Desert surrounds you. Worms will destroy you if you can't Sandslide.",
         'PATHS': {
             "NORTH": "DESERT3",
             'WEST': "DESERT1",
@@ -95,7 +95,7 @@ world_map = {
     },
     'DESERT3': {
         'NAME': "Open desert",
-        'DESCRIPTION': "Open desert. Worms will destroy you if you can't Sandslide.",
+        'DESCRIPTION': "Desert surrounds you. Worms will destroy you if you can't Sandslide.",
         'PATHS': {
             "SOUTH": "DESERT2",
             'WEST': "DESERT1",
@@ -104,7 +104,7 @@ world_map = {
     },
     'DESERT4': {
         'NAME': "Open desert",
-        'DESCRIPTION': "Open desert. Worms will destroy you if you can't Sandslide.",
+        'DESCRIPTION': "Desert surrounds you. Worms will destroy you if you can't Sandslide.",
         'PATHS': {
             "NORTH": "DESERT5",
             'WEST': "DESERT2",
@@ -113,7 +113,7 @@ world_map = {
     },
     'DESERT5': {
         'NAME': "Open desert",
-        'DESCRIPTION': "Open desert. Worms will destroy you if you can't Sandslide.",
+        'DESCRIPTION': "Desert surrounds you. Worms will destroy you if you can't Sandslide.",
         'PATHS': {
             "SOUTH": "DESERT4",
             'WEST': "DESERT3",
@@ -122,7 +122,8 @@ world_map = {
     },
     'DESERT6': {
         'NAME': "Open desert",
-        'DESCRIPTION': "Open desert. Worms will destroy you if you can't Sandslide.",
+        'DESCRIPTION': "The desert vanishes as you see that to the south "
+                       "and east, civilization appears. However, Worms will destroy you if you can't Sandslide.",
         'PATHS': {
             "SOUTH": "STREET2",
             'WEST': "DESERT6",
@@ -158,7 +159,22 @@ world_map = {
     },
     "SIETCH BALBOA": {
         "NAME": "Sietch Balboa",
-        "DESCRIPTION": "You find yourself at the entrance to another Fremen Sietch. "
+        "DESCRIPTION": "You find yourself at the entrance to another Fremen Sietch. For some unkown reason, the doors"
+                       " are closed and it does not appear that they can be opened. However, there are paths up and"
+                       " down the cliff.",
+        "PATHS": {
+            "UP": "POPEYES",
+            "DOWN": "ROCKFACE"
+        }
+    },
+    "POPEYES": {
+        "NAME": "Popeyes Chicken",
+        "DESCRIPTION": "The land of the gods. All around you is chicken stacked to the heavens. You investigate further" 
+                       "and notice some sort of computer file. It is in rough condition, but you can see that it"
+                       " mentions calling a god. Please just go down.",
+        "PATHS": {
+            "DOWN": "SIETCH BALBOA"
+        }
     }
 }
 # CONTROLLER
