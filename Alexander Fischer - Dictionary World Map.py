@@ -80,7 +80,7 @@ world_map = {
         'DESCRIPTION': "Small houses line both sides of the dusty streets. Most of the doors are locked except for one"
                        "orange house north of you. East leads to a market, while west leads into the desert.",
         'PATHS': {
-            "NORTH": 'POPEYES',
+            "NORTH": 'POPEYES2',
             'WEST': 'DESERT6',
             'EAST': 'ARRAKEEN MARKET'
         }
@@ -168,13 +168,22 @@ world_map = {
             "DOWN": "ROCKFACE"
         }
     },
-    "POPEYES": {
+    "POPEYES1": {
         "NAME": "Popeyes Chicken",
         "DESCRIPTION": "The land of the gods. All around you is chicken stacked to the heavens. You investigate further" 
                        "and notice some sort of computer file. It is in rough condition, but you can see that it"
                        " mentions calling a god. Please just go down.",
         "PATHS": {
             "DOWN": "SIETCH BALBOA"
+        }
+    },
+    "POPEYES2": {
+        "NAME": "Mysterious House of Fried Chicken",
+        "DESCRIPTION": "The house seems to be filled with fried chicken and biscuits. You continue to investigate,"
+                       " and notice a small note on the ground. The note says that heaven exists above a Fremen Sietch"
+                       " that is located on a cliff. The only way out of the building is the door you came through.",
+        "PATHS": {
+            "SOUTH": "STREET1"
         }
     }
 }
