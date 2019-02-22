@@ -41,6 +41,37 @@ DESERT4 = Room("Open Desert", "The sun beats down on the sandy desert all around
                None, None, "DESERT1", "FUNERAL_PLAIN")
 FUNERAL_PLAIN = Room("Funeral Plain", "The expanse of the desert only grows larger as you come across the Funeral"
                                       " Plain, where the Fremen take the dead. You are completely outside the reaches"
-                                      " of society with no clear paths ahead of you.",
+                                      " of so,ciety with no clear paths ahead of you.",
                      "GREAT_FLAT", "GREAT_FLAT", "DESERT4", "GREAT_FLAT")
-GREAT_FLAT = Room("The Great Flat", "The farthest known point")
+GREAT_FLAT = Room("The Great Flat", "The farthest known point on the western half of the world. The only way out"
+                                    " is back through the Funeral Plain.",
+                  "FUNERAL_PLAIN", "FUNERAL_PLAIN", "FUNERAL_PLAIN")
+DESERT5 = Room("Open Desert", "The sun beats down on the sandy desert all around you. You need to find a way out of"
+                              " the desert before the lack of water or Imperials kill you.",
+               "DESERT3", None, "DESERT8", "DESERT2")
+DESERT6 = Room("Open Desert", "The sun beats down on the sandy desert all around you. You need to find a way out of"
+                              " the desert before the lack of water or Imperials kill you.",
+               "ROCKFACE", "DESERT3")
+ROCKFACE = Room("Cliff side", "You come upon a cliff side in the desert. It is blocking the north and east, but it"
+                              " appears scalable.",
+                None, "DESERT6", None, "PATROL_STATION", "SIETCH_BALBOA")
+SIETCH_BALBOA = Room("Sietch Balboa", "You find a massive door leading to another Sietch aligned with the Fremen."
+                                      "The door appears locked and you don't know how to open it.",
+                     None, None, None, None, "HEAVEN", "ROCKFACE")
+PATROL = Room("Imperial Patrol Station", " As you make your way back to the city, you find an Imperial Patrol Station."
+                                         "Imperial soldiers surround the massive stone barracks. As you approach,"
+                                         " a guard notices you, and you realize you can only escape to the west",
+              None, None, None, "ROCKFACE")
+DESERT7 = Room("Open Desert", "The sun beats down on the sandy desert all around you. You need to find a way out of"
+                              " the desert before the lack of water or Imperials kill you.",
+               "DESERT6", "DESERT8", "STREET1", "DESERT3")
+DESERT8 = Room("Open Desert", "The sun beats down on the sandy desert all around you. You need to find a way out of"
+                              " the desert before the lack of water or Imperials kill you.",
+               "DESERT7", None, None, "DESERT5")
+STREET1 = Room("Suburbs of Arrakeen", "Small houses line both sides of the dusty streets. Most of the doors are locked"
+                                      " except for one orange house north of you. The street continues to the south.",
+               "POPEYES", "STREET2", "MARKET", "DESERT7")
+STREET2 = Room("Streets of Arrakeen", "You find a small alley corner. As you enter, you notice Imperial guards on the"
+                                      " opposite side looking out for any Fremen. You could continue east or head "
+                                      "north",
+               "STREET1", None, "MARKET")
