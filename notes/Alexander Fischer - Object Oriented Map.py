@@ -109,4 +109,5 @@ HEAVEN = Room("Heaven", "You've found Heaven. Here, anything is possible as stac
                         " everywhere. However, you search around and notice a small USB drive that appears to say "
                         "'call god'.",
               None, None, None, None, None, "SIETCH_BALBOA")
-SHIELD_WALL = Room("The shield wall")
+SHIELD_WALL = Room("The shield wall is the eastern boundary of the city. Venturing beyond is too dangerous.",
+                   None, None, None, "MARKET")
