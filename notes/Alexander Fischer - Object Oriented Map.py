@@ -75,3 +75,38 @@ STREET2 = Room("Streets of Arrakeen", "You find a small alley corner. As you ent
                                       " opposite side looking out for any Fremen. You could continue east or head "
                                       "north",
                "STREET1", None, "MARKET")
+MARKET = Room("Arrakeen Market", "You find yourself at the central market of Arrakeen. There are shops selling food,"
+                                 " water, and Stillsuit repairs. Looking to the north you see the entrance to the"
+                                 " palace. The street continues to the south and west while the shield wall is on the "
+                                 "east.",
+              "PALACE", "STREET2", "SHIELD_WALL", "STREET1")
+PALACE = Room("Palace Entrance", "You approach the massive palace. The massive gold throne and large, red banners"
+                                 " hang down. The floor is velvet red carpet with the crest of the Harkonnens. "
+                                 "The Council appears to meet the west and dine in a room to the east.",
+              None, "MARKET", "DINE", "COUNCIL")
+DINE = Room("Dining Hall", "The room is filled with a massive wooden table with food still sitting out, "
+                           "accompanied by beautiful red decorations."
+                           "The massive banners hanging down symbol Imperial power. Above the head of the table is "
+                           "the head of the bear that killed the old Duke. The entrance to the palace is to the west"
+                           " and the private quarters are to the east.",
+            None, None, "BEDROOM", "PALACE")
+BEDROOM = Room("Private Quarters", "This is the private quarters of the ruler. The walls are lined with swords and "
+                                   "shields, which can be used in the training area north of the room. The only exit"
+                                   " leading towards the center of the palace is west.",
+               "TRAIN", None, None, "DINE")
+TRAIN = Room("Training Room", " You enter a room of complete white. The only thing there is a small training dummy"
+                              " with a sword in the center of the room.",
+             None, "BEDROOM")
+COUNCIL = Room("Council", "The location where all of the official government business takes place. The room is bland,"
+                          " with only a round table. There appears to be something hidden on the underside of the"
+                          " table. The only way out is to the east.",
+               None, None, "PALACE", None, None, "WORM")
+WORM = Room("Cellar", "You descend the hidden stairs to reveal a cellar. In the middle is a worm chained to the floor."
+                      " It appears that the Water of Life is being extracted from it and stored in containers along"
+                      " with spice.",
+            None, None, None, None, "COUNCIL")
+HEAVEN = Room("Heaven", "You've found Heaven. Here, anything is possible as stacks of fried chicken and weapons are"
+                        " everywhere. However, you search around and notice a small USB drive that appears to say "
+                        "'call god'.",
+              None, None, None, None, None, "SIETCH_BALBOA")
+SHIELD_WALL = Room("The shield wall")
