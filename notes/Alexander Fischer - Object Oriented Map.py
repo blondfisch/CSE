@@ -1,5 +1,5 @@
 class Room(object):
-    def __init__(self, name, descrip, north=None, south=None, east=None, west=None, up=None, down=None):
+    def __init__(self, name, desc, north=None, south=None, east=None, west=None, up=None, down=None):
         self.name = name
         self.north = north
         self.south = south
@@ -7,7 +7,31 @@ class Room(object):
         self.west = west
         self.up = up
         self.down = down
-        self.descrip = descrip
+        self.desc = desc
+
+
+class Player(object):
+    def __init__(self, starting_location):
+        self.current_location = starting_location
+        self.inventory = []
+        self.appearance = "text"
+        self.sandslide = False
+
+    def move(self, new_location):
+        """ This moves the player to a new room
+
+        :param new_location: The room object of which you are going to
+        """
+        self.current_location = new_location
+
+    def find_next_room(self, direction):
+        """This method searches the current room to see if a room exists in that direction.
+
+        :param direction: The direction that you want to move to
+        :return: The room object if it exists, or none if it does not
+        """
+        name_of_room = getattr(self.current_location, direction)
+        return globals()[name_of_room]
 
 
 # Option 2 - set all at once, modify controller
@@ -58,9 +82,11 @@ ROCKFACE = Room("Cliff side", "You come upon a cliff side in the desert. It is b
 SIETCH_BALBOA = Room("Sietch Balboa", "You find a massive door leading to another Sietch aligned with the Fremen."
                                       "The door appears locked and you don't know how to open it.",
                      None, None, None, None, "HEAVEN", "ROCKFACE")
-PATROL = Room("Imperial Patrol Station", " As you make your way back to the city, you find an Imperial Patrol Station."
-                                         "Imperial soldiers surround the massive stone barracks. As you approach,"
-                                         " a guard notices you, and you realize you can only escape to the west",
+PATROL_STATION = Room("Imperial Patrol Station", " As you make your way back to the city, you find an Imperial"
+                                                 " Patrol Station."
+                                                 "Imperial soldiers surround the massive stone barracks."
+                                                 " As you approach,"
+                                                 "a guard notices you, and you realize you can only escape to the west",
               None, None, None, "ROCKFACE")
 DESERT7 = Room("Open Desert", "The sun beats down on the sandy desert all around you. You need to find a way out of"
                               " the desert before the lack of water or Imperials kill you.",
@@ -90,7 +116,7 @@ DINE = Room("Dining Hall", "The room is filled with a massive wooden table with 
                            "the head of the bear that killed the old Duke. The entrance to the palace is to the west"
                            " and the private quarters are to the east.",
             None, None, "BEDROOM", "PALACE")
-BEDROOM = Room("Private Quarters", "This is the private quarters of the ruler. The walls are lined with swords and "
+BEDROOM = Room("Private Quarters", "This is the private quarters of the Imperial. The walls are lined with swords and "
                                    "shields, which can be used in the training area north of the room. The only exit"
                                    " leading towards the center of the palace is west.",
                "TRAIN", None, None, "DINE")
@@ -111,3 +137,26 @@ HEAVEN = Room("Heaven", "You've found Heaven. Here, anything is possible as stac
               None, None, None, None, None, "SIETCH_BALBOA")
 SHIELD_WALL = Room("The shield wall is the eastern boundary of the city. Venturing beyond is too dangerous.",
                    None, None, None, "MARKET")
+
+player = Player(DESERT1)
+playing = True
+directions = ['north', 'south', 'east', 'west', 'up', 'down']
+short_directions = ['n', 's', 'e', 'w', 'u', 'd']
+while playing:
+    print(player.current_location.name)
+    print(player.current_location.desc)
+    command = input(">_")
+    if command.lower() in short_directions:
+        index = short_directions.index(command.lower())
+        command = directions[index]
+
+    if command.lower() in ["q", "quit", "exit"]:
+        playing = False
+    elif command.lower() in directions:
+        try:
+            next_room = player.find_next_room(command)
+            player.move(next_room)
+        except KeyError:
+            print("I can't go that way.")
+    else:
+        print("Command Not Found")
