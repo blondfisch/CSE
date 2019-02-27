@@ -8,6 +8,7 @@ class Room(object):
         self.up = up
         self.down = down
         self.desc = desc
+        self.characters = []
 
 
 class Player(object):
@@ -34,7 +35,16 @@ class Player(object):
         return globals()[name_of_room]
 
 
+class Imperial(object):
+    def __init__(self, health=10, desc=None, shield=False):
+        self.health = health
+        self.desc = desc
+        self.items = []
+        self.shield = shield
+
+
 # Option 2 - set all at once, modify controller
+# Rooms
 DESERT1 = Room("Open Desert", 'The sun beats down on the sandy desert all around you. There are caves to the north'
                               ' inside of the rock, a place of safety from the worms in the desert. On all other sides'
                               ' is the desert.',
@@ -87,7 +97,7 @@ PATROL_STATION = Room("Imperial Patrol Station", " As you make your way back to 
                                                  "Imperial soldiers surround the massive stone barracks."
                                                  " As you approach,"
                                                  "a guard notices you, and you realize you can only escape to the west",
-              None, None, None, "ROCKFACE")
+                      None, None, None, "ROCKFACE")
 DESERT7 = Room("Open Desert", "The sun beats down on the sandy desert all around you. You need to find a way out of"
                               " the desert before the lack of water or Imperials kill you.",
                "DESERT6", "DESERT8", "STREET1", "DESERT3")
@@ -137,8 +147,12 @@ HEAVEN = Room("Heaven", "You've found Heaven. Here, anything is possible as stac
               None, None, None, None, None, "SIETCH_BALBOA")
 SHIELD_WALL = Room("The shield wall is the eastern boundary of the city. Venturing beyond is too dangerous.",
                    None, None, None, "MARKET")
-
+# Characters
 player = Player(DESERT1)
+IMPERIAL1 = Imperial(10, "The guard appears to be poorly trained, standing awkwardly with his sword. From the faint"
+                         "glare you can tell that he is wearing a shield.", True)
+Jack = Imperial(1, "Eldritch God", True)
+IMPERIAL2 = Imperial(15, "An Imperial Captain")
 playing = True
 directions = ['north', 'south', 'east', 'west', 'up', 'down']
 short_directions = ['n', 's', 'e', 'w', 'u', 'd']
@@ -154,7 +168,7 @@ while playing:
         playing = False
     elif command.lower() in directions:
         try:
-            next_room = player.find_next_room(command)
+            next_room = player.find_next_room(command.lower())
             player.move(next_room)
         except KeyError:
             print("I can't go that way.")
