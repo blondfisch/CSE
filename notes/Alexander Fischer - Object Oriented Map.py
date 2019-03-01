@@ -1,5 +1,6 @@
+import
 class Room(object):
-    def __init__(self, name, desc, north=None, south=None, east=None, west=None, up=None, down=None, characters=[]):
+    def __init__(self, name, desc, north=None, south=None, east=None, west=None, up=None, down=None, characters=None):
         self.name = name
         self.north = north
         self.south = south
@@ -15,7 +16,6 @@ class Player(object):
     def __init__(self, starting_location):
         self.current_location = starting_location
         self.inventory = []
-        self.appearance = "text"
         self.sandslide = False
 
     def move(self, new_location):
@@ -35,7 +35,7 @@ class Player(object):
         return globals()[name_of_room]
 
 
-class Imperial(object):
+class Enemy(object):
     def __init__(self, health=10, desc=None, shield=False):
         self.health = health
         self.desc = desc
@@ -150,10 +150,10 @@ SHIELD_WALL = Room("The shield wall is the eastern boundary of the city. Venturi
                    None, None, None, "MARKET")
 # Characters
 player = Player(DESERT1)
-IMPERIAL1 = Imperial(10, "The guard appears to be poorly trained, standing awkwardly with his sword. From the faint"
-                         "glare you can tell that he is wearing a shield.", True)
-Jack = Imperial(1, "Eldritch God", True)
-IMPERIAL2 = Imperial(15, "An Imperial Captain")
+IMPERIAL1 = Enemy(10, "The guard appears to be poorly trained, standing awkwardly with his sword. From the faint"
+                      "glare you can tell that he is wearing a shield.", True)
+Jack = Enemy(1, "Eldritch God", True)
+IMPERIAL2 = Enemy(15, "An Imperial Captain")
 playing = True
 directions = ['north', 'south', 'east', 'west', 'up', 'down']
 short_directions = ['n', 's', 'e', 'w', 'u', 'd']
