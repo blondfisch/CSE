@@ -65,32 +65,32 @@ class Lasgun(Gun):
 
 
 class Consumable(Item):
-    def __init__(self, name, description):
+    def __init__(self, name, description, health):
         super(Consumable, self).__init__(name)
         self.name = name
         self.desc = description
 
 
 class Bread(Consumable):
-    def __init__(self,):
-        super(Bread, self).__init__("Bread", "This is a piece of bread. It can be eaten for health.")
+    def __init__(self):
+        super(Bread, self).__init__("Bread", "This is a piece of bread. It can be eaten for health.", 5)
 
 
 class Water(Consumable):
     def __init__(self):
         super(Water, self).__init__("Water", "Arguably the most valuable item on the planet, water heals you massive"
-                                             " amounts but is very rare.")
+                                             " amounts but is very rare.", 50)
 
 
 class Rice(Consumable):
     def __init__(self):
-        super(Rice, self).__init__("Rice", "This item can be eaten for health. It is rather common on the planet.")
+        super(Rice, self).__init__("Rice", "This item can be eaten for health. It is rather common on the planet.", 3)
 
 
 class Chicken(Consumable):
     def __init__(self):
         super(Chicken, self).__init__("Fried Chicken", "The most holy of items, fried chicken. This item heals for all"
-                                                       " of your health.")
+                                                       " of your health.", 100)
 
 
 class Herb(Consumable):
@@ -102,7 +102,7 @@ class Life(Consumable):
     def __init__(self):
         super(Life, self).__init__("Water of Life", "An incredibly dangerous item. Consuming the Water of Life could "
                                                     "kill you or grant you superhuman strength.")
-        
+
 
 class Armor(Item):
     def __init__(self, name, desc, defense, shield):
