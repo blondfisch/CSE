@@ -149,10 +149,7 @@ SHIELD_WALL = Room("The shield wall is the eastern boundary of the city. Venturi
                    None, None, None, "MARKET")
 # Characters
 player = Player(DESERT1)
-IMPERIAL1 = Enemy(10, "The guard appears to be poorly trained, standing awkwardly with his sword. From the faint"
-                      "glare you can tell that he is wearing a shield.", True)
-Jack = Enemy(1, "Eldritch God", True)
-IMPERIAL2 = Enemy(15, "An Imperial Captain")
+
 playing = True
 directions = ['north', 'south', 'east', 'west', 'up', 'down']
 short_directions = ['n', 's', 'e', 'w', 'u', 'd']
