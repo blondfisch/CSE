@@ -147,12 +147,13 @@ class HalfShield(Armor):
 
 
 class Enemy(object):
-    def __init__(self, health, item=None, desc=None, shield=False):
+    def __init__(self, name, health, item=None, desc=None, shield=False):
         self.health = health
         self.desc = desc
         self.items = []
         self.shield = shield
         self.items = item
+        self.name = name
 
 
 class BaseSoldier(Enemy):
@@ -169,7 +170,38 @@ class Captain(Enemy):
 
 class Baron(Enemy):
     def __init___(self):
-        super(Baron, self).__init___("The Baron", 200, BroadSword, "The Baron. He is extremely well trained and"
-                                                                   " is very fast. His attacks will kill you quickly"
-                                                                   " if you are unprepared, in the same way that he"
-                                                                   " killed your parents.", False)
+        super(Baron, self).__init__("The Baron", 200, BroadSword, "The Baron. He is extremely well trained and"
+                                                                  " is very fast. His attacks will kill you quickly"
+                                                                  " if you are unprepared, in the same way that he"
+                                                                  " killed your parents.", False)
+
+
+class Fremen(Enemy):
+    def __init__(self):
+        super(Fremen, self).__init__("Fremen", 150, CrysKnife, "A Fremen soldier. While not formally trained, they"
+                                                               " possess an extreme amount of skill and are incredibly"
+                                                               " dangerous.", False)
+
+
+class Sardaukar1(Enemy):
+    def __init__(self):
+        super(Sardaukar1, self).__init__("Sardaukar", 125, BroadSword, "The Sardaukar are the top soldiers of the"
+                                                                       " Empire. They have expert training and can"
+                                                                       " take extreme amounts of pain. Tread lightly.",
+                                         True)
+
+
+class Sardaukar2(Enemy):
+    def __init__(self):
+        super(Sardaukar2, self).__init__("Sardaukar", 125, Lasgun, "The Sardaukar are the top soldiers of the"
+                                                                   " Empire. They have expert training and can"
+                                                                   " take extreme amounts of pain. Tread lightly.",
+                                         True)
+
+
+class Emperor(Enemy):
+    def __init__(self):
+        super(Emperor, self).__init__("The Emperor", 500, BroadSword, "The leader of the known universe stands before"
+                                                                      " you. This man has killed hundreds and is a"
+                                                                      " machine. He wears his imperial shield.", True)
+
