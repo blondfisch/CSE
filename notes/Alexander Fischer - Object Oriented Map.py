@@ -46,8 +46,7 @@ class Enemy(object):
 # Rooms
 DESERT1 = Room("Open Desert", 'The sun beats down on the sandy desert all around you. There are caves to the north'
                               ' inside of the rock, a place of safety from the worms in the desert.\n On all other '
-                              'sides'
-                              ' is the desert.',
+                              'sides is the desert.',
                "SIETCH", 'DESERT2', 'DESERT3', 'DESERT4')
 
 SIETCH = Room("Sietch Tabr", 'You walk into a hidden Fremen cave. Inside, you find a Stillsuit folded in a '
@@ -61,7 +60,8 @@ SPICE_ROOMS = Room("Spice Rooms", "Spice is stacked in boxes in for ceremonies. 
                    None, None, None, 'SIETCH')
 
 FREMEN_PIT = Room("Fremen Pit", "A massive room with seating similar to a coliseum. Battle marks from swords line the"
-                                " walls of the center pit.\n There is a staircase descending downwards and a path"
+                                " walls of the center pit.\n A Fremen stands in the middle of the arena"
+                                " and does not appear friendly. \nThere is a staircase descending downwards and a path"
                                 " leading east.", None, None, "SIETCH", None, None, "WATER")
 
 WATER = Room("Water Storage", 'The water storage area of the sietch. You see tanks of water containing hundreds of'
@@ -70,7 +70,8 @@ WATER = Room("Water Storage", 'The water storage area of the sietch. You see tan
              None, None, None, None, "FREMEN_PIT")
 
 DESERT2 = Room("Open Desert", "The sun beats down on the sandy desert all around you. You need to find a way out of"
-                              " the desert\n before the lack of water or Imperials kill you.",
+                              " the desert\n before the lack of water or Imperials kill you. This time, however, there"
+                              " is a lonely Imperial Guard out on patrol.",
                'DESERT1', None, 'DESERT5')
 
 DESERT3 = Room("Open Desert", "The sun beats down on the sandy desert all around you. You need to find a way out of"
@@ -87,7 +88,8 @@ FUNERAL_PLAIN = Room("Funeral Plain", "The expanse of the desert only grows larg
                      "GREAT_FLAT", "GREAT_FLAT", "DESERT4", "GREAT_FLAT")
 
 GREAT_FLAT = Room("The Great Flat", "The farthest known point on the western half of the world. The only way out"
-                                    " is back through the Funeral Plain.",
+                                    " is back through the Funeral Plain. While here, a massive worm "
+                                    "appears out of the ground.",
                   "FUNERAL_PLAIN", "FUNERAL_PLAIN", "FUNERAL_PLAIN")
 
 DESERT5 = Room("Open Desert", "The sun beats down on the sandy desert all around you. You need to find a way out of"
@@ -111,7 +113,7 @@ PATROL_STATION = Room("Imperial Patrol Station", " As you make your way back to 
                                                  "Imperial soldiers surround the massive stone barracks.\n"
                                                  " As you approach,"
                                                  "a guard notices you, and you realize you can only escape to the west",
-                      None, None, None, "ROCKFACE", None, None, ["IMPERIAL1", "IMPERIAL2"])
+                      None, None, None, "ROCKFACE", None, None)
 
 DESERT7 = Room("Open Desert", "The sun beats down on the sandy desert all around you. You need to find a way out of"
                               " the desert\n before the lack of water or Imperials kill you.",
@@ -170,7 +172,7 @@ WORM = Room("Cellar", "You descend the hidden stairs to reveal a cellar. In the 
 HEAVEN = Room("Heaven", "You've found Heaven. Here, anything is possible as stacks of fried chicken and weapons are"
                         " everywhere.\n However, you search around and notice a small USB drive that appears to say "
                         "'call god'.",
-              None, None, None, None, None, "SIETCH_BALBOA", ["Jack"])
+              None, None, None, None, None, "SIETCH_BALBOA")
 
 SHIELD_WALL = Room("The shield wall is the eastern boundary of the city. Venturing beyond is too dangerous.",
                    None, None, None, "MARKET")

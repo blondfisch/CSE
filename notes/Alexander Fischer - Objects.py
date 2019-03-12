@@ -51,6 +51,12 @@ class CrysKnife(Sword):
                                                              " breaks.")
 
 
+class Needle(Sword):
+    def __init__(self):
+        super(Needle, self).__init__("Poisoned Needle", 100, 1, "A poisoned needle. Can only be used once but does "
+                                                                "massive damage to enemies")
+
+
 class Gun(Weapon):
     def __init__(self, name, damage, charge):
         super(Gun, self).__init__(name, damage, 1)
@@ -69,6 +75,11 @@ class Gun(Weapon):
 class Lasgun(Gun):
     def __init__(self):
         super(Lasgun, self).__init__("Lasgun", 20, 30)
+
+
+class Atomic(Gun):
+    def __init__(self):
+        super(Atomic, self).__init__("Bow and Arrow", 5, 50)
 
 
 class Consumable(Item):
@@ -125,6 +136,13 @@ class Life(Potion):
                                                     "kill you or grant you superhuman strength.", 30)
 
 
+class Spice(Potion):
+    def __init__(self):
+        super(Spice, self).__init__("The Spice", "An addicting substance but it grants special strengths. Your attacks"
+                                                 " will do more damage, but you will need to keep consuming spice.",
+                                    20)
+
+
 class Armor(Item):
     def __init__(self, name, desc, defense, shield):
         super(Armor, self).__init__(name)
@@ -178,9 +196,10 @@ class Baron(Enemy):
 
 class Fremen(Enemy):
     def __init__(self):
-        super(Fremen, self).__init__("Fremen", 150, CrysKnife, "A Fremen soldier. While not formally trained, they"
-                                                               " possess an extreme amount of skill and are incredibly"
-                                                               " dangerous.", False)
+        super(Fremen, self).__init__("Fremen", 50, CrysKnife, "A Fremen soldier. While not formally trained, they"
+                                                              " possess an extreme amount of skill and are incredibly"
+                                                              " dangerous. Clearly this one is not happy that"
+                                                              " you took his items.", False)
 
 
 class Sardaukar1(Enemy):
@@ -205,3 +224,15 @@ class Emperor(Enemy):
                                                                       " you. This man has killed hundreds and is a"
                                                                       " machine. He wears his imperial shield.", True)
 
+
+class Worm(Enemy):
+    def __init__(self):
+        super(Worm, self).__init__("Worm", 1000, None, "A worm. A massive creature stretching over one thousand yards."
+                                                       " You could fight the massive creature but will likely be"
+                                                       " crushed.", False)
+
+
+class Dummy(Enemy):
+    def __init__(self):
+        super(Dummy, self).__init__("Dummy", 10000000, None, "A training dummy. You could hit it, if you wanted to.",
+                                    False)
