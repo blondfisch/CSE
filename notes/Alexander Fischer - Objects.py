@@ -4,14 +4,14 @@ class Item(object):
 
 
 class Weapon(Item):
-    def __init__(self, name, damage, distance):
+    def __init__(self, name, damage: int, distance: int):
         super(Weapon, self).__init__(name)
         self.damage = damage
         self.range = distance
 
 
 class Sword(Weapon):
-    def __init__(self, name, damage, durability, desc):
+    def __init__(self, name, damage: int, durability: int, desc):
         super(Sword, self).__init__(name, damage, 0)
         self.name = name
         self.damage = damage
@@ -58,7 +58,7 @@ class Needle(Sword):
 
 
 class Gun(Weapon):
-    def __init__(self, name, damage, charge):
+    def __init__(self, name, damage: int, charge: int):
         super(Gun, self).__init__(name, damage, 1)
         self.name = name
         self.damage = damage
@@ -125,7 +125,7 @@ class Herb(Food):
 
 
 class Potion(Consumable):
-    def __init__(self, name, description, damage):
+    def __init__(self, name, description, damage: int):
         super(Potion, self).__init__(name, description)
         self.damage = damage
 
@@ -144,7 +144,7 @@ class Spice(Potion):
 
 
 class Armor(Item):
-    def __init__(self, name, desc, defense, shield):
+    def __init__(self, name, desc, defense: int, shield):
         super(Armor, self).__init__(name)
         self.name = name
         self.desc = desc
@@ -155,29 +155,47 @@ class Armor(Item):
 class FullShield(Armor):
     def __init__(self):
         super(FullShield, self).__init__("Full body shield", "This shield is incredibly powerful because it covers the"
-                                                             "entire body.", 4, True)
+                                                             "entire body.", 40, True)
 
 
 class HalfShield(Armor):
     def __init__(self):
         super(HalfShield, self).__init__("Half Shield", "This shield has been worn down from use and only covers"
-                                                        "half of the body.", 2, True)
+                                                        "half of the body.", 10, True)
+
+
+class QuartShield(Armor):
+    def __init__(self):
+        super(QuartShield, self).__init__("Quarter Shield", "A quarter shield, covering just a small part of the body",
+                                          5, True)
 
 
 class Enemy(object):
-    def __init__(self, name, health, item=None, desc=None, shield=False):
+    def __init__(self, name, health: int, armor, weapon, item=None, desc=None):
         self.health = health
         self.desc = desc
         self.items = []
-        self.shield = shield
+        self.defense = 60
         self.items = item
         self.name = name
+        self.weapon = weapon
+
+    def take_damage(self, damage: int):
+        if self.defense > damage:
+            print("No damage taken")
+        else:
+            self.health -= damage - self.armor
+            print("%s has %d health left" % (self.name, self.health))
+
+    def attack(self, target):
+        print("%s attacks %s for %d damage" % (self.name, target.name, self.weapon.damage))
+        target.take_damage(self.weapon.damage)
 
 
 class BaseSoldier(Enemy):
     def __init__(self):
-        super(BaseSoldier, self).__init__("Imperial", 50, "A basic Imperial soldier. He is not well equipped and does"
-                                                          " not have a shield.")
+        super(BaseSoldier, self).__init__("Imperial", 50, 3, "A basic Imperial soldier. He is not well equipped and"
+                                                             " does not have a shield.")
 
 
 class Captain(Enemy):
@@ -236,3 +254,9 @@ class Dummy(Enemy):
     def __init__(self):
         super(Dummy, self).__init__("Dummy", 10000000, None, "A training dummy. You could hit it, if you wanted to.",
                                     False)
+
+sword = Sword("nmae", 30, 70, "adfe")
+baron = Baron("Baron", 200, HalfShield, sword)
+dummy = Baron("idiot", 10000, None, None)
+baron.attack(dummy)
+

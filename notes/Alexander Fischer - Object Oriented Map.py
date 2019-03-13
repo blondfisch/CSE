@@ -12,10 +12,12 @@ class Room(object):
 
 
 class Player(object):
-    def __init__(self, starting_location):
+    def __init__(self, starting_location, armor, weapon):
         self.current_location = starting_location
         self.inventory = []
         self.sandslide = False
+        self.armor = armor
+        self.weapon = weapon
 
     def move(self, new_location):
         """ This moves the player to a new room
