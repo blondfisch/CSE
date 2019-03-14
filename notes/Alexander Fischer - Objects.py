@@ -115,8 +115,8 @@ class Rice(Food):
 
 class Chicken(Food):
     def __init__(self):
-        super(Chicken, self).__init__("Fried Chicken", "The most holy of items, fried chicken. This item heals for all"
-                                                       " of your health.", 100)
+        super(Chicken, self).__init__("Fried Chicken", "This glorious chicken hails from heaven and heals you for all"
+                                                       " damage you may have taken. Use wisely.", 100)
 
 
 class Herb(Food):
@@ -171,12 +171,11 @@ class QuartShield(Armor):
 
 
 class Enemy(object):
-    def __init__(self, name, health: int, armor, weapon, item=None, desc=None):
+    def __init__(self, name, health: int, defense, weapon, desc=None):
         self.health = health
         self.desc = desc
         self.items = []
-        self.defense = 60
-        self.items = item
+        self.defense = defense
         self.name = name
         self.weapon = weapon
 
@@ -184,7 +183,7 @@ class Enemy(object):
         if self.defense > damage:
             print("No damage taken")
         else:
-            self.health -= damage - self.armor
+            self.health -= damage - self.defense
             print("%s has %d health left" % (self.name, self.health))
 
     def attack(self, target):
@@ -194,30 +193,30 @@ class Enemy(object):
 
 class BaseSoldier(Enemy):
     def __init__(self):
-        super(BaseSoldier, self).__init__("Imperial", 50, 3, "A basic Imperial soldier. He is not well equipped and"
+        super(BaseSoldier, self).__init__("Imperial", 50, 0, "A basic Imperial soldier. He is not well equipped and"
                                                              " does not have a shield.")
 
 
 class Captain(Enemy):
     def __init__(self):
-        super(Captain, self).__init__("Imperial Captain", 75, Rapier, "An Imperial Captain. He has a more advanced "
-                                                                      "training and is wearing a shield.", True)
+        super(Captain, self).__init__("Imperial Captain", 75, 50, Rapier, "An Imperial Captain. He has a more advanced "
+                                                                          "training and is wearing a shield.")
 
 
 class Baron(Enemy):
-    def __init___(self):
-        super(Baron, self).__init__("The Baron", 200, BroadSword, "The Baron. He is extremely well trained and"
-                                                                  " is very fast. His attacks will kill you quickly"
-                                                                  " if you are unprepared, in the same way that he"
-                                                                  " killed your parents.", False)
+    def __init__(self):
+        super(Baron, self).__init__("The Baron", 200, 0, BroadSword, "The Baron. He is extremely well trained and"
+                                                                     " is very fast. His attacks will kill you quickly"
+                                                                     " if you are unprepared, in the same way that he"
+                                                                     " killed your parents.")
 
 
 class Fremen(Enemy):
     def __init__(self):
-        super(Fremen, self).__init__("Fremen", 50, CrysKnife, "A Fremen soldier. While not formally trained, they"
-                                                              " possess an extreme amount of skill and are incredibly"
-                                                              " dangerous. Clearly this one is not happy that"
-                                                              " you took his items.", False)
+        super(Fremen, self).__init__("Fremen", 50, 0, CrysKnife, "A Fremen soldier. While not formally trained, they"
+                                                                 " are great fighters and are incredibly"
+                                                                 " dangerous. Clearly this one is not happy that"
+                                                                 " you took his items.")
 
 
 class Sardaukar1(Enemy):
@@ -232,31 +231,47 @@ class Sardaukar2(Enemy):
     def __init__(self):
         super(Sardaukar2, self).__init__("Sardaukar", 125, Lasgun, "The Sardaukar are the top soldiers of the"
                                                                    " Empire. They have expert training and can"
-                                                                   " take extreme amounts of pain. Tread lightly.",
-                                         True)
+                                                                   " take extreme amounts of pain. Tread lightly.")
 
 
 class Emperor(Enemy):
     def __init__(self):
-        super(Emperor, self).__init__("The Emperor", 500, BroadSword, "The leader of the known universe stands before"
-                                                                      " you. This man has killed hundreds and is a"
-                                                                      " machine. He wears his imperial shield.", True)
+        super(Emperor, self).__init__("The Emperor", 500, 50, BroadSword, "The leader of the known universe stands "
+                                                                          "before you. This man has killed hundreds"
+                                                                          " and is a"
+                                                                          " machine. He wears his imperial shield.")
 
 
 class Worm(Enemy):
     def __init__(self):
-        super(Worm, self).__init__("Worm", 1000, None, "A worm. A massive creature stretching over one thousand yards."
-                                                       " You could fight the massive creature but will likely be"
-                                                       " crushed.", False)
+        super(Worm, self).__init__("Worm", 1000, 0, "A worm. A massive creature stretching over one thousand yards."
+                                                    " You could fight the massive creature but will likely be"
+                                                    " crushed.")
 
 
 class Dummy(Enemy):
     def __init__(self):
-        super(Dummy, self).__init__("Dummy", 10000000, None, "A training dummy. You could hit it, if you wanted to.",
-                                    False)
+        super(Dummy, self).__init__("Dummy", 10000000, 0, "A training dummy. You could hit it, if you wanted to.")
 
+
+half_shield = HalfShield()
+quart_shield = QuartShield()
 sword = Sword("nmae", 30, 70, "adfe")
-baron = Baron("Baron", 200, HalfShield, sword)
-dummy = Baron("idiot", 10000, None, None)
+dummy = Baron()
+spice = Spice()
+full_shield = FullShield()
+life = Life()
+herb = Herb()
+rice = Rice()
+water = Water()
+bread = Bread()
+atomic = Atomic()
+lasgun = Lasgun()
+needle = Needle()
+crysknife = CrysKnife()
+broadsword = BroadSword()
+dull = DullSword()
+rapier = Rapier()
+baron = Baron()
 baron.attack(dummy)
 
