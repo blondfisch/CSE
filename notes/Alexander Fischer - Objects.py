@@ -12,7 +12,7 @@ class Weapon(Item):
 
 class Sword(Weapon):
     def __init__(self, name, damage: int, durability: int, desc):
-        super(Sword, self).__init__(name, damage, 0)
+        super(Sword, self).__init__(name, damage, durability)
         self.name = name
         self.damage = damage
         self.distance = 0
@@ -199,47 +199,49 @@ class BaseSoldier(Enemy):
 
 class Captain(Enemy):
     def __init__(self):
-        super(Captain, self).__init__("Imperial Captain", 75, 50, Rapier, "An Imperial Captain. He has a more advanced "
-                                                                          "training and is wearing a shield.")
+        super(Captain, self).__init__("Imperial Captain", 75, 50, Rapier(), "An Imperial Captain. He has a more"
+                                                                            " advanced "
+                                                                            "training and is wearing a shield.")
 
 
 class Baron(Enemy):
     def __init__(self):
-        super(Baron, self).__init__("The Baron", 200, 0, BroadSword, "The Baron. He is extremely well trained and"
-                                                                     " is very fast. His attacks will kill you quickly"
-                                                                     " if you are unprepared, in the same way that he"
-                                                                     " killed your parents.")
+        super(Baron, self).__init__("The Baron", 200, 0, BroadSword(), "The Baron. He is extremely well trained and"
+                                                                       " is very fast. His attacks will kill you "
+                                                                       "quickly"
+                                                                       " if you are unprepared, in the same way that he"
+                                                                       " killed your parents.")
 
 
 class Fremen(Enemy):
     def __init__(self):
-        super(Fremen, self).__init__("Fremen", 50, 0, CrysKnife, "A Fremen soldier. While not formally trained, they"
-                                                                 " are great fighters and are incredibly"
-                                                                 " dangerous. Clearly this one is not happy that"
-                                                                 " you took his items.")
+        super(Fremen, self).__init__("Fremen", 50, 0, CrysKnife(), "A Fremen soldier. While not formally trained, they"
+                                                                   " are great fighters and are incredibly"
+                                                                   " dangerous. Clearly this one is not happy that"
+                                                                   " you took his items.")
 
 
 class Sardaukar1(Enemy):
     def __init__(self):
-        super(Sardaukar1, self).__init__("Sardaukar", 125, BroadSword, "The Sardaukar are the top soldiers of the"
-                                                                       " Empire. They have expert training and can"
-                                                                       " take extreme amounts of pain. Tread lightly.",
-                                         True)
+        super(Sardaukar1, self).__init__("Sardaukar", 125, BroadSword(), "The Sardaukar are the top soldiers of the"
+                                                                         " Empire. They have expert training and can"
+                                                                         " take extreme amounts of pain. "
+                                                                         "Tread lightly.", True)
 
 
 class Sardaukar2(Enemy):
     def __init__(self):
-        super(Sardaukar2, self).__init__("Sardaukar", 125, Lasgun, "The Sardaukar are the top soldiers of the"
-                                                                   " Empire. They have expert training and can"
-                                                                   " take extreme amounts of pain. Tread lightly.")
+        super(Sardaukar2, self).__init__("Sardaukar", 125, Lasgun(), "The Sardaukar are the top soldiers of the"
+                                                                     " Empire. They have expert training and can"
+                                                                     " take extreme amounts of pain. Tread lightly.")
 
 
 class Emperor(Enemy):
     def __init__(self):
-        super(Emperor, self).__init__("The Emperor", 500, 50, BroadSword, "The leader of the known universe stands "
-                                                                          "before you. This man has killed hundreds"
-                                                                          " and is a"
-                                                                          " machine. He wears his imperial shield.")
+        super(Emperor, self).__init__("The Emperor", 500, 50, BroadSword(), "The leader of the known universe stands "
+                                                                            "before you. This man has killed hundreds"
+                                                                            " and is a"
+                                                                            " machine. He wears his imperial shield.")
 
 
 class Worm(Enemy):
@@ -251,13 +253,13 @@ class Worm(Enemy):
 
 class Dummy(Enemy):
     def __init__(self):
-        super(Dummy, self).__init__("Dummy", 10000000, 0, "A training dummy. You could hit it, if you wanted to.")
+        super(Dummy, self).__init__("Dummy", 10000000, 0, None, "A training dummy. You could hit it, if you wanted to.")
 
 
 half_shield = HalfShield()
 quart_shield = QuartShield()
 sword = Sword("nmae", 30, 70, "adfe")
-dummy = Baron()
+dummy = Dummy()
 spice = Spice()
 full_shield = FullShield()
 life = Life()
@@ -274,4 +276,3 @@ dull = DullSword()
 rapier = Rapier()
 baron = Baron()
 baron.attack(dummy)
-

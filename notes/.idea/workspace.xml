@@ -12,7 +12,7 @@
     <SUITE FILE_PATH="coverage/notes$Alexander_Fischer___Object_Oriented_Map.coverage" NAME="Alexander Fischer - Object Oriented Map Coverage Results" MODIFIED="1551372976399" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/notes$Inheritance.coverage" NAME="Inheritance Coverage Results" MODIFIED="1552494858981" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/notes$Special_Random.coverage" NAME="Special_Random Coverage Results" MODIFIED="1551373642788" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/notes$Alexander_Fischer___Objects.coverage" NAME="Alexander Fischer - Objects Coverage Results" MODIFIED="1552581905756" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/notes$Alexander_Fischer___Objects.coverage" NAME="Alexander Fischer - Objects Coverage Results" MODIFIED="1552594947919" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/notes$helloWorld.coverage" NAME="helloWorld Coverage Results" MODIFIED="1540310119507" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/notes$Alexander_Fischer___Object_Practice.coverage" NAME="Alexander Fischer - Object Practice Coverage Results" MODIFIED="1550251852023" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
@@ -64,7 +64,7 @@
     <session id="1855669546">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="18" />
+          <entry key="project.closed" value="19" />
           <entry key="project.open.time.0" value="1" />
           <entry key="project.open.time.106" value="1" />
           <entry key="project.open.time.11" value="1" />
@@ -76,13 +76,14 @@
           <entry key="project.open.time.52" value="1" />
           <entry key="project.open.time.53" value="1" />
           <entry key="project.open.time.56" value="1" />
+          <entry key="project.open.time.60" value="1" />
           <entry key="project.open.time.64" value="1" />
           <entry key="project.open.time.67" value="1" />
           <entry key="project.open.time.68" value="3" />
           <entry key="project.open.time.7" value="1" />
           <entry key="project.open.time.74" value="1" />
           <entry key="project.open.time.75" value="1" />
-          <entry key="project.opened" value="23" />
+          <entry key="project.opened" value="24" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -97,12 +98,12 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="20052" />
+          <entry key="py" value="20110" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="20052" />
+          <entry key="Python" value="20110" />
         </counts>
       </usages-collector>
     </session>
@@ -158,18 +159,18 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Alexander Fischer - Objects.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="276" lean-forward="true" selection-start-line="276" selection-end-line="276" />
+            <state relative-caret-position="17">
+              <caret line="259" column="13" selection-start-line="259" selection-start-column="13" selection-end-line="259" selection-end-column="13" />
               <folding>
-                <marker date="1552581923318" expanded="true" signature="279:284" ph="..." />
-                <marker date="1552581923318" expanded="true" signature="1831:2068" ph="..." />
-                <marker date="1552581923318" expanded="true" signature="2577:2665" ph="..." />
-                <marker date="1552581923318" expanded="true" signature="3603:3605" ph="..." />
-                <marker date="1552581923318" expanded="true" signature="3625:3874" ph="..." />
-                <marker date="1552581923318" expanded="true" signature="4491:4795" ph="..." />
-                <marker date="1552581923318" expanded="true" signature="5561:5759" ph="..." />
-                <marker date="1552581923318" expanded="true" signature="9279:9284" ph="..." />
-                <marker date="1552581923318" expanded="true" signature="9618:9623" ph="..." />
+                <marker date="1552594947685" expanded="true" signature="279:284" ph="..." />
+                <marker date="1552594947685" expanded="true" signature="1840:2077" ph="..." />
+                <marker date="1552594947685" expanded="true" signature="2586:2674" ph="..." />
+                <marker date="1552594947685" expanded="true" signature="3612:3614" ph="..." />
+                <marker date="1552594947685" expanded="true" signature="3634:3883" ph="..." />
+                <marker date="1552594947685" expanded="true" signature="4500:4804" ph="..." />
+                <marker date="1552594947685" expanded="true" signature="5570:5768" ph="..." />
+                <marker date="1552594947685" expanded="true" signature="9308:9313" ph="..." />
+                <marker date="1552594947685" expanded="true" signature="9647:9652" ph="..." />
               </folding>
             </state>
           </provider>
@@ -264,6 +265,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -275,7 +277,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -573,18 +574,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Alexander Fischer - Objects.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="276" lean-forward="true" selection-start-line="276" selection-end-line="276" />
+        <state relative-caret-position="17">
+          <caret line="259" column="13" selection-start-line="259" selection-start-column="13" selection-end-line="259" selection-end-column="13" />
           <folding>
-            <marker date="1552581923318" expanded="true" signature="279:284" ph="..." />
-            <marker date="1552581923318" expanded="true" signature="1831:2068" ph="..." />
-            <marker date="1552581923318" expanded="true" signature="2577:2665" ph="..." />
-            <marker date="1552581923318" expanded="true" signature="3603:3605" ph="..." />
-            <marker date="1552581923318" expanded="true" signature="3625:3874" ph="..." />
-            <marker date="1552581923318" expanded="true" signature="4491:4795" ph="..." />
-            <marker date="1552581923318" expanded="true" signature="5561:5759" ph="..." />
-            <marker date="1552581923318" expanded="true" signature="9279:9284" ph="..." />
-            <marker date="1552581923318" expanded="true" signature="9618:9623" ph="..." />
+            <marker date="1552594947685" expanded="true" signature="279:284" ph="..." />
+            <marker date="1552594947685" expanded="true" signature="1840:2077" ph="..." />
+            <marker date="1552594947685" expanded="true" signature="2586:2674" ph="..." />
+            <marker date="1552594947685" expanded="true" signature="3612:3614" ph="..." />
+            <marker date="1552594947685" expanded="true" signature="3634:3883" ph="..." />
+            <marker date="1552594947685" expanded="true" signature="4500:4804" ph="..." />
+            <marker date="1552594947685" expanded="true" signature="5570:5768" ph="..." />
+            <marker date="1552594947685" expanded="true" signature="9308:9313" ph="..." />
+            <marker date="1552594947685" expanded="true" signature="9647:9652" ph="..." />
           </folding>
         </state>
       </provider>
