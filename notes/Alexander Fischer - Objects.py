@@ -26,6 +26,11 @@ class Sword(Weapon):
             self.durability -= 1
 
 
+class WoodSword(Sword):
+    def __init__(self):
+        super(WoodSword, self).__init__("Wooden Sword", 5, 60, "A wooden sword. It's not the best option")
+
+
 class Rapier(Sword):
     def __init__(self):
         super(Rapier, self).__init__("Rapier", 7, 50, "A sharp rapier sword. It is in excellent condition and will"
@@ -57,19 +62,24 @@ class Needle(Sword):
                                                                 "massive damage to enemies")
 
 
+class Tooth(Sword):
+    def __init__(self):
+        super(Tooth, self).__init__("Nothing here", 0, 1000000, "You shouldn't care.")
+
+
 class Gun(Weapon):
-    def __init__(self, name, damage: int, charge: int):
+    def __init__(self, name, damage: int, durability: int):
         super(Gun, self).__init__(name, damage, 1)
         self.name = name
         self.damage = damage
         self.distance = 1
-        self.charge = charge
+        self.durability = durability
 
     def shoot(self):
-        if self.charge <= 0:
+        if self.durability <= 0:
             print("The gun does not have any charge left.")
         else:
-            self.charge -= 1
+            self.durability -= 1
 
 
 class Lasgun(Gun):
@@ -184,11 +194,23 @@ class Enemy(object):
             print("No damage taken")
         else:
             self.health -= damage - self.defense
+            if self.health <= 0:
+                self.health = 0
             print("%s has %d health left" % (self.name, self.health))
 
     def attack(self, target):
-        print("%s attacks %s for %d damage" % (self.name, target.name, self.weapon.damage))
-        target.take_damage(self.weapon.damage)
+        if self.weapon.durability <= 0:
+            print("The weapon broke and the attack failed.")
+        elif target.health <= 0:
+            print("You're attacking a dead person")
+        else:
+            target.take_damage(self.weapon.damage)
+            if target.health - self.weapon.damage > 0:
+                print("%s attacks %s for %d damage" % (self.name, target.name, self.weapon.damage))
+                target.health -= self.weapon.damage
+            if target.health <= 0:
+                print("%s died." % target.name)
+            self.weapon.durability -= 1
 
 
 class BaseSoldier(Enemy):
@@ -223,17 +245,18 @@ class Fremen(Enemy):
 
 class Sardaukar1(Enemy):
     def __init__(self):
-        super(Sardaukar1, self).__init__("Sardaukar", 125, BroadSword(), "The Sardaukar are the top soldiers of the"
-                                                                         " Empire. They have expert training and can"
-                                                                         " take extreme amounts of pain. "
-                                                                         "Tread lightly.", True)
+        super(Sardaukar1, self).__init__("Sardaukar", 125, 0, BroadSword(), "The Sardaukar are the top soldiers of the"
+                                                                            " Empire. They have expert training and can"
+                                                                            " take extreme amounts of pain. "
+                                                                            "Tread lightly.")
 
 
 class Sardaukar2(Enemy):
     def __init__(self):
-        super(Sardaukar2, self).__init__("Sardaukar", 125, Lasgun(), "The Sardaukar are the top soldiers of the"
-                                                                     " Empire. They have expert training and can"
-                                                                     " take extreme amounts of pain. Tread lightly.")
+        super(Sardaukar2, self).__init__("Sardaukar", 125, 12, Lasgun(), "The Sardaukar are the top soldiers of the"
+                                                                         " Empire. They have expert training and can"
+                                                                         " take extreme amounts of pain. Tread lightly."
+                                         )
 
 
 class Emperor(Enemy):
@@ -246,19 +269,19 @@ class Emperor(Enemy):
 
 class Worm(Enemy):
     def __init__(self):
-        super(Worm, self).__init__("Worm", 1000, 0, "A worm. A massive creature stretching over one thousand yards."
-                                                    " You could fight the massive creature but will likely be"
-                                                    " crushed.")
+        super(Worm, self).__init__("Worm", 1000, 0, Tooth(), "A worm. A massive creature stretching over one thousand"
+                                                             " yards. You could fight the massive creature but will "
+                                                             "likely be crushed.")
 
 
 class Dummy(Enemy):
     def __init__(self):
-        super(Dummy, self).__init__("Dummy", 10000000, 0, None, "A training dummy. You could hit it, if you wanted to.")
+        super(Dummy, self).__init__("Dummy", 1000000000, 0, "A training dummy. You could hit it, if you wanted to.")
 
 
 half_shield = HalfShield()
 quart_shield = QuartShield()
-sword = Sword("nmae", 30, 70, "adfe")
+sword = Rapier()
 dummy = Dummy()
 spice = Spice()
 full_shield = FullShield()
@@ -275,4 +298,8 @@ broadsword = BroadSword()
 dull = DullSword()
 rapier = Rapier()
 baron = Baron()
-baron.attack(dummy)
+sard1 = Sardaukar1()
+worm = Worm()
+tooth = Tooth()
+sard2 = Sardaukar2()
+sard2.attack(dummy)
