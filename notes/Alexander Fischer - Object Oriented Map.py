@@ -1,5 +1,14 @@
+import random
+import Objects
+
+
 class Room(object):
-    def __init__(self, name, desc, north=None, south=None, east=None, west=None, up=None, down=None, characters=None):
+    def __init__(self, name, desc, north=None, south=None, east=None, west=None, up=None, down=None,
+                 items=None, characters=None):
+        if characters is None:
+            characters = []
+        if items is None:
+            items = []
         self.name = name
         self.north = north
         self.south = south
@@ -8,11 +17,12 @@ class Room(object):
         self.up = up
         self.down = down
         self.desc = desc
+        self.items = items
         self.characters = characters
 
 
 class Player(object):
-    def __init__(self, starting_location, armor, weapon):
+    def __init__(self, starting_location, armor=None, weapon=None):
         self.current_location = starting_location
         self.inventory = []
         self.sandslide = False
@@ -36,14 +46,6 @@ class Player(object):
         return globals()[name_of_room]
 
 
-class Enemy(object):
-    def __init__(self, health=10, desc=None, shield=False):
-        self.health = health
-        self.desc = desc
-        self.items = []
-        self.shield = shield
-
-
 # Option 2 - set all at once, modify controller
 # Rooms
 DESERT1 = Room("Open Desert", 'The sun beats down on the sandy desert all around you. There are caves to the north'
@@ -51,30 +53,29 @@ DESERT1 = Room("Open Desert", 'The sun beats down on the sandy desert all around
                               'sides is the desert.',
                "SIETCH", 'DESERT2', 'DESERT3', 'DESERT4')
 
-SIETCH = Room("Sietch Tabr", 'You walk into a hidden Fremen cave. Inside, you find a Stillsuit folded in a '
-                             'corner, as well as paths leading deeper into the chamber'
-                             ' to the north and south.',
-              None, 'DESERT1', 'SPICE_ROOMS', 'FREMEN_PIT')
+SIETCH = Room("Sietch Tabr", 'You walk into a hidden Fremen cave. Inside, you find paths leading deeper into the'
+                             ' chamber to the north and south.',
+              None, 'DESERT1', 'SPICE_ROOMS', 'FREMEN_PIT', None, None, [Objects.QuartShield(), Objects.DullSword()])
 
 SPICE_ROOMS = Room("Spice Rooms", "Spice is stacked in boxes in for ceremonies. You are aware of the power that it can"
                                   " bring from consumption, however the addiction can be fatal.\n There is only a path"
                                   " to the left leading out of the room.",
-                   None, None, None, 'SIETCH')
+                   None, None, None, 'SIETCH', None, None, [Objects.Spice])
 
 FREMEN_PIT = Room("Fremen Pit", "A massive room with seating similar to a coliseum. Battle marks from swords line the"
                                 " walls of the center pit.\n A Fremen stands in the middle of the arena"
                                 " and does not appear friendly. \nThere is a staircase descending downwards and a path"
-                                " leading east.", None, None, "SIETCH", None, None, "WATER")
+                                " leading east.", None, None, "SIETCH", None, None, "WATER", None, [Objects.fremen])
 
 WATER = Room("Water Storage", 'The water storage area of the sietch. You see tanks of water containing hundreds of'
                               ' liters kept in storage, all carefully counted for the tribe. The only way out is the'
                               ' staircase leading up.',
-             None, None, None, None, "FREMEN_PIT")
+             None, None, None, None, "FREMEN_PIT", None, [Objects.water])
 
 DESERT2 = Room("Open Desert", "The sun beats down on the sandy desert all around you. You need to find a way out of"
                               " the desert\n before the lack of water or Imperials kill you. This time, however, there"
                               " is a lonely Imperial Guard out on patrol.",
-               'DESERT1', None, 'DESERT5')
+               'DESERT1', None, 'DESERT5', None, None, None, None, [Objects.soldier])
 
 DESERT3 = Room("Open Desert", "The sun beats down on the sandy desert all around you. You need to find a way out of"
                               " the desert\n before the lack of water or Imperials kill you.",
