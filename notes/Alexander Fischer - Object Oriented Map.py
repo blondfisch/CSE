@@ -4,7 +4,7 @@ import Objects
 
 class Room(object):
     def __init__(self, name, desc, north=None, south=None, east=None, west=None, up=None, down=None,
-                 items=None, characters=None):
+                 items=None, characters=None, indoor=False):
         if characters is None:
             characters = []
         if items is None:
@@ -19,15 +19,20 @@ class Room(object):
         self.desc = desc
         self.items = items
         self.characters = characters
+        self.indoor = indoor
 
 
 class Player(object):
-    def __init__(self, starting_location, armor=None, weapon=None):
+    def __init__(self, starting_location, suit, weapon=None):
         self.current_location = starting_location
         self.inventory = []
         self.sandslide = False
-        self.armor = armor
+        self.suit = suit
         self.weapon = weapon
+
+    def degrade(self):
+        if self.current_location.indoor is False:
+            self.suit -= 10
 
     def move(self, new_location):
         """ This moves the player to a new room
@@ -144,28 +149,28 @@ MARKET = Room("Arrakeen Market", "You find yourself at the central market of Arr
 PALACE = Room("Palace Entrance", "You approach the massive palace. The massive gold throne and large, red banners"
                                  " hang down. The floor is velvet red carpet\n with the crest of the Harkonnens. "
                                  "The Council appears to meet the west and dine in a room to the east.",
-              None, "MARKET", "DINE", "COUNCIL")
+              None, "MARKET", "DINE", "COUNCIL", None, None, [], [], True)
 
 DINE = Room("Dining Hall", "The room is filled with a massive wooden table with food still sitting out, "
                            "accompanied by beautiful red decorations.\n"
                            "The massive banners hanging down symbol Imperial power. Above the head of the table is "
                            "the head of the bear that killed the old Duke.\n The entrance to the palace is to the west"
                            " and the private quarters are to the east.",
-            None, None, "BEDROOM", "PALACE")
+            None, None, "BEDROOM", "PALACE", None, None, [], [], True)
 
 BEDROOM = Room("Private Quarters", "This is the private quarters of the Imperial. The walls are lined with swords and "
                                    "shields,\n which can be used in the training area north of the room. The only exit"
                                    " leading towards the center of the palace is west.",
-               "TRAIN", None, None, "DINE")
+               "TRAIN", None, None, "DINE", None, None, [], [], True)
 
 TRAIN = Room("Training Room", " You enter a room of complete white. The only thing there is a small training dummy"
                               " with a sword in the center of the room.",
-             None, "BEDROOM")
+             None, "BEDROOM", None, None, None, None, [], [], True)
 
 COUNCIL = Room("Council", "The location where all of the official government business takes place. The room is bland,"
                           " with only a round table.\n There appears to be something hidden on the underside of the"
                           " table. The only way out is to the east.",
-               None, None, "PALACE", None, None, "WORM")
+               None, None, "PALACE", None, None, "WORM", [], [], True)
 
 WORM = Room("Cellar", "You descend the hidden stairs to reveal a cellar. In the middle is a worm chained to the floor."
                       " \nIt appears that the Water of Life is being extracted from it and stored in containers along"
@@ -175,10 +180,11 @@ WORM = Room("Cellar", "You descend the hidden stairs to reveal a cellar. In the 
 HEAVEN = Room("Heaven", "You've found Heaven. Here, anything is possible as stacks of fried chicken and weapons are"
                         " everywhere.\n However, you search around and notice a small USB drive that appears to say "
                         "'call god'.",
-              None, None, None, None, None, "SIETCH_BALBOA")
+              None, None, None, None, None, "SIETCH_BALBOA", [], [], True)
 
 SHIELD_WALL = Room("The shield wall is the eastern boundary of the city. Venturing beyond is too dangerous.",
-                   None, None, None, "MARKET")
+                   None, None, None, "MARKET", None, None)
+
 # Characters
 player = Player(DESERT1)
 

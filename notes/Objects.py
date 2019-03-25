@@ -180,6 +180,12 @@ class QuartShield(Armor):
                                           5, True)
 
 
+class Suit(Item):
+    def __init__(self, name, health):
+        super(Suit, self).__init__(name)
+        self.health = health
+
+
 class Enemy(object):
     def __init__(self, name, health: int, defense, weapon, desc=None):
         self.health = health
