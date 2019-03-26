@@ -186,6 +186,26 @@ class Suit(Item):
         self.health = health
 
 
+class FremenSuit(Suit):
+    def __init__(self):
+        super(FremenSuit, self).__init__("Fremen Stillsuit", 500)
+
+
+class ImperialSuit(Suit):
+    def __init__(self):
+        super(ImperialSuit, self).__init__("Imperial Stillsuit", 320)
+
+
+class StarterSuit(Suit):
+    def __init__(self):
+        super(StarterSuit, self).__init__("Low Quality Suit", 220)
+
+
+class Money(Item):
+    def __init__(self, name, value):
+        super(Money, self).__init__(name, value)
+
+
 class Enemy(object):
     def __init__(self, name, health: int, defense, weapon, desc=None):
         self.health = health

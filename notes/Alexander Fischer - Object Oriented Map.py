@@ -23,16 +23,25 @@ class Room(object):
 
 
 class Player(object):
-    def __init__(self, starting_location, suit, weapon=None):
+    def __init__(self, starting_location, health, suit=None, weapon=None, wallet=0):
         self.current_location = starting_location
         self.inventory = []
         self.sandslide = False
         self.suit = suit
         self.weapon = weapon
+        self.wallet = wallet
+        self.health = 200
 
     def degrade(self):
-        if self.current_location.indoor is False:
-            self.suit -= 10
+        if self.suit.health > 0 and self.current_location.indoor is False:
+            if self.current_location.indoor is False:
+                self.suit.health -= 10
+        if self.suit.health <= 0:
+            self.health -= 10
+
+    def purchase(self,item):
+        if self.wallet >= item.value:
+            
 
     def move(self, new_location):
         """ This moves the player to a new room
@@ -70,7 +79,7 @@ SPICE_ROOMS = Room("Spice Rooms", "Spice is stacked in boxes in for ceremonies. 
 FREMEN_PIT = Room("Fremen Pit", "A massive room with seating similar to a coliseum. Battle marks from swords line the"
                                 " walls of the center pit.\n A Fremen stands in the middle of the arena"
                                 " and does not appear friendly. \nThere is a staircase descending downwards and a path"
-                                " leading east.", None, None, "SIETCH", None, None, "WATER", None, [Objects.fremen])
+                                " leading east.", None, None, "SIETCH", None, None, "WATER", [Objects.fremen])
 
 WATER = Room("Water Storage", 'The water storage area of the sietch. You see tanks of water containing hundreds of'
                               ' liters kept in storage, all carefully counted for the tribe. The only way out is the'
