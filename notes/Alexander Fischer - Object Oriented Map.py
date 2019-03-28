@@ -23,7 +23,7 @@ class Room(object):
 
 
 class Player(object):
-    def __init__(self, starting_location, health, suit=None, weapon=None, wallet=0):
+    def __init__(self, starting_location, suit=None, weapon=None, wallet=0):
         self.current_location = starting_location
         self.inventory = []
         self.sandslide = False
@@ -36,12 +36,21 @@ class Player(object):
         if self.suit.health > 0 and self.current_location.indoor is False:
             if self.current_location.indoor is False:
                 self.suit.health -= 10
-        if self.suit.health <= 0:
-            self.health -= 10
+                if self.suit.health <= 0:
+                    self.health -= 10
+                    if self.health <= 0:
+                        print("You died.")
 
-    def purchase(self,item):
-        if self.wallet >= item.value:
-            
+    def purchase(self, item):
+        if self.wallet >= item.value and self.current_location == MARKET:
+            self.inventory.append(item)
+            self.wallet -= item.value
+
+        elif self.wallet < item.value:
+            print("You are too poor to purchase such an item, peasant.")
+
+        elif self.current_location != MARKET:
+            print("Bold of you to assume you could purchase something while not at a market")
 
     def move(self, new_location):
         """ This moves the player to a new room

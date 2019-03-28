@@ -11,13 +11,14 @@ class Weapon(Item):
 
 
 class Sword(Weapon):
-    def __init__(self, name, damage: int, durability: int, desc):
+    def __init__(self, name, damage: int, durability: int, desc, value=None,):
         super(Sword, self).__init__(name, damage, durability)
         self.name = name
         self.damage = damage
         self.distance = 0
         self.durability = durability
         self.desc = desc
+        self.value = value
 
     def swing(self):
         if self.durability <= 0:
@@ -204,7 +205,8 @@ class StarterSuit(Suit):
 class Money(Item):
     def __init__(self, name, value):
         super(Money, self).__init__(name, value)
-
+        self.name = name
+        self.value = value
 
 class Enemy(object):
     def __init__(self, name, health: int, defense, weapon, desc=None):
