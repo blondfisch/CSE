@@ -204,7 +204,7 @@ SHIELD_WALL = Room("The shield wall is the eastern boundary of the city. Venturi
                    None, None, None, "MARKET", None, None)
 
 # Characters
-player = Player(DESERT1)
+player = Player(MARKET)
 
 playing = True
 directions = ['north', 'south', 'east', 'west', 'up', 'down']

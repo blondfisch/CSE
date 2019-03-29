@@ -204,9 +204,20 @@ class StarterSuit(Suit):
 
 class Money(Item):
     def __init__(self, name, value):
-        super(Money, self).__init__(name, value)
+        super(Money, self).__init__(name)
         self.name = name
         self.value = value
+
+
+class BigNote(Money):
+    def __init__(self):
+        super(BigNote, self).__init__("100 note bill", 100)
+
+
+class SmallNote(Money):
+    def __init__(self):
+        super(SmallNote, self).__init__("10 note bill", 10)
+
 
 class Enemy(object):
     def __init__(self, name, health: int, defense, weapon, desc=None):
