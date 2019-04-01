@@ -45,9 +45,10 @@ class Player(object):
         item = input("What do you want to take?")
         for number in range(len(self.current_location.items)):
             grab = self.current_location.items[number]
-            if item == grab.grab or item == grab.name:
-                self.inventory.append(item)
+            if item.lower() == grab.grab.lower() or item == grab.name.lower():
+                self.inventory.append(grab)
                 self.current_location.items.remove(item)
+                print("You added %s to your inventory" % grab.name)
 
     def purchase(self, item):
         if self.wallet >= item.value and self.current_location == MARKET:
@@ -256,6 +257,7 @@ short_directions = ['n', 's', 'e', 'w', 'u', 'd']
 while playing:
     print(player.current_location.name)
     print(player.current_location.desc)
+    print(player.inventory)
     if player.current_location.characters is None or player.current_location.characters is []:
         print("You are alone.")
     else:
@@ -279,7 +281,7 @@ while playing:
             player.move(next_room)
         except KeyError:
             print("I can't go that way.")
-    elif command.lower in [" take", "take", "take "]:
+    elif command.lower() in ["take", " take", "take ", "t"]:
         player.take()
     else:
         print("Command Not Found")
