@@ -11,7 +11,7 @@ class Weapon(Item):
 
 
 class Sword(Weapon):
-    def __init__(self, name, damage: int, durability: int, desc, value=None,):
+    def __init__(self, name, damage: int, durability: int, desc, value=None, grab=None):
         super(Sword, self).__init__(name, damage, durability)
         self.name = name
         self.damage = damage
@@ -19,6 +19,7 @@ class Sword(Weapon):
         self.durability = durability
         self.desc = desc
         self.value = value
+        self.grab = grab
 
     def swing(self):
         if self.durability <= 0:
@@ -29,52 +30,60 @@ class Sword(Weapon):
 
 class WoodSword(Sword):
     def __init__(self):
-        super(WoodSword, self).__init__("Wooden Sword", 5, 60, "A wooden sword. It's not the best option")
+        super(WoodSword, self).__init__("Wooden Sword", 5, 60, "A wooden sword. It's not the best option",
+                                        ["wood sword", "sword", "wooden sword"])
 
 
 class Rapier(Sword):
     def __init__(self):
         super(Rapier, self).__init__("Rapier", 7, 50, "A sharp rapier sword. It is in excellent condition and will"
-                                                      " do massive damage to enemies.")
+                                                      " do massive damage to enemies.",
+                                     ["rapier", "sword"])
 
 
 class DullSword(Sword):
     def __init__(self):
         super(DullSword, self).__init__("Dull Sword", 2, 25, "A dull sword. It has not been well maintained and is on"
-                                                             " the verge of breaking.")
+                                                             " the verge of breaking.",
+                                        ["sword", "dull sword", "dullsword"])
 
 
 class BroadSword(Sword):
     def __init__(self):
         super(BroadSword, self).__init__("Broadsword", 10, 40, "This sword is quite heavy and will wear out quickly"
-                                                               "but does massive damage.")
+                                                               "but does massive damage.",
+                                         ["broadsword", "sword", "broad sword"])
 
 
 class CrysKnife(Sword):
     def __init__(self):
         super(CrysKnife, self).__init__("Crysknife", 6, 100, "This knife is made from the teeth of a worm. While not"
                                                              " very sharp, it will undergo a lot of use before it"
-                                                             " breaks.")
+                                                             " breaks.",
+                                        ["knife", "crysknife"])
 
 
 class Needle(Sword):
     def __init__(self):
         super(Needle, self).__init__("Poisoned Needle", 100, 1, "A poisoned needle. Can only be used once but does "
-                                                                "massive damage to enemies")
+                                                                "massive damage to enemies",
+                                     ["poisoned needle", "needle", "poisonedneedle"])
 
 
 class Tooth(Sword):
     def __init__(self):
-        super(Tooth, self).__init__("Nothing here", 0, 1000000, "You shouldn't care.")
+        super(Tooth, self).__init__("Nothing here", 0, 1000000, "You shouldn't care.",
+                                    ["tooth", "object"])
 
 
 class Gun(Weapon):
-    def __init__(self, name, damage: int, durability: int):
+    def __init__(self, name, damage: int, durability: int, grab=None):
         super(Gun, self).__init__(name, damage, 1)
         self.name = name
         self.damage = damage
         self.distance = 1
         self.durability = durability
+        self.grab = grab
 
     def shoot(self):
         if self.durability <= 0:
@@ -85,12 +94,12 @@ class Gun(Weapon):
 
 class Lasgun(Gun):
     def __init__(self):
-        super(Lasgun, self).__init__("Lasgun", 20, 30)
+        super(Lasgun, self).__init__("Lasgun", 20, 30, ["gun", "lasgun"])
 
 
-class Atomic(Gun):
+class Bow(Gun):
     def __init__(self):
-        super(Atomic, self).__init__("Bow and Arrow", 5, 50)
+        super(Bow, self).__init__("Bow and Arrow", 5, 50, ["bow", "bow and arrow"])
 
 
 class Consumable(Item):
@@ -101,112 +110,124 @@ class Consumable(Item):
 
 
 class Food(Consumable):
-    def __init__(self, name, description, health):
+    def __init__(self, name, description, health, grab=None):
         super(Consumable, self).__init__(name)
         self.name = name
         self.desc = description
         self.health = health
+        self.grab = grab
 
 
 class Bread(Food):
     def __init__(self):
-        super(Bread, self).__init__("Bread", "This is a piece of bread. It can be eaten for health.", 25)
+        super(Bread, self).__init__("Bread", "This is a piece of bread. It can be eaten for health.", 25, "bread")
 
 
 class Water(Food):
     def __init__(self):
         super(Water, self).__init__("Water", "Arguably the most valuable item on the planet, water heals you massive"
-                                             " amounts but is very rare.", 50)
+                                             " amounts but is very rare.", 50, ["water", "h2o", "aqua"])
 
 
 class Rice(Food):
     def __init__(self):
-        super(Rice, self).__init__("Rice", "This item can be eaten for health. It is rather common on the planet.", 15)
+        super(Rice, self).__init__("Rice", "This item can be eaten for health. It is rather common on the planet.", 15,
+                                   "rice")
 
 
 class Chicken(Food):
     def __init__(self):
         super(Chicken, self).__init__("Fried Chicken", "This glorious chicken hails from heaven and heals you for all"
-                                                       " damage you may have taken. Use wisely.", 100)
+                                                       " damage you may have taken. Use wisely.", 100,
+                                      ["chicken", "fried chicken", "friedchicken"])
 
 
 class Herb(Food):
     def __init__(self):
-        super(Herb, self).__init__("Herbs", "Common Herbs. They are plentiful but heal for only a small amount", 10)
+        super(Herb, self).__init__("Herbs", "Common Herbs. They are plentiful but heal for only a small amount", 10,
+                                   ["herb", "herbs"])
 
 
 class Potion(Consumable):
-    def __init__(self, name, description, damage: int):
+    def __init__(self, name, description, damage: int, grab=None):
         super(Potion, self).__init__(name, description)
         self.damage = damage
+        self.grab = grab
 
 
 class Life(Potion):
     def __init__(self):
         super(Life, self).__init__("Water of Life", "An incredibly dangerous item. Consuming the Water of Life could "
-                                                    "kill you or grant you superhuman strength.", 30)
+                                                    "kill you or grant you superhuman strength.", 30,
+                                   ["water of life", "water", "life"])
 
 
 class Spice(Potion):
     def __init__(self):
         super(Spice, self).__init__("The Spice", "An addicting substance but it grants special strengths. Your attacks"
                                                  " will do more damage, but you will need to keep consuming spice.",
-                                    20)
+                                    20, ["spice", "the spice", "melange"])
 
 
 class Armor(Item):
-    def __init__(self, name, desc, defense: int, shield):
+    def __init__(self, name, desc, defense: int, shield, grab=None):
         super(Armor, self).__init__(name)
         self.name = name
         self.desc = desc
         self.defense = defense
         self.shield = shield
+        self.grab = grab
 
 
 class FullShield(Armor):
     def __init__(self):
         super(FullShield, self).__init__("Full body shield", "This shield is incredibly powerful because it covers the"
-                                                             "entire body.", 40, True)
+                                                             "entire body.", 40, True,
+                                         ["shield", "full shield", "best shield"])
 
 
 class HalfShield(Armor):
     def __init__(self):
         super(HalfShield, self).__init__("Half Shield", "This shield has been worn down from use and only covers"
-                                                        "half of the body.", 10, True)
+                                                        "half of the body.", 10, True,
+                                         ["halfshield", "half shield"])
 
 
 class QuartShield(Armor):
     def __init__(self):
         super(QuartShield, self).__init__("Quarter Shield", "A quarter shield, covering just a small part of the body",
-                                          5, True)
+                                          5, True,
+                                          ["quarter shield", "quartershield", "quartshield"])
 
 
 class Suit(Item):
-    def __init__(self, name, health):
+    def __init__(self, name, health, grab=None):
         super(Suit, self).__init__(name)
         self.health = health
+        self.grab = grab
 
 
 class FremenSuit(Suit):
     def __init__(self):
-        super(FremenSuit, self).__init__("Fremen Stillsuit", 500)
+        super(FremenSuit, self).__init__("Fremen Stillsuit", 500, ["suit", "fremen suit", "fremensuit"])
 
 
 class ImperialSuit(Suit):
     def __init__(self):
-        super(ImperialSuit, self).__init__("Imperial Stillsuit", 320)
+        super(ImperialSuit, self).__init__("Imperial Stillsuit", 320, ["suit", "imperial suit", "imperialsuit"])
 
 
 class StarterSuit(Suit):
     def __init__(self):
-        super(StarterSuit, self).__init__("Low Quality Suit", 220)
+        super(StarterSuit, self).__init__("Low Quality Suit", 220, ["basic suit", "suit", "bad suit"])
 
 
 class Money(Item):
-    def __init__(self, name, value):
+    def __init__(self, name, value, grab=None):
         super(Money, self).__init__(name)
         self.name = name
         self.value = value
+        self.grab = grab
 
 
 class BigNote(Money):
@@ -315,7 +336,7 @@ class Worm(Enemy):
 
 class Dummy(Enemy):
     def __init__(self):
-        super(Dummy, self).__init__("Dummy", 1000000000, 0, "A training dummy. You could hit it, if you wanted to.")
+        super(Dummy, self).__init__("Dummy", 1000000000000, 0, "A training dummy. You could hit it, if you wanted to.")
 
 
 half_shield = HalfShield()
@@ -330,7 +351,7 @@ chicken = Chicken()
 rice = Rice()
 water = Water()
 bread = Bread()
-atomic = Atomic()
+atomic = Bow()
 lasgun = Lasgun()
 needle = Needle()
 crysknife = CrysKnife()
@@ -347,4 +368,4 @@ tooth = Tooth()
 sard2 = Sardaukar2()
 fremen = Fremen()
 soldier = BaseSoldier()
-sard2.attack(dummy)
+# sard2.attack(dummy)

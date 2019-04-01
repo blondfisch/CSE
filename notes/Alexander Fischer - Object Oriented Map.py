@@ -70,6 +70,41 @@ class Player(object):
 
 
 # Option 2 - set all at once, modify controller
+# Objects
+rapier1 = Objects.Rapier()
+dullsword1 = Objects.DullSword()
+broadsword1 = Objects.BroadSword()
+crysknife1 = Objects.CrysKnife()
+half_shield1 = Objects.HalfShield()
+quart_shield1 = Objects.QuartShield()
+rapier2 = Objects.Rapier()
+dummy1 = Objects.Dummy()
+spice1 = Objects.Spice()
+full_shield1 = Objects.FullShield()
+life1 = Objects.Life()
+herb1 = Objects.Herb()
+chicken1 = Objects.Chicken()
+rice1 = Objects.Rice()
+water1 = Objects.Water()
+bread1 = Objects.Bread()
+atomic1 = Objects.Bow()
+lasgun1 = Objects.Lasgun()
+needle1 = Objects.Needle()
+crysknife2 = Objects.CrysKnife()
+broadsword2 = Objects.BroadSword()
+dullsword2 = Objects.DullSword()
+wood_sword1 = Objects.WoodSword()
+rapier3 = Objects.Rapier()
+chicken2 = Objects.Chicken()
+chicken3 = Objects.Chicken()
+chicken4 = Objects.Chicken()
+chicken5 = Objects.Chicken()
+chicken6 = Objects.Chicken()
+chicken7 = Objects.Chicken()
+chicken8 = Objects.Chicken()
+# Characters
+gi1 = Objects.BaseSoldier()
+gi2 = Objects.Sardaukar2()
 # Rooms
 DESERT1 = Room("Open Desert", 'The sun beats down on the sandy desert all around you. There are caves to the north'
                               ' inside of the rock, a place of safety from the worms in the desert.\n On all other '
@@ -86,8 +121,7 @@ SPICE_ROOMS = Room("Spice Rooms", "Spice is stacked in boxes in for ceremonies. 
                    None, None, None, 'SIETCH', None, None, [Objects.Spice])
 
 FREMEN_PIT = Room("Fremen Pit", "A massive room with seating similar to a coliseum. Battle marks from swords line the"
-                                " walls of the center pit.\n A Fremen stands in the middle of the arena"
-                                " and does not appear friendly. \nThere is a staircase descending downwards and a path"
+                                " walls of the center pit.\n There is a staircase descending downwards and a path"
                                 " leading east.", None, None, "SIETCH", None, None, "WATER", [Objects.fremen])
 
 WATER = Room("Water Storage", 'The water storage area of the sietch. You see tanks of water containing hundreds of'
@@ -198,13 +232,15 @@ WORM = Room("Cellar", "You descend the hidden stairs to reveal a cellar. In the 
 HEAVEN = Room("Heaven", "You've found Heaven. Here, anything is possible as stacks of fried chicken and weapons are"
                         " everywhere.\n However, you search around and notice a small USB drive that appears to say "
                         "'call god'.",
-              None, None, None, None, None, "SIETCH_BALBOA", [], [], True)
+              None, None, None, None, None, "SIETCH_BALBOA", [chicken1, chicken2, chicken3, chicken4, chicken5,
+                                                              chicken6, chicken7], [], True)
 
-SHIELD_WALL = Room("The shield wall is the eastern boundary of the city. Venturing beyond is too dangerous.",
-                   None, None, None, "MARKET", None, None)
+SHIELD_WALL = Room("Shield Wall",
+                   "The shield wall is the eastern boundary of the city. Venturing beyond is too dangerous.",
+                   None, None, None, "MARKET", None, None, [], [gi1, gi2])
 
 # Characters
-player = Player(MARKET)
+player = Player(SHIELD_WALL)
 
 playing = True
 directions = ['north', 'south', 'east', 'west', 'up', 'down']
@@ -212,6 +248,12 @@ short_directions = ['n', 's', 'e', 'w', 'u', 'd']
 while playing:
     print(player.current_location.name)
     print(player.current_location.desc)
+    if player.current_location.characters is None or player.current_location.characters is []:
+        print("You are alone.")
+    else:
+        for i in range(len(player.current_location.characters)):
+            character = player.current_location.characters[i]
+            print("You see a " + character.name)
     command = input(">_")
     if command.lower() in short_directions:
         index = short_directions.index(command.lower())
