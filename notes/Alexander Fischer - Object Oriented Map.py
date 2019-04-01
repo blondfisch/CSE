@@ -41,6 +41,14 @@ class Player(object):
                     if self.health <= 0:
                         print("You died.")
 
+    def take(self):
+        item = input("What do you want to take?")
+        for number in range(len(self.current_location.items)):
+            grab = self.current_location.items[number]
+            if item == grab.grab or item == grab.name:
+                self.inventory.append(item)
+                self.current_location.items.remove(item)
+
     def purchase(self, item):
         if self.wallet >= item.value and self.current_location == MARKET:
             self.inventory.append(item)
@@ -125,7 +133,7 @@ FREMEN_PIT = Room("Fremen Pit", "A massive room with seating similar to a colise
                                 " leading east.", None, None, "SIETCH", None, None, "WATER", [Objects.fremen])
 
 WATER = Room("Water Storage", 'The water storage area of the sietch. You see tanks of water containing hundreds of'
-                              ' liters kept in storage, all carefully counted for the tribe. The only way out is the'
+                              ' liters kept in storage, all carefully counted for the tribe.\n The only way out is the'
                               ' staircase leading up.',
              None, None, None, None, "FREMEN_PIT", None, [Objects.water])
 
@@ -240,7 +248,7 @@ SHIELD_WALL = Room("Shield Wall",
                    None, None, None, "MARKET", None, None, [], [gi1, gi2])
 
 # Characters
-player = Player(SHIELD_WALL)
+player = Player(WATER)
 
 playing = True
 directions = ['north', 'south', 'east', 'west', 'up', 'down']
@@ -253,13 +261,17 @@ while playing:
     else:
         for i in range(len(player.current_location.characters)):
             character = player.current_location.characters[i]
-            print("You see a " + character.name)
+            if len(player.current_location.characters) == 1:
+                print("You are in a room with" + character.name)
+            else:
+                print("You are surrounded by:")
+                print(character.name + "s")
     command = input(">_")
     if command.lower() in short_directions:
         index = short_directions.index(command.lower())
         command = directions[index]
 
-    if command.lower() in ["q", "quit", "exit"]:
+    elif command.lower() in ["q", "quit", "exit"]:
         playing = False
     elif command.lower() in directions:
         try:
@@ -267,5 +279,7 @@ while playing:
             player.move(next_room)
         except KeyError:
             print("I can't go that way.")
+    elif command.lower in [" take", "take", "take "]:
+        player.take()
     else:
         print("Command Not Found")
