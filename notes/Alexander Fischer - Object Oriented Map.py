@@ -42,20 +42,22 @@ class Player(object):
                         print("You died.")
 
     def take(self):
-        item = input("What do you want to take?")
+        item = input("What do you want to take? >_")
         for number in range(len(self.current_location.items)):
             grab = self.current_location.items[number]
-            if item.lower() == grab.grab.lower() or item == grab.name.lower():
+            if item.lower() in grab.grab or item == grab.name.lower():
                 self.inventory.append(grab)
-                self.current_location.items.remove(item)
+                self.current_location.items.remove(grab)
                 print("You added %s to your inventory" % grab.name)
 
-    def purchase(self, item):
-        if self.wallet >= item.value and self.current_location == MARKET:
-            self.inventory.append(item)
-            self.wallet -= item.value
-
-        elif self.wallet < item.value:
+    def purchase(self):
+        item = input("What do you want to purchase?")
+        for thing in range(len(self.current_location.items)):
+            grab = self.current_location.items[thing]
+            if item.lower() in grab.grab or item == grab.name.lower() and self.wallet >= grab.value and self.current_location == MARKET:
+                self.inventory.append(grab)
+                self.wallet -= grab.value
+        if self.wallet < grab.value:
             print("You are too poor to purchase such an item, peasant.")
 
         elif self.current_location != MARKET:
@@ -257,7 +259,6 @@ short_directions = ['n', 's', 'e', 'w', 'u', 'd']
 while playing:
     print(player.current_location.name)
     print(player.current_location.desc)
-    print(player.inventory)
     if player.current_location.characters is None or player.current_location.characters is []:
         print("You are alone.")
     else:
@@ -283,5 +284,11 @@ while playing:
             print("I can't go that way.")
     elif command.lower() in ["take", " take", "take ", "t"]:
         player.take()
+    elif command.lower() in ["inventory", "i"]:
+        for i in range(len(player.inventory)):
+            item = player.inventory[i]
+            print(item.name)
+    elif command.lower() in ["buy", "purchase", "b", "p"]:
+        player.purchase()
     else:
         print("Command Not Found")

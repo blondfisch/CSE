@@ -259,6 +259,9 @@ class Enemy(object):
             print("%s has %d health left" % (self.name, self.health))
 
     def attack(self, target):
+        weapon = input("What do you want to attack with? >_")
+        if weapon not in self.inventory:
+            print("You cannot use that")
         if self.weapon.durability <= 0:
             print("The weapon broke and the attack failed.")
         elif target.health <= 0:
