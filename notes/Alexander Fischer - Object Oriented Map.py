@@ -23,7 +23,7 @@ class Room(object):
 
 
 class Player(object):
-    def __init__(self, starting_location, suit=None, weapon=None, wallet=0):
+    def __init__(self, starting_location, suit=None, weapon=None, wallet=0, defense=0):
         self.current_location = starting_location
         self.inventory = []
         self.sandslide = False
@@ -31,6 +31,7 @@ class Player(object):
         self.weapon = weapon
         self.wallet = wallet
         self.health = 200
+        self.defense = defense
 
     def degrade(self):
         if self.suit.health > 0 and self.current_location.indoor is False:
@@ -54,14 +55,40 @@ class Player(object):
         item = input("What do you want to purchase?")
         for thing in range(len(self.current_location.items)):
             grab = self.current_location.items[thing]
-            if item.lower() in grab.grab or item == grab.name.lower() and self.wallet >= grab.value and self.current_location == MARKET:
+            if item.lower() in grab.grab or item == grab.name.lower() \
+                    and self.wallet >= grab.value and self.current_location == MARKET:
                 self.inventory.append(grab)
                 self.wallet -= grab.value
-        if self.wallet < grab.value:
-            print("You are too poor to purchase such an item, peasant.")
+            if self.wallet < grab.value and item.lower() in grab.grab or item == grab.name.lower():
+                print("You are too poor to purchase such an item, peasant.")
+            elif self.current_location != MARKET:
+                print("Bold of you to assume you could purchase something while not at a market.")
 
-        elif self.current_location != MARKET:
-            print("Bold of you to assume you could purchase something while not at a market")
+    def take_damage(self, damage: int):
+        if self.defense > damage:
+            print("No damage taken")
+        else:
+            self.health -= damage - self.defense
+            if self.health <= 0:
+                self.health = 0
+            print("You have %d health left" %  self.health)
+
+    def attack(self, target):
+        weapon = input("What do you want to attack with? >_")
+        if weapon not in self.inventory:
+            print("You cannot use that because you do not have it.")
+        if self.weapon.durability <= 0:
+            print("The weapon broke and the attack failed.")
+        elif target.health <= 0:
+            print("You're attacking a dead person")
+        else:
+            target.take_damage(self.weapon.damage)
+            if target.health - self.weapon.damage > 0:
+                print("You attack %s for %d damage" % (target.name, self.weapon.damage))
+                target.health -= self.weapon.damage
+            if target.health <= 0:
+                print("%s died." % target.name)
+            self.weapon.durability -= 1
 
     def move(self, new_location):
         """ This moves the player to a new room
@@ -119,6 +146,7 @@ gi2 = Objects.Sardaukar2()
 worm1 = Objects.Worm()
 fremen1 = Objects.Fremen()
 # Rooms
+# Region 1 - The Desert
 DESERT1 = Room("Open Desert", 'The sun beats down on the sandy desert all around you. There are caves to the north'
                               ' inside of the rock, a place of safety from the worms in the desert.\n On all other '
                               'sides is the desert.',
@@ -145,7 +173,7 @@ WATER = Room("Water Storage", 'The water storage area of the sietch. You see tan
 DESERT2 = Room("Open Desert", "The sun beats down on the sandy desert all around you. You need to find a way out of"
                               " the desert\n before the lack of water or Imperials kill you. This time, however, there"
                               " is a lonely Imperial Guard out on patrol.",
-               'DESERT1', None, 'DESERT5', None, None, None, None, [Objects.soldier])
+               'DESERT1', None, 'DESERT5', None, None, None, [], [Objects.soldier])
 
 DESERT3 = Room("Open Desert", "The sun beats down on the sandy desert all around you. You need to find a way out of"
                               " the desert\n before the lack of water or Imperials kill you.",
@@ -196,6 +224,8 @@ DESERT8 = Room("Open Desert", "The sun beats down on the sandy desert all around
                               " the desert\n before the lack of water or Imperials kill you.",
                "DESERT7", None, None, "DESERT5")
 
+# Region 2 - The City
+
 STREET1 = Room("Suburbs of Arrakeen", "Small houses line both sides of the dusty streets. Most of the doors are locked"
                                       " except for one orange house north of you. The street continues to the south.",
                "POPEYES", "STREET2", "MARKET", "DESERT7")
@@ -210,6 +240,11 @@ MARKET = Room("Arrakeen Market", "You find yourself at the central market of Arr
                                  " palace. The street continues to the south and west while the shield wall is on the "
                                  "east.",
               "PALACE", "STREET2", "SHIELD_WALL", "STREET1")
+
+SHIELD_WALL = Room("Shield Wall",
+                   "The shield wall is the eastern boundary of the city. Venturing beyond is too dangerous.",
+                   None, None, None, "MARKET", None, None, [], [gi1, gi2])
+# Region 3 - The Palace
 
 PALACE = Room("Palace Entrance", "You approach the massive palace. The massive gold throne and large, red banners"
                                  " hang down. The floor is velvet red carpet\n with the crest of the Harkonnens. "
@@ -248,9 +283,8 @@ HEAVEN = Room("Heaven", "You've found Heaven. Here, anything is possible as stac
               None, None, None, None, None, "SIETCH_BALBOA", [chicken1, chicken2, chicken3, chicken4, chicken5,
                                                               chicken6, chicken7], [], True)
 
-SHIELD_WALL = Room("Shield Wall",
-                   "The shield wall is the eastern boundary of the city. Venturing beyond is too dangerous.",
-                   None, None, None, "MARKET", None, None, [], [gi1, gi2])
+# Region 4 - The Imperial
+
 
 # Characters
 player = Player(WATER)
@@ -275,7 +309,6 @@ while playing:
     if command.lower() in short_directions:
         index = short_directions.index(command.lower())
         command = directions[index]
-
     elif command.lower() in ["q", "quit", "exit"]:
         playing = False
     elif command.lower() in directions:
@@ -292,5 +325,7 @@ while playing:
             print(item.name)
     elif command.lower() in ["buy", "purchase", "b", "p"]:
         player.purchase()
+    elif command.lower() in ["attack", "hit", "hurt", "harm"]:
+        player.attack()
     else:
         print("Command Not Found")
