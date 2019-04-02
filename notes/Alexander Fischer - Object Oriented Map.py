@@ -23,7 +23,7 @@ class Room(object):
 
 
 class Player(object):
-    def __init__(self, starting_location, suit=None, weapon=None, wallet=0):
+    def __init__(self, starting_location, suit=None, weapon=None, wallet=0, defense=0):
         self.current_location = starting_location
         self.inventory = []
         self.sandslide = False
@@ -31,6 +31,7 @@ class Player(object):
         self.weapon = weapon
         self.wallet = wallet
         self.health = 200
+        self.defense = defense
 
     def degrade(self):
         if self.suit.health > 0 and self.current_location.indoor is False:
@@ -54,14 +55,40 @@ class Player(object):
         item = input("What do you want to purchase?")
         for thing in range(len(self.current_location.items)):
             grab = self.current_location.items[thing]
-            if item.lower() in grab.grab or item == grab.name.lower() and self.wallet >= grab.value and self.current_location == MARKET:
+            if item.lower() in grab.grab or item == grab.name.lower() \
+                    and self.wallet >= grab.value and self.current_location == MARKET:
                 self.inventory.append(grab)
                 self.wallet -= grab.value
-        if self.wallet < grab.value:
-            print("You are too poor to purchase such an item, peasant.")
+            if self.wallet < grab.value:
+                print("You are too poor to purchase such an item, peasant.")
+            elif self.current_location != MARKET:
+                print("Bold of you to assume you could purchase something while not at a market")
 
-        elif self.current_location != MARKET:
-            print("Bold of you to assume you could purchase something while not at a market")
+    def take_damage(self, damage: int):
+        if self.defense > damage:
+            print("No damage taken")
+        else:
+            self.health -= damage - self.defense
+            if self.health <= 0:
+                self.health = 0
+            print("You have %d health left" %  self.health)
+
+    def attack(self, target):
+        weapon = input("What do you want to attack with? >_")
+        if weapon not in self.inventory:
+            print("You cannot use that because you do not have it.")
+        if self.weapon.durability <= 0:
+            print("The weapon broke and the attack failed.")
+        elif target.health <= 0:
+            print("You're attacking a dead person")
+        else:
+            target.take_damage(self.weapon.damage)
+            if target.health - self.weapon.damage > 0:
+                print("You attack %s for %d damage" % (target.name, self.weapon.damage))
+                target.health -= self.weapon.damage
+            if target.health <= 0:
+                print("%s died." % target.name)
+            self.weapon.durability -= 1
 
     def move(self, new_location):
         """ This moves the player to a new room
@@ -290,5 +317,7 @@ while playing:
             print(item.name)
     elif command.lower() in ["buy", "purchase", "b", "p"]:
         player.purchase()
+    elif command.lower() in ["attack", "hit", "hurt", "harm"]:
+        player.attack()
     else:
         print("Command Not Found")

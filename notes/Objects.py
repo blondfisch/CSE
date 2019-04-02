@@ -9,6 +9,12 @@ class Weapon(Item):
         self.damage = damage
         self.range = distance
 
+    def use(self):
+        if self.durability <= 0:
+            print("Your sword is broken.")
+        else:
+            self.durability -= 1
+
 
 class Sword(Weapon):
     def __init__(self, name, damage: int, durability: int, desc, value=None, grab=None):
@@ -21,11 +27,7 @@ class Sword(Weapon):
         self.value = value
         self.grab = grab
 
-    def swing(self):
-        if self.durability <= 0:
-            print("Your sword is broken.")
-        else:
-            self.durability -= 1
+
 
 
 class WoodSword(Sword):
@@ -84,12 +86,6 @@ class Gun(Weapon):
         self.distance = 1
         self.durability = durability
         self.grab = grab
-
-    def shoot(self):
-        if self.durability <= 0:
-            print("The gun does not have any charge left.")
-        else:
-            self.durability -= 1
 
 
 class Lasgun(Gun):
