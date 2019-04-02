@@ -116,6 +116,8 @@ chicken8 = Objects.Chicken()
 # Characters
 gi1 = Objects.BaseSoldier()
 gi2 = Objects.Sardaukar2()
+worm1 = Objects.Worm()
+fremen1 = Objects.Fremen()
 # Rooms
 DESERT1 = Room("Open Desert", 'The sun beats down on the sandy desert all around you. There are caves to the north'
                               ' inside of the rock, a place of safety from the worms in the desert.\n On all other '
@@ -151,21 +153,21 @@ DESERT3 = Room("Open Desert", "The sun beats down on the sandy desert all around
 
 DESERT4 = Room("Open Desert", "The sun beats down on the sandy desert all around you. You need to find a way out of"
                               " the desert\n before the lack of water or Imperials kill you.",
-               None, None, "DESERT1", "FUNERAL_PLAIN")
+               None, None, "DESERT1", "FUNERAL_PLAIN", )
 
 FUNERAL_PLAIN = Room("Funeral Plain", "The expanse of the desert only grows larger as you come across the Funeral"
                                       " Plain,\n where the Fremen take the dead. You are completely outside the reaches"
                                       " of society with no clear paths ahead of you.",
-                     "GREAT_FLAT", "GREAT_FLAT", "DESERT4", "GREAT_FLAT")
+                     "GREAT_FLAT", "GREAT_FLAT", "DESERT4", "GREAT_FLAT", None, None, [], [fremen1])
 
 GREAT_FLAT = Room("The Great Flat", "The farthest known point on the western half of the world. The only way out"
                                     " is back through the Funeral Plain. While here, a massive worm "
                                     "appears out of the ground.",
-                  "FUNERAL_PLAIN", "FUNERAL_PLAIN", "FUNERAL_PLAIN")
+                  "FUNERAL_PLAIN", "FUNERAL_PLAIN", "FUNERAL_PLAIN", None, None, None, [], [worm1])
 
 DESERT5 = Room("Open Desert", "The sun beats down on the sandy desert all around you. You need to find a way out of"
                               " the desert\n before the lack of water or Imperials kill you.",
-               "DESERT3", None, "DESERT8", "DESERT2")
+               "DESERT3", None, "DESERT8", "DESERT2", None, None, [], [])
 
 DESERT6 = Room("Open Desert", "The sun beats down on the sandy desert all around you. You need to find a way out of"
                               " the desert\n before the lack of water or Imperials kill you.",
