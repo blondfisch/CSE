@@ -59,10 +59,10 @@ class Player(object):
                     and self.wallet >= grab.value and self.current_location == MARKET:
                 self.inventory.append(grab)
                 self.wallet -= grab.value
-            if self.wallet < grab.value:
+            if self.wallet < grab.value and item.lower() in grab.grab or item == grab.name.lower():
                 print("You are too poor to purchase such an item, peasant.")
             elif self.current_location != MARKET:
-                print("Bold of you to assume you could purchase something while not at a market")
+                print("Bold of you to assume you could purchase something while not at a market.")
 
     def take_damage(self, damage: int):
         if self.defense > damage:
@@ -144,6 +144,7 @@ chicken8 = Objects.Chicken()
 gi1 = Objects.BaseSoldier()
 gi2 = Objects.Sardaukar2()
 # Rooms
+# Region 1 - The Desert
 DESERT1 = Room("Open Desert", 'The sun beats down on the sandy desert all around you. There are caves to the north'
                               ' inside of the rock, a place of safety from the worms in the desert.\n On all other '
                               'sides is the desert.',
@@ -170,7 +171,7 @@ WATER = Room("Water Storage", 'The water storage area of the sietch. You see tan
 DESERT2 = Room("Open Desert", "The sun beats down on the sandy desert all around you. You need to find a way out of"
                               " the desert\n before the lack of water or Imperials kill you. This time, however, there"
                               " is a lonely Imperial Guard out on patrol.",
-               'DESERT1', None, 'DESERT5', None, None, None, None, [Objects.soldier])
+               'DESERT1', None, 'DESERT5', None, None, None, [], [Objects.soldier])
 
 DESERT3 = Room("Open Desert", "The sun beats down on the sandy desert all around you. You need to find a way out of"
                               " the desert\n before the lack of water or Imperials kill you.",
@@ -221,6 +222,8 @@ DESERT8 = Room("Open Desert", "The sun beats down on the sandy desert all around
                               " the desert\n before the lack of water or Imperials kill you.",
                "DESERT7", None, None, "DESERT5")
 
+# Region 2 - The City
+
 STREET1 = Room("Suburbs of Arrakeen", "Small houses line both sides of the dusty streets. Most of the doors are locked"
                                       " except for one orange house north of you. The street continues to the south.",
                "POPEYES", "STREET2", "MARKET", "DESERT7")
@@ -235,6 +238,11 @@ MARKET = Room("Arrakeen Market", "You find yourself at the central market of Arr
                                  " palace. The street continues to the south and west while the shield wall is on the "
                                  "east.",
               "PALACE", "STREET2", "SHIELD_WALL", "STREET1")
+
+SHIELD_WALL = Room("Shield Wall",
+                   "The shield wall is the eastern boundary of the city. Venturing beyond is too dangerous.",
+                   None, None, None, "MARKET", None, None, [], [gi1, gi2])
+# Region 3 - The Palace
 
 PALACE = Room("Palace Entrance", "You approach the massive palace. The massive gold throne and large, red banners"
                                  " hang down. The floor is velvet red carpet\n with the crest of the Harkonnens. "
@@ -273,9 +281,8 @@ HEAVEN = Room("Heaven", "You've found Heaven. Here, anything is possible as stac
               None, None, None, None, None, "SIETCH_BALBOA", [chicken1, chicken2, chicken3, chicken4, chicken5,
                                                               chicken6, chicken7], [], True)
 
-SHIELD_WALL = Room("Shield Wall",
-                   "The shield wall is the eastern boundary of the city. Venturing beyond is too dangerous.",
-                   None, None, None, "MARKET", None, None, [], [gi1, gi2])
+# Region 4 - The Imperial
+
 
 # Characters
 player = Player(WATER)
@@ -300,7 +307,6 @@ while playing:
     if command.lower() in short_directions:
         index = short_directions.index(command.lower())
         command = directions[index]
-
     elif command.lower() in ["q", "quit", "exit"]:
         playing = False
     elif command.lower() in directions:
