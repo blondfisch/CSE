@@ -50,6 +50,10 @@ class Player(object):
                 self.inventory.append(grab)
                 self.current_location.items.remove(grab)
                 print("You added %s to your inventory" % grab.name)
+            elif item.lower() not in grab.grab or item != grab.name.lower():
+                print("I don't know what you want to take.")
+            elif item.lower() in ["", " "]:
+                print("You have to actually take something.")
 
     def purchase(self):
         item = input("What do you want to purchase?")
@@ -71,7 +75,7 @@ class Player(object):
             self.health -= damage - self.defense
             if self.health <= 0:
                 self.health = 0
-            print("You have %d health left" %  self.health)
+            print("You have %d health left" % self.health)
 
     def attack(self, target):
         weapon = input("What do you want to attack with? >_")
@@ -109,6 +113,7 @@ class Player(object):
 
 # Option 2 - set all at once, modify controller
 # Objects
+# Weapons
 rapier1 = Objects.Rapier()
 dullsword1 = Objects.DullSword()
 broadsword1 = Objects.BroadSword()
@@ -120,11 +125,6 @@ dummy1 = Objects.Dummy()
 spice1 = Objects.Spice()
 full_shield1 = Objects.FullShield()
 life1 = Objects.Life()
-herb1 = Objects.Herb()
-chicken1 = Objects.Chicken()
-rice1 = Objects.Rice()
-water1 = Objects.Water()
-bread1 = Objects.Bread()
 atomic1 = Objects.Bow()
 lasgun1 = Objects.Lasgun()
 needle1 = Objects.Needle()
@@ -133,6 +133,11 @@ broadsword2 = Objects.BroadSword()
 dullsword2 = Objects.DullSword()
 wood_sword1 = Objects.WoodSword()
 rapier3 = Objects.Rapier()
+tooth1 = Objects.Tooth
+# Armor
+
+# Food
+chicken1 = Objects.Chicken()
 chicken2 = Objects.Chicken()
 chicken3 = Objects.Chicken()
 chicken4 = Objects.Chicken()
@@ -140,11 +145,19 @@ chicken5 = Objects.Chicken()
 chicken6 = Objects.Chicken()
 chicken7 = Objects.Chicken()
 chicken8 = Objects.Chicken()
+rice1 = Objects.Rice()
+water1 = Objects.Water()
+bread1 = Objects.Bread()
+herb1 = Objects.Herb()
 # Characters
 gi1 = Objects.BaseSoldier()
 gi2 = Objects.Sardaukar2()
 worm1 = Objects.Worm()
 fremen1 = Objects.Fremen()
+captain = Objects.Captain
+sard1 = Objects.Sardaukar1
+sard2 = Objects.Sardaukar2
+
 # Rooms
 # Region 1 - The Desert
 DESERT1 = Room("Open Desert", 'The sun beats down on the sandy desert all around you. There are caves to the north'
@@ -154,30 +167,30 @@ DESERT1 = Room("Open Desert", 'The sun beats down on the sandy desert all around
 
 SIETCH = Room("Sietch Tabr", 'You walk into a hidden Fremen cave. Inside, you find paths leading deeper into the'
                              ' chamber to the north and south.',
-              None, 'DESERT1', 'SPICE_ROOMS', 'FREMEN_PIT', None, None, [Objects.QuartShield(), Objects.DullSword()])
+              None, 'DESERT1', 'SPICE_ROOMS', 'FREMEN_PIT', None, None, [quart_shield1, dullsword1])
 
 SPICE_ROOMS = Room("Spice Rooms", "Spice is stacked in boxes in for ceremonies. You are aware of the power that it can"
                                   " bring from consumption, however the addiction can be fatal.\n There is only a path"
                                   " to the left leading out of the room.",
-                   None, None, None, 'SIETCH', None, None, [Objects.Spice])
+                   None, None, None, 'SIETCH', None, None, [spice1])
 
 FREMEN_PIT = Room("Fremen Pit", "A massive room with seating similar to a coliseum. Battle marks from swords line the"
                                 " walls of the center pit.\n There is a staircase descending downwards and a path"
-                                " leading east.", None, None, "SIETCH", None, None, "WATER", [Objects.fremen])
+                                " leading east.", None, None, "SIETCH", None, None, "WATER", [fremen1])
 
 WATER = Room("Water Storage", 'The water storage area of the sietch. You see tanks of water containing hundreds of'
                               ' liters kept in storage, all carefully counted for the tribe.\n The only way out is the'
                               ' staircase leading up.',
-             None, None, None, None, "FREMEN_PIT", None, [Objects.water])
+             None, None, None, None, "FREMEN_PIT", None, [water1])
 
 DESERT2 = Room("Open Desert", "The sun beats down on the sandy desert all around you. You need to find a way out of"
                               " the desert\n before the lack of water or Imperials kill you. This time, however, there"
                               " is a lonely Imperial Guard out on patrol.",
-               'DESERT1', None, 'DESERT5', None, None, None, [], [Objects.soldier])
+               'DESERT1', None, 'DESERT5', None, None, None, [rapier1], [gi1])
 
 DESERT3 = Room("Open Desert", "The sun beats down on the sandy desert all around you. You need to find a way out of"
                               " the desert\n before the lack of water or Imperials kill you.",
-               "DESERT6", 'DESERT5', 'DESERT7', 'DESERT1')
+               "DESERT6", 'DESERT5', 'DESERT7', 'DESERT1', None, None, [], [])
 
 DESERT4 = Room("Open Desert", "The sun beats down on the sandy desert all around you. You need to find a way out of"
                               " the desert\n before the lack of water or Imperials kill you.",
@@ -199,7 +212,7 @@ DESERT5 = Room("Open Desert", "The sun beats down on the sandy desert all around
 
 DESERT6 = Room("Open Desert", "The sun beats down on the sandy desert all around you. You need to find a way out of"
                               " the desert\n before the lack of water or Imperials kill you.",
-               "ROCKFACE", "DESERT3")
+               "ROCKFACE", "DESERT3", None, None, None, None, [], [fremen1])
 
 ROCKFACE = Room("Cliff side", "You come upon a cliff side in the desert. It is blocking the north and east, but it"
                               " appears scalable.",
@@ -214,15 +227,15 @@ PATROL_STATION = Room("Imperial Patrol Station", " As you make your way back to 
                                                  "Imperial soldiers surround the massive stone barracks.\n"
                                                  " As you approach,"
                                                  "a guard notices you, and you realize you can only escape to the west",
-                      None, None, None, "ROCKFACE", None, None)
+                      None, None, None, "ROCKFACE", None, None, [], [gi1, captain])
 
 DESERT7 = Room("Open Desert", "The sun beats down on the sandy desert all around you. You need to find a way out of"
                               " the desert\n before the lack of water or Imperials kill you.",
-               "DESERT6", "DESERT8", "STREET1", "DESERT3")
+               "DESERT6", "DESERT8", "STREET1", "DESERT3", None, None, [], [])
 
 DESERT8 = Room("Open Desert", "The sun beats down on the sandy desert all around you. You need to find a way out of"
                               " the desert\n before the lack of water or Imperials kill you.",
-               "DESERT7", None, None, "DESERT5")
+               "DESERT7", None, None, "DESERT5", None, None, [], [])
 
 # Region 2 - The City
 
@@ -265,7 +278,7 @@ BEDROOM = Room("Private Quarters", "This is the private quarters of the Imperial
 
 TRAIN = Room("Training Room", " You enter a room of complete white. The only thing there is a small training dummy"
                               " with a sword in the center of the room.",
-             None, "BEDROOM", None, None, None, None, [], [], True)
+             None, "BEDROOM", None, None, None, None, [], [dummy1], True)
 
 COUNCIL = Room("Council", "The location where all of the official government business takes place. The room is bland,"
                           " with only a round table.\n There appears to be something hidden on the underside of the"
@@ -275,7 +288,7 @@ COUNCIL = Room("Council", "The location where all of the official government bus
 WORM = Room("Cellar", "You descend the hidden stairs to reveal a cellar. In the middle is a worm chained to the floor."
                       " \nIt appears that the Water of Life is being extracted from it and stored in containers along"
                       " with spice.",
-            None, None, None, None, "COUNCIL")
+            None, None, None, None, "COUNCIL", None, [tooth1], [worm1])
 
 HEAVEN = Room("Heaven", "You've found Heaven. Here, anything is possible as stacks of fried chicken and weapons are"
                         " everywhere.\n However, you search around and notice a small USB drive that appears to say "
@@ -326,6 +339,6 @@ while playing:
     elif command.lower() in ["buy", "purchase", "b", "p"]:
         player.purchase()
     elif command.lower() in ["attack", "hit", "hurt", "harm"]:
-        player.attack()
+        player.attack(player.current_location.characters[0])
     else:
         print("Command Not Found")

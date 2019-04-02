@@ -237,13 +237,16 @@ class SmallNote(Money):
 
 
 class Enemy(object):
-    def __init__(self, name, health: int, defense, weapon, desc=None):
+    def __init__(self, name, health: int, defense, weapon, desc=None, inven=None):
+        if inven is None:
+            inven = []
         self.health = health
         self.desc = desc
         self.items = []
         self.defense = defense
         self.name = name
         self.weapon = weapon
+        self.inventory = inven
 
     def take_damage(self, damage: int):
         if self.defense > damage:
