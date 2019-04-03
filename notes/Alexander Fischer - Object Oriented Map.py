@@ -42,19 +42,6 @@ class Player(object):
                     if self.health <= 0:
                         print("You died.")
 
-    def take(self):
-        item = input("What do you want to take? >_")
-        for number in range(len(self.current_location.items)):
-            grab = self.current_location.items[number]
-            if item.lower() in grab.grab or item == grab.name.lower():
-                self.inventory.append(grab)
-                self.current_location.items.remove(grab)
-                print("You added %s to your inventory" % grab.name)
-            elif item.lower() not in grab.grab or item != grab.name.lower():
-                print("I don't know what you want to take.")
-            elif item.lower() in ["", " "]:
-                print("You have to actually take something.")
-
     def purchase(self):
         item = input("What do you want to purchase?")
         for thing in range(len(self.current_location.items)):
@@ -317,21 +304,39 @@ while playing:
                 print("You are in a room with" + character.name)
             else:
                 print("You are surrounded by:")
-                print(character.name + "s")
+                print(character.name)
     command = input(">_")
     if command.lower() in short_directions:
         index = short_directions.index(command.lower())
         command = directions[index]
     elif command.lower() in ["q", "quit", "exit"]:
         playing = False
+        print("Goodbye.")
     elif command.lower() in directions:
         try:
             next_room = player.find_next_room(command.lower())
             player.move(next_room)
         except KeyError:
             print("I can't go that way.")
-    elif command.lower() in ["take", " take", "take ", "t"]:
-        player.take()
+    elif "take" in command.lower() or "t " in command.lower():
+        if "take " in command.lower():
+            item = command[5:]
+        elif "t " in command.lower():
+            item = command[2:]
+        else:
+            item = input("What do you want to take? >_")
+        for number in range(len(player.current_location.items)):
+            grab = player.current_location.items[number]
+            if item.lower() in grab.grab or item == grab.name.lower():
+                player.inventory.append(grab)
+                player.current_location.items.remove(grab)
+                print("You added %s to your inventory" % grab.name)
+            elif item.lower() not in grab.grab or item != grab.name.lower():
+                print("I don't know what you want to take.")
+            elif item.lower() in ["", " "]:
+                print("You have to actually take something.")
+            elif range(len(player.current_location.items)) == 0:
+                print("There is nothing left to take.")
     elif command.lower() in ["inventory", "i"]:
         for i in range(len(player.inventory)):
             item = player.inventory[i]

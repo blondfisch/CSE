@@ -4,11 +4,11 @@ class Item(object):
 
 
 class Weapon(Item):
-    def __init__(self, name, damage: int, distance: int):
+    def __init__(self, name, damage: int, distance: int, durability):
         super(Weapon, self).__init__(name)
         self.damage = damage
         self.range = distance
-
+        self.durability = durability
     def use(self):
         if self.durability <= 0:
             print("Your sword is broken.")
