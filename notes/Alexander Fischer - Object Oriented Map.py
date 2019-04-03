@@ -42,19 +42,6 @@ class Player(object):
                     if self.health <= 0:
                         print("You died.")
 
-    def purchase(self):
-        item = input("What do you want to purchase?")
-        for thing in range(len(self.current_location.items)):
-            grab = self.current_location.items[thing]
-            if item.lower() in grab.grab or item == grab.name.lower() \
-                    and self.wallet >= grab.value and self.current_location == MARKET:
-                self.inventory.append(grab)
-                self.wallet -= grab.value
-            if self.wallet < grab.value and item.lower() in grab.grab or item == grab.name.lower():
-                print("You are too poor to purchase such an item, peasant.")
-            elif self.current_location != MARKET:
-                print("Bold of you to assume you could purchase something while not at a market.")
-
     def take_damage(self, damage: int):
         if self.defense > damage:
             print("No damage taken")
@@ -341,8 +328,23 @@ while playing:
         for i in range(len(player.inventory)):
             item = player.inventory[i]
             print(item.name)
-    elif command.lower() in ["buy", "purchase", "b", "p"]:
-        player.purchase()
+    elif "purchase " in command.lower() or "p " in command.lower():
+        if "purchase " in command.lower():
+            item = command[9:]
+        elif "p " in command.lower():
+            item = command[2:]
+        else:
+            item = input("What do you want to purchase?")
+        for thing in range(len(player.current_location.items)):
+            grab = player.current_location.items[thing]
+            if item.lower() in grab.grab or item == grab.name.lower() \
+                    and player.wallet >= grab.value and player.current_location == MARKET:
+                player.inventory.append(grab)
+                player.wallet -= grab.value
+            if player.wallet < grab.value and item.lower() in grab.grab or item == grab.name.lower():
+                print("You are too poor to purchase such an item, peasant.")
+            elif player.current_location != MARKET:
+                print("Bold of you to assume you could purchase something while not at a market.")
     elif command.lower() in ["attack", "hit", "hurt", "harm"]:
         player.attack(player.current_location.characters[0])
     else:
