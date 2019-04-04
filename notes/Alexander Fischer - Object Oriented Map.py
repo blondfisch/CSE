@@ -51,23 +51,6 @@ class Player(object):
                 self.health = 0
             print("You have %d health left" % self.health)
 
-    def attack(self, target):
-        weapon = input("What do you want to attack with? >_")
-        if weapon not in self.inventory:
-            print("You cannot use that because you do not have it.")
-        if self.weapon.durability <= 0:
-            print("The weapon broke and the attack failed.")
-        elif target.health <= 0:
-            print("You're attacking a dead person")
-        else:
-            target.take_damage(self.weapon.damage)
-            if target.health - self.weapon.damage > 0:
-                print("You attack %s for %d damage" % (target.name, self.weapon.damage))
-                target.health -= self.weapon.damage
-            if target.health <= 0:
-                print("%s died." % target.name)
-            self.weapon.durability -= 1
-
     def move(self, new_location):
         """ This moves the player to a new room
 
@@ -345,7 +328,25 @@ while playing:
                 print("You are too poor to purchase such an item, peasant.")
             elif player.current_location != MARKET:
                 print("Bold of you to assume you could purchase something while not at a market.")
-    elif command.lower() in ["attack", "hit", "hurt", "harm"]:
-        player.attack(player.current_location.characters[0])
+    elif "attack " in command.lower():
+        jac = command.lower().split()
+        target = jac[1]
+        weapon = jac[3]
+        weapon = input("What do you want to attack with? >_")
+        if weapon not in player.inventory:
+            print("You cannot use that because you do not have it.")
+        if player.weapon.durability <= 0 or player.weapon.durability - 1 == 0:
+            print("The weapon broke and the attack failed.")
+        elif target.health <= 0:
+                print("You're attacking a dead person")
+        else:
+            target.take_damage(player.weapon.damage)
+            if target.health - player.weapon.damage > 0:
+                    print("You attack %s for %d damage" % (target.name, player.weapon.damage))
+                    target.health -= player.weapon.damage
+            if target.health <= 0:
+                 print("%s died." % target.name)
+            player.weapon.use()
     else:
         print("Command Not Found")
+"""

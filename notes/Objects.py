@@ -4,16 +4,10 @@ class Item(object):
 
 
 class Weapon(Item):
-    def __init__(self, name, damage: int, distance: int, durability):
+    def __init__(self, name, damage: int, distance: int):
         super(Weapon, self).__init__(name)
         self.damage = damage
         self.range = distance
-        self.durability = durability
-    def use(self):
-        if self.durability <= 0:
-            print("Your sword is broken.")
-        else:
-            self.durability -= 1
 
 
 class Sword(Weapon):
@@ -27,7 +21,11 @@ class Sword(Weapon):
         self.value = value
         self.grab = grab
 
-
+    def use(self):
+        if self.durability <= 0:
+            print("Your sword is broken.")
+        else:
+            self.durability -= 1
 
 
 class WoodSword(Sword):
@@ -86,6 +84,12 @@ class Gun(Weapon):
         self.distance = 1
         self.durability = durability
         self.grab = grab
+
+    def use(self):
+        if self.durability <= 0:
+            print("Your gun is broken.")
+        else:
+            self.durability -= 1
 
 
 class Lasgun(Gun):
