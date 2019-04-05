@@ -328,12 +328,23 @@ while playing:
                 print("You are too poor to purchase such an item, peasant.")
             elif player.current_location != MARKET:
                 print("Bold of you to assume you could purchase something while not at a market.")
-    elif "attack " in command.lower():
-        jac = command.lower().split()
-        target = jac[1]
-        weapon = jac[3]
-        weapon = input("What do you want to attack with? >_")
-        if weapon not in player.inventory:
+    elif "attack " in command.lower() or "hit" in command.lower() or "murder" in command.lower():
+        if " " * 3 in command.lower():
+            jac = command.lower().split()
+            target = jac[1]
+            weapon = jac[3]
+        else:
+            weapon = input("What do you want to attack with? >_")
+            target = input("Who do you want to attack?")
+        for i in range(len(player.current_location.characters)):
+            char = player.current_location.characters[i]
+            if target in char.name:
+                target = char
+        for i in range(len(player.inventory)):
+            item = player.inventory[i]
+            if weapon in item.name or weapon in item.grab:
+                player.weapon = item
+        if player.weapon not in player.inventory:
             print("You cannot use that because you do not have it.")
         if player.weapon.durability <= 0 or player.weapon.durability - 1 == 0:
             print("The weapon broke and the attack failed.")
@@ -345,8 +356,10 @@ while playing:
                     print("You attack %s for %d damage" % (target.name, player.weapon.damage))
                     target.health -= player.weapon.damage
             if target.health <= 0:
-                 print("%s died." % target.name)
+                print("%s died." % target.name)
             player.weapon.use()
+    elif "consume" in command.lower() or "use" in command.lower() or "eat" in command.lower() \
+        or "drink" in command.lower():
+        
     else:
         print("Command Not Found")
-"""
