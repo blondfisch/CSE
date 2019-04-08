@@ -309,9 +309,13 @@ while playing:
         for number in range(len(player.current_location.items)):
             grab = player.current_location.items[number]
             if item.lower() in grab.grab or item == grab.name.lower():
-                player.inventory.append(grab)
-                player.current_location.items.remove(grab)
-                print("You added %s to your inventory" % grab.name)
+                if type(item.lower()) is Objects.Money:
+                    player.wallet += grab.value
+                    print("You added %d coins to your wallet" % grab.value)
+                else:
+                    player.inventory.append(grab)
+                    player.current_location.items.remove(grab)
+                    print("You added %s to your inventory" % grab.name)
             elif item.lower() not in grab.grab or item != grab.name.lower():
                 print("I don't know what you want to take.")
             elif item.lower() in ["", " "]:
@@ -369,7 +373,8 @@ while playing:
             if target.health <= 0:
                 print("%s died." % target.name)
             player.weapon.use()
-    elif "consume" in command.lower() or "use" in command.lower() or "eat" in command.lower() or "drink" in command.lower():
+    elif "consume" in command.lower() or "use" in command.lower() or "eat" in command.lower() or\
+            "drink" in command.lower():
         if "consume " in command.lower():
             object = command[8:]
         elif "use " in command.lower():
@@ -384,6 +389,7 @@ while playing:
             item = player.inventory[i]
             if object in item.name or object in item.grab:
                 player.consum = item
+                player.inventory.remove(item)
         if issubclass(type(player.consum), Objects.Food):
             player.health += player.consum.health
         elif issubclass(type(player.consum), Objects.Potion):
