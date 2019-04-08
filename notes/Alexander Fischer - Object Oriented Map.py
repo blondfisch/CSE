@@ -23,7 +23,7 @@ class Room(object):
 
 
 class Player(object):
-    def __init__(self, starting_location, suit=None, weapon=None, wallet=0, defense=0):
+    def __init__(self, starting_location, suit=None, weapon=None, wallet=0, defense=0, consum=None):
         self.current_location = starting_location
         self.inventory = []
         self.sandslide = False
@@ -32,6 +32,7 @@ class Player(object):
         self.wallet = wallet
         self.health = 200
         self.defense = defense
+        self.consum = consum
 
     def degrade(self):
         if self.suit.health > 0 and self.current_location.indoor is False:
@@ -275,6 +276,16 @@ while playing:
             else:
                 print("You are surrounded by:")
                 print(character.name)
+    if player.current_location.items is None or player.current_location.items is []:
+        print("There is nothing for you to take.")
+    else:
+        for i in range(len(player.current_location.items)):
+            thingy = player.current_location.items[i]
+            if len(player.current_location.items) == 1:
+                print("You can take " + thingy.name)
+            else:
+                print("You see a ")
+                print(thingy.name)
     command = input(">_")
     if command.lower() in short_directions:
         index = short_directions.index(command.lower())
@@ -343,7 +354,7 @@ while playing:
         for i in range(len(player.inventory)):
             item = player.inventory[i]
             if weapon in item.name or weapon in item.grab:
-                player.weapon = item
+                player.weapon = item + player.consum
         if player.weapon not in player.inventory:
             print("You cannot use that because you do not have it.")
         if player.weapon.durability <= 0 or player.weapon.durability - 1 == 0:
@@ -358,8 +369,24 @@ while playing:
             if target.health <= 0:
                 print("%s died." % target.name)
             player.weapon.use()
-    elif "consume" in command.lower() or "use" in command.lower() or "eat" in command.lower() \
-        or "drink" in command.lower():
-        
+    elif "consume" in command.lower() or "use" in command.lower() or "eat" in command.lower() or "drink" in command.lower():
+        if "consume " in command.lower():
+            object = command[8:]
+        elif "use " in command.lower():
+            object = command[4:]
+        elif "eat " in command.lower():
+            object = command[4:]
+        elif "drink " in command.lower():
+            object = command[6:]
+        else:
+            object = input("What do you want to consume? >_")
+        for i in range(len(player.inventory)):
+            item = player.inventory[i]
+            if object in item.name or object in item.grab:
+                player.consum = item
+        if issubclass(type(player.consum), Objects.Food):
+            player.health += player.consum.health
+        elif issubclass(type(player.consum), Objects.Potion):
+            player.consum += player.consum.damage
     else:
         print("Command Not Found")
