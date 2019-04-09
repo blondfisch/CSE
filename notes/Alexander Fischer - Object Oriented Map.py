@@ -76,11 +76,8 @@ rapier1 = Objects.Rapier()
 dullsword1 = Objects.DullSword()
 broadsword1 = Objects.BroadSword()
 crysknife1 = Objects.CrysKnife()
-half_shield1 = Objects.HalfShield()
-quart_shield1 = Objects.QuartShield()
 rapier2 = Objects.Rapier()
 dummy1 = Objects.Dummy()
-spice1 = Objects.Spice()
 full_shield1 = Objects.FullShield()
 life1 = Objects.Life()
 atomic1 = Objects.Bow()
@@ -93,7 +90,10 @@ wood_sword1 = Objects.WoodSword()
 rapier3 = Objects.Rapier()
 tooth1 = Objects.Tooth
 # Armor
-
+half_shield1 = Objects.HalfShield
+half_shield2 = Objects.HalfShield
+quart_shield2 = Objects.QuartShield
+quart_shield1 = Objects.QuartShield()
 # Food
 chicken1 = Objects.Chicken()
 chicken2 = Objects.Chicken()
@@ -103,10 +103,22 @@ chicken5 = Objects.Chicken()
 chicken6 = Objects.Chicken()
 chicken7 = Objects.Chicken()
 chicken8 = Objects.Chicken()
+spice1 = Objects.Spice()
+spice2 = Objects.Spice()
+spice3 = Objects.Spice()
+spice4 = Objects.Spice()
+spice5 = Objects.Spice()
 rice1 = Objects.Rice()
 water1 = Objects.Water()
 bread1 = Objects.Bread()
 herb1 = Objects.Herb()
+water2 = Objects.Water()
+water3 = Objects.Water()
+water4 = Objects.Water()
+water5 = Objects.Water()
+water6 = Objects.Water()
+water7 = Objects.Water()
+water8 = Objects.Water()
 # Characters
 gi1 = Objects.BaseSoldier()
 gi2 = Objects.Sardaukar2()
@@ -130,7 +142,7 @@ SIETCH = Room("Sietch Tabr", 'You walk into a hidden Fremen cave. Inside, you fi
 SPICE_ROOMS = Room("Spice Rooms", "Spice is stacked in boxes in for ceremonies. You are aware of the power that it can"
                                   " bring from consumption, however the addiction can be fatal.\n There is only a path"
                                   " to the left leading out of the room.",
-                   None, None, None, 'SIETCH', None, None, [spice1])
+                   None, None, None, 'SIETCH', None, None, [spice1], [fremen1])
 
 FREMEN_PIT = Room("Fremen Pit", "A massive room with seating similar to a coliseum. Battle marks from swords line the"
                                 " walls of the center pit.\n There is a staircase descending downwards and a path"
@@ -144,29 +156,29 @@ WATER = Room("Water Storage", 'The water storage area of the sietch. You see tan
 DESERT2 = Room("Open Desert", "The sun beats down on the sandy desert all around you. You need to find a way out of"
                               " the desert\n before the lack of water or Imperials kill you. This time, however, there"
                               " is a lonely Imperial Guard out on patrol.",
-               'DESERT1', None, 'DESERT5', None, None, None, [rapier1], [gi1])
+               'DESERT1', None, 'DESERT5', None, None, None, [dullsword2], [gi1])
 
 DESERT3 = Room("Open Desert", "The sun beats down on the sandy desert all around you. You need to find a way out of"
                               " the desert\n before the lack of water or Imperials kill you.",
-               "DESERT6", 'DESERT5', 'DESERT7', 'DESERT1', None, None, [], [])
+               "DESERT6", 'DESERT5', 'DESERT7', 'DESERT1', None, None, [wood_sword1], [fremen1])
 
 DESERT4 = Room("Open Desert", "The sun beats down on the sandy desert all around you. You need to find a way out of"
                               " the desert\n before the lack of water or Imperials kill you.",
-               None, None, "DESERT1", "FUNERAL_PLAIN", )
+               None, None, "DESERT1", "FUNERAL_PLAIN", None, None, [atomic1], [fremen1])
 
 FUNERAL_PLAIN = Room("Funeral Plain", "The expanse of the desert only grows larger as you come across the Funeral"
                                       " Plain,\n where the Fremen take the dead. You are completely outside the reaches"
                                       " of society with no clear paths ahead of you.",
-                     "GREAT_FLAT", "GREAT_FLAT", "DESERT4", "GREAT_FLAT", None, None, [], [fremen1])
+                     "GREAT_FLAT", "GREAT_FLAT", "DESERT4", "GREAT_FLAT", None, None, [half_shield1], [fremen1])
 
 GREAT_FLAT = Room("The Great Flat", "The farthest known point on the western half of the world. The only way out"
                                     " is back through the Funeral Plain. While here, a massive worm "
                                     "appears out of the ground.",
-                  "FUNERAL_PLAIN", "FUNERAL_PLAIN", "FUNERAL_PLAIN", None, None, None, [], [worm1])
+                  "FUNERAL_PLAIN", "FUNERAL_PLAIN", "FUNERAL_PLAIN", None, None, None, [rapier1], [worm1])
 
 DESERT5 = Room("Open Desert", "The sun beats down on the sandy desert all around you. You need to find a way out of"
                               " the desert\n before the lack of water or Imperials kill you.",
-               "DESERT3", None, "DESERT8", "DESERT2", None, None, [], [])
+               "DESERT3", None, "DESERT8", "DESERT2", None, None, [lasgun1], [gi1])
 
 DESERT6 = Room("Open Desert", "The sun beats down on the sandy desert all around you. You need to find a way out of"
                               " the desert\n before the lack of water or Imperials kill you.",
@@ -178,7 +190,7 @@ ROCKFACE = Room("Cliff side", "You come upon a cliff side in the desert. It is b
 
 SIETCH_BALBOA = Room("Sietch Balboa", "You find a massive door leading to another Sietch aligned with the Fremen."
                                       "The door appears locked and you don't know how to open it.",
-                     None, None, None, None, "HEAVEN", "ROCKFACE")
+                     None, None, None, None, "HEAVEN", "ROCKFACE", [broadsword2, water6])
 
 PATROL_STATION = Room("Imperial Patrol Station", " As you make your way back to the city, you find an Imperial"
                                                  " Patrol Station."
@@ -214,20 +226,20 @@ MARKET = Room("Arrakeen Market", "You find yourself at the central market of Arr
 
 SHIELD_WALL = Room("Shield Wall",
                    "The shield wall is the eastern boundary of the city. Venturing beyond is too dangerous.",
-                   None, None, None, "MARKET", None, None, [], [gi1, gi2])
+                   None, None, None, "MARKET", None, None, [quart_shield2], [gi1, gi2])
 # Region 3 - The Palace
 
 PALACE = Room("Palace Entrance", "You approach the massive palace. The massive gold throne and large, red banners"
                                  " hang down. The floor is velvet red carpet\n with the crest of the Harkonnens. "
                                  "The Council appears to meet the west and dine in a room to the east.",
-              None, "MARKET", "DINE", "COUNCIL", None, None, [], [], True)
+              None, "MARKET", "DINE", "COUNCIL", None, None, [broadsword1], [], True)
 
 DINE = Room("Dining Hall", "The room is filled with a massive wooden table with food still sitting out, "
                            "accompanied by beautiful red decorations.\n"
                            "The massive banners hanging down symbol Imperial power. Above the head of the table is "
                            "the head of the bear that killed the old Duke.\n The entrance to the palace is to the west"
                            " and the private quarters are to the east.",
-            None, None, "BEDROOM", "PALACE", None, None, [], [], True)
+            None, None, "BEDROOM", "PALACE", None, None, [bread1, spice4, water3], [sard1, sard2, captain], True)
 
 BEDROOM = Room("Private Quarters", "This is the private quarters of the Imperial. The walls are lined with swords and "
                                    "shields,\n which can be used in the training area north of the room. The only exit"
@@ -236,12 +248,12 @@ BEDROOM = Room("Private Quarters", "This is the private quarters of the Imperial
 
 TRAIN = Room("Training Room", " You enter a room of complete white. The only thing there is a small training dummy"
                               " with a sword in the center of the room.",
-             None, "BEDROOM", None, None, None, None, [], [dummy1], True)
+             None, "BEDROOM", None, None, None, None, [rapier2], [dummy1], True)
 
 COUNCIL = Room("Council", "The location where all of the official government business takes place. The room is bland,"
                           " with only a round table.\n There appears to be something hidden on the underside of the"
                           " table. The only way out is to the east.",
-               None, None, "PALACE", None, None, "WORM", [], [], True)
+               None, None, "PALACE", None, None, "WORM", [], [sard1, sard2, Objects.Baron], True)
 
 WORM = Room("Cellar", "You descend the hidden stairs to reveal a cellar. In the middle is a worm chained to the floor."
                       " \nIt appears that the Water of Life is being extracted from it and stored in containers along"
@@ -258,7 +270,7 @@ HEAVEN = Room("Heaven", "You've found Heaven. Here, anything is possible as stac
 
 
 # Characters
-player = Player(WATER)
+player = Player(DESERT1)
 
 playing = True
 directions = ['north', 'south', 'east', 'west', 'up', 'down']
@@ -284,13 +296,12 @@ while playing:
             if len(player.current_location.items) == 1:
                 print("You can take " + thingy.name)
             else:
-                print("You see a ")
-                print(thingy.name)
+                print("You see a " + thingy.name)
     command = input(">_")
     if command.lower() in short_directions:
         index = short_directions.index(command.lower())
         command = directions[index]
-    elif command.lower() in ["q", "quit", "exit"]:
+    if command.lower() in ["q", "quit", "exit"]:
         playing = False
         print("Goodbye.")
     elif command.lower() in directions:
