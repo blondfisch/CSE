@@ -107,6 +107,7 @@ rice1 = Objects.Rice()
 water1 = Objects.Water()
 bread1 = Objects.Bread()
 herb1 = Objects.Herb()
+spice2 = Objects.Spice()
 # Characters
 gi1 = Objects.BaseSoldier()
 gi2 = Objects.Sardaukar2()
@@ -130,16 +131,16 @@ SIETCH = Room("Sietch Tabr", 'You walk into a hidden Fremen cave. Inside, you fi
 SPICE_ROOMS = Room("Spice Rooms", "Spice is stacked in boxes in for ceremonies. You are aware of the power that it can"
                                   " bring from consumption, however the addiction can be fatal.\n There is only a path"
                                   " to the left leading out of the room.",
-                   None, None, None, 'SIETCH', None, None, [spice1])
+                   None, None, None, 'SIETCH', None, None, [spice1, spice2])
 
 FREMEN_PIT = Room("Fremen Pit", "A massive room with seating similar to a coliseum. Battle marks from swords line the"
                                 " walls of the center pit.\n There is a staircase descending downwards and a path"
-                                " leading east.", None, None, "SIETCH", None, None, "WATER", [fremen1])
+                                " leading east.", None, None, "SIETCH", None, None, "WATER", [crysknife1], [fremen1])
 
 WATER = Room("Water Storage", 'The water storage area of the sietch. You see tanks of water containing hundreds of'
                               ' liters kept in storage, all carefully counted for the tribe.\n The only way out is the'
                               ' staircase leading up.',
-             None, None, None, None, "FREMEN_PIT", None, [water1])
+             None, None, None, None, "FREMEN_PIT", None, [water1, water1, water1], [fremen1])
 
 DESERT2 = Room("Open Desert", "The sun beats down on the sandy desert all around you. You need to find a way out of"
                               " the desert\n before the lack of water or Imperials kill you. This time, however, there"
@@ -157,16 +158,16 @@ DESERT4 = Room("Open Desert", "The sun beats down on the sandy desert all around
 FUNERAL_PLAIN = Room("Funeral Plain", "The expanse of the desert only grows larger as you come across the Funeral"
                                       " Plain,\n where the Fremen take the dead. You are completely outside the reaches"
                                       " of society with no clear paths ahead of you.",
-                     "GREAT_FLAT", "GREAT_FLAT", "DESERT4", "GREAT_FLAT", None, None, [], [fremen1])
+                     "GREAT_FLAT", "GREAT_FLAT", "DESERT4", "GREAT_FLAT", None, None, [dullsword1], [fremen1, fremen1])
 
 GREAT_FLAT = Room("The Great Flat", "The farthest known point on the western half of the world. The only way out"
                                     " is back through the Funeral Plain. While here, a massive worm "
                                     "appears out of the ground.",
-                  "FUNERAL_PLAIN", "FUNERAL_PLAIN", "FUNERAL_PLAIN", None, None, None, [], [worm1])
+                  "FUNERAL_PLAIN", "FUNERAL_PLAIN", "FUNERAL_PLAIN", None, None, None, [tooth1], [worm1, fremen1])
 
 DESERT5 = Room("Open Desert", "The sun beats down on the sandy desert all around you. You need to find a way out of"
                               " the desert\n before the lack of water or Imperials kill you.",
-               "DESERT3", None, "DESERT8", "DESERT2", None, None, [], [])
+               "DESERT3", None, "DESERT8", "DESERT2", None, None, [], [fremen1, fremen1])
 
 DESERT6 = Room("Open Desert", "The sun beats down on the sandy desert all around you. You need to find a way out of"
                               " the desert\n before the lack of water or Imperials kill you.",
