@@ -137,7 +137,7 @@ DESERT1 = Room("Open Desert", 'The sun beats down on the sandy desert all around
                "SIETCH", 'DESERT2', 'DESERT3', 'DESERT4')
 
 SIETCH = Room("Sietch Tabr", 'You walk into a hidden Fremen cave. Inside, you find paths leading deeper into the'
-                             ' chamber to the north and south.',
+                             ' chamber to the east and west.',
               None, 'DESERT1', 'SPICE_ROOMS', 'FREMEN_PIT', None, None, [quart_shield1, dullsword1])
 
 SPICE_ROOMS = Room("Spice Rooms", "Spice is stacked in boxes in for ceremonies. You are aware of the power that it can"
@@ -207,13 +207,13 @@ DESERT7 = Room("Open Desert", "The sun beats down on the sandy desert all around
 
 DESERT8 = Room("Open Desert", "The sun beats down on the sandy desert all around you. You need to find a way out of"
                               " the desert\n before the lack of water or Imperials kill you.",
-               "DESERT7", None, None, "DESERT5", None, None, [], [])
+               "DESERT7", None, None, "DESERT5", None, None, [], [fremen1])
 
 # Region 2 - The City
 
 STREET1 = Room("Suburbs of Arrakeen", "Small houses line both sides of the dusty streets. Most of the doors are locked"
                                       " except for one orange house north of you. The street continues to the south.",
-               "POPEYES", "STREET2", "MARKET", "DESERT7")
+               "POPEYES", "STREET2", "MARKET", "DESERT7", None, None, [], [gi1, gi2, gi1])
 
 STREET2 = Room("Streets of Arrakeen", "You find a small alley corner. As you enter, you notice Imperial guards on the"
                                       " opposite side looking out for any Fremen. You could continue east or head "
@@ -224,7 +224,10 @@ MARKET = Room("Arrakeen Market", "You find yourself at the central market of Arr
                                  " water, and Stillsuit repairs.\n Looking to the north you see the entrance to the"
                                  " palace. The street continues to the south and west while the shield wall is on the "
                                  "east.",
-              "PALACE", "STREET2", "SHIELD_WALL", "STREET1")
+              "PALACE", "STREET2", "SHIELD_WALL", "STREET1", None, None,
+              [Objects.BroadSword, Objects.Rapier, Objects.HalfShield, Objects.QuartShield, Objects.CrysKnife,
+               Objects.Bow, Objects.Lasgun, Objects.ImperialSuit, Objects.Bread, Objects.Chicken
+               ])
 
 SHIELD_WALL = Room("Shield Wall",
                    "The shield wall is the eastern boundary of the city. Venturing beyond is too dangerous.",
@@ -234,7 +237,7 @@ SHIELD_WALL = Room("Shield Wall",
 PALACE = Room("Palace Entrance", "You approach the massive palace. The massive gold throne and large, red banners"
                                  " hang down. The floor is velvet red carpet\n with the crest of the Harkonnens. "
                                  "The Council appears to meet the west and dine in a room to the east.",
-              None, "MARKET", "DINE", "COUNCIL", None, None, [broadsword1], [], True)
+              None, "MARKET", "DINE", "COUNCIL", None, None, [broadsword1], [sard1, sard1], True)
 
 DINE = Room("Dining Hall", "The room is filled with a massive wooden table with food still sitting out, "
                            "accompanied by beautiful red decorations.\n"
@@ -246,7 +249,7 @@ DINE = Room("Dining Hall", "The room is filled with a massive wooden table with 
 BEDROOM = Room("Private Quarters", "This is the private quarters of the Imperial. The walls are lined with swords and "
                                    "shields,\n which can be used in the training area north of the room. The only exit"
                                    " leading towards the center of the palace is west.",
-               "TRAIN", None, None, "DINE", None, None, [], [], True)
+               "TRAIN", None, None, "DINE", None, None, [full_shield1], [sard1, sard2], True)
 
 TRAIN = Room("Training Room", " You enter a room of complete white. The only thing there is a small training dummy"
                               " with a sword in the center of the room.",
@@ -278,8 +281,11 @@ playing = True
 directions = ['north', 'south', 'east', 'west', 'up', 'down']
 short_directions = ['n', 's', 'e', 'w', 'u', 'd']
 while playing:
+    print()
+    print("___________")
     print(player.current_location.name)
     print(player.current_location.desc)
+    print(len(player.current_location.items))
     if player.current_location.characters is None or player.current_location.characters is []:
         print("You are alone.")
     else:
@@ -319,14 +325,14 @@ while playing:
             item = command[2:]
         else:
             item = input("What do you want to take? >_")
-        for number in range(len(player.current_location.items)):
-            grab = player.current_location.items[number]
-            if item.lower() in grab.grab or item == grab.name.lower():
+        for i in range(len(player.current_location.items) - 1):
+            grab = player.current_location.items[i]
+            if item.lower() in player.current_location.items[i].grab or item == player.current_location.items[i].name.lower():
                 if type(item.lower()) is Objects.Money:
                     player.wallet += grab.value
                     print("You added %d coins to your wallet" % grab.value)
                 else:
-                    player.inventory.append(grab)
+                    player.inventory.append(player.current_location.items[i])
                     player.current_location.items.remove(grab)
                     print("You added %s to your inventory" % grab.name)
             elif item.lower() not in grab.grab or item != grab.name.lower():
@@ -335,6 +341,8 @@ while playing:
                 print("You have to actually take something.")
             elif range(len(player.current_location.items)) == 0:
                 print("There is nothing left to take.")
+            else:
+                print("So the code broke")
     elif command.lower() in ["inventory", "i"]:
         for i in range(len(player.inventory)):
             item = player.inventory[i]

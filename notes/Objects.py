@@ -52,7 +52,7 @@ class BroadSword(Sword):
     def __init__(self):
         super(BroadSword, self).__init__("Broadsword", 10, 40, "This sword is quite heavy and will wear out quickly"
                                                                "but does massive damage.",
-                                         ["broadsword", "sword", "broad sword"])
+                                         ["broadsword", "sword", "broad sword", "sword"])
 
 
 class CrysKnife(Sword):
@@ -183,21 +183,21 @@ class FullShield(Armor):
     def __init__(self):
         super(FullShield, self).__init__("Full body shield", "This shield is incredibly powerful because it covers the"
                                                              "entire body.", 40, True,
-                                         ["shield", "full shield", "best shield"])
+                                         ["shield", "full shield", "best shield", "shield"])
 
 
 class HalfShield(Armor):
     def __init__(self):
         super(HalfShield, self).__init__("Half Shield", "This shield has been worn down from use and only covers"
                                                         "half of the body.", 10, True,
-                                         ["halfshield", "half shield"])
+                                         ["halfshield", "half shield", "shield"])
 
 
 class QuartShield(Armor):
     def __init__(self):
         super(QuartShield, self).__init__("Quarter Shield", "A quarter shield, covering just a small part of the body",
                                           5, True,
-                                          ["quarter shield", "quartershield", "quartshield"])
+                                          ["quarter shield", "quartershield", "quartshield", "shield"])
 
 
 class Suit(Item):
