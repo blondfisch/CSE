@@ -325,7 +325,8 @@ while playing:
             item = command[2:]
         else:
             item = input("What do you want to take? >_")
-        for i in range(len(player.current_location.items) - 1):
+        for i in range(len(player.current_location.items)):
+            print(item)
             grab = player.current_location.items[i]
             if item.lower() in player.current_location.items[i].grab or item == player.current_location.items[i].name.lower():
                 if type(item.lower()) is Objects.Money:
@@ -343,7 +344,7 @@ while playing:
                 print("There is nothing left to take.")
             else:
                 print("So the code broke")
-    elif command.lower() in ["inventory", "i"]:
+    elif command.lower() in "inventory" or command.lower() == "i":
         for i in range(len(player.inventory)):
             item = player.inventory[i]
             print(item.name)
