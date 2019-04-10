@@ -285,14 +285,14 @@ while playing:
     print("___________")
     print(player.current_location.name)
     print(player.current_location.desc)
-    print(len(player.current_location.items))
+    print(list(range(len(player.current_location.items))))
     if player.current_location.characters is None or player.current_location.characters is []:
         print("You are alone.")
     else:
         for i in range(len(player.current_location.characters)):
             character = player.current_location.characters[i]
             if len(player.current_location.characters) == 1:
-                print("You are in a room with" + character.name)
+                print("You are in a room with " + character.name)
             else:
                 print("You are surrounded by:")
                 print(character.name)
@@ -325,15 +325,17 @@ while playing:
             item = command[2:]
         else:
             item = input("What do you want to take? >_")
-        for i in range(len(player.current_location.items)):
             print(item)
+        for i in range(len(player.current_location.items)):
             grab = player.current_location.items[i]
-            if item.lower() in player.current_location.items[i].grab or item == player.current_location.items[i].name.lower():
-                if type(item.lower()) is Objects.Money:
+            """if len(player.current_location.items) > 1 and item in "all":
+                player.inventory.append(player.current_location.items)"""
+            if item.lower() in grab.grab or item.lower() == grab.name.lower():
+                if type(grab) is Objects.Money:
                     player.wallet += grab.value
                     print("You added %d coins to your wallet" % grab.value)
                 else:
-                    player.inventory.append(player.current_location.items[i])
+                    player.inventory.append(grab)
                     player.current_location.items.remove(grab)
                     print("You added %s to your inventory" % grab.name)
             elif item.lower() not in grab.grab or item != grab.name.lower():
@@ -345,6 +347,7 @@ while playing:
             else:
                 print("So the code broke")
     elif command.lower() in "inventory" or command.lower() == "i":
+        print("You have:")
         for i in range(len(player.inventory)):
             item = player.inventory[i]
             print(item.name)
