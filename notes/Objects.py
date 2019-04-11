@@ -11,14 +11,13 @@ class Weapon(Item):
 
 
 class Sword(Weapon):
-    def __init__(self, name, damage: int, durability: int, desc, value=None, grab=None):
+    def __init__(self, name, damage: int, durability: int, desc, grab=None):
         super(Sword, self).__init__(name, damage, durability)
         self.name = name
         self.damage = damage
         self.distance = 0
         self.durability = durability
         self.desc = desc
-        self.value = value
         self.grab = grab
 
     def use(self):

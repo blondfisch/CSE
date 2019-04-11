@@ -285,7 +285,6 @@ while playing:
     print("___________")
     print(player.current_location.name)
     print(player.current_location.desc)
-    print(list(range(len(player.current_location.items))))
     if player.current_location.characters is None or player.current_location.characters is []:
         print("You are alone.")
     else:
@@ -318,19 +317,22 @@ while playing:
             player.move(next_room)
         except KeyError:
             print("I can't go that way.")
-    elif "take" in command.lower() or "t " in command.lower():
-        if "take " in command.lower():
+    elif "take" in command.lower() or "t " in command.lower() or "grab " in command.lower():
+        if "take " in command.lower() or "grab" in command.lower():
             item = command[5:]
         elif "t " in command.lower():
             item = command[2:]
         else:
             item = input("What do you want to take? >_")
             print(item)
-        for i in range(len(player.current_location.items)):
-            grab = player.current_location.items[i]
+        for i in player.current_location.items:
+            grab = i
             """if len(player.current_location.items) > 1 and item in "all":
                 player.inventory.append(player.current_location.items)"""
-            if item.lower() in grab.grab or item.lower() == grab.name.lower():
+            print(item)
+            print(i)
+            print(grab.grab)
+            if item.lower() in grab.grab or item.lower() in grab.name.lower():
                 if type(grab) is Objects.Money:
                     player.wallet += grab.value
                     print("You added %d coins to your wallet" % grab.value)
@@ -348,8 +350,8 @@ while playing:
                 print("So the code broke")
     elif command.lower() in "inventory" or command.lower() == "i":
         print("You have:")
-        for i in range(len(player.inventory)):
-            item = player.inventory[i]
+        for i in player.inventory:
+            item = i
             print(item.name)
     elif "purchase " in command.lower() or "p " in command.lower():
         if "purchase " in command.lower():
@@ -358,8 +360,8 @@ while playing:
             item = command[2:]
         else:
             item = input("What do you want to purchase?")
-        for thing in range(len(player.current_location.items)):
-            grab = player.current_location.items[thing]
+        for thing in player.current_location.items:
+            grab = thing
             if item.lower() in grab.grab or item == grab.name.lower() \
                     and player.wallet >= grab.value and player.current_location == MARKET:
                 player.inventory.append(grab)
@@ -380,8 +382,8 @@ while playing:
             char = player.current_location.characters[i]
             if target in char.name:
                 target = char
-        for i in range(len(player.inventory)):
-            item = player.inventory[i]
+        for i in player.inventory:
+            item = i
             if weapon in item.name or weapon in item.grab:
                 player.weapon = item + player.consum
         if player.weapon not in player.inventory:
@@ -410,14 +412,14 @@ while playing:
             object = command[6:]
         else:
             object = input("What do you want to consume? >_")
-        for i in range(len(player.inventory)):
-            item = player.inventory[i]
+        for i in player.inventory:
+            item = i
             if object in item.name or object in item.grab:
                 player.consum = item
                 player.inventory.remove(item)
         if issubclass(type(player.consum), Objects.Food):
             player.health += player.consum.health
         elif issubclass(type(player.consum), Objects.Potion):
-            player.consum += player.consum.damage
+            player.weapon.damage += player.consum.damage
     else:
         print("Command Not Found")
