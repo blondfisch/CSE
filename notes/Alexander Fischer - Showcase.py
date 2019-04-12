@@ -23,7 +23,7 @@ class Room(object):
 
 
 class Player(object):
-    def __init__(self, starting_location, suit=None, weapon=None, wallet=0, defense=0, consum=None):
+    def __init__(self, starting_location, suit=None, weapon=None, wallet=0, defense=0):
         self.current_location = starting_location
         self.inventory = []
         self.sandslide = False
@@ -32,7 +32,8 @@ class Player(object):
         self.wallet = wallet
         self.health = 200
         self.defense = defense
-        self.consum = consum
+        self.consum = 0
+        self.damage = 10
 
     def degrade(self):
         if self.suit.health > 0 and self.current_location.indoor is False:
@@ -346,8 +347,6 @@ while playing:
                 print("You have to actually take something.")
             elif range(len(player.current_location.items)) == 0:
                 print("There is nothing left to take.")
-            else:
-                print("So the code broke")
     elif command.lower() in "inventory" or command.lower() == "i":
         print("You have:")
         for i in player.inventory:
@@ -371,32 +370,36 @@ while playing:
             elif player.current_location != MARKET:
                 print("Bold of you to assume you could purchase something while not at a market.")
     elif "attack " in command.lower() or "hit" in command.lower() or "murder" in command.lower():
-        if " " * 3 in command.lower():
+        if len(command.lower().split()) == 4:
             jac = command.lower().split()
             target = jac[1]
             weapon = jac[3]
+            print(target)
+            print(weapon)
         else:
             weapon = input("What do you want to attack with? >_")
             target = input("Who do you want to attack?")
-        for i in range(len(player.current_location.characters)):
-            char = player.current_location.characters[i]
-            if target in char.name:
+        for i in player.current_location.characters:
+            char = i
+            if target.lower() in char.name.lower():
                 target = char
-        for i in player.inventory:
-            item = i
-            if weapon in item.name or weapon in item.grab:
-                player.weapon = item + player.consum
-        if player.weapon not in player.inventory:
+                print(target)
+        for g in player.inventory:
+            item = g
+            if weapon.lower() in item.name.lower() or weapon in item.grab.lower():
+                player.weapon = item
+                player.damage = player.weapon.damage + player.consum
+        if weapon not in player.inventory:
             print("You cannot use that because you do not have it.")
         if player.weapon.durability <= 0 or player.weapon.durability - 1 == 0:
             print("The weapon broke and the attack failed.")
         elif target.health <= 0:
                 print("You're attacking a dead person")
         else:
-            target.take_damage(player.weapon.damage)
-            if target.health - player.weapon.damage > 0:
-                    print("You attack %s for %d damage" % (target.name, player.weapon.damage))
-                    target.health -= player.weapon.damage
+            target.take_damage(player.damage)
+            if target.health - player.damage > 0:
+                    print("You attack %s for %d damage" % (target.name, player.damage))
+                    target.health -= player.damage
             if target.health <= 0:
                 print("%s died." % target.name)
             player.weapon.use()
@@ -414,12 +417,14 @@ while playing:
             object = input("What do you want to consume? >_")
         for i in player.inventory:
             item = i
-            if object in item.name or object in item.grab:
-                player.consum = item
-                player.inventory.remove(item)
-        if issubclass(type(player.consum), Objects.Food):
-            player.health += player.consum.health
+        if object in item.name or object in item.grab:
+            yeah = item
+            player.inventory.remove(item)
+        if issubclass(type(yeah), Objects.Food):
+            player.health += yeah.health
+            print("You increased your health to %d" % player.health)
         elif issubclass(type(player.consum), Objects.Potion):
-            player.weapon.damage += player.consum.damage
+            player.damage += yeah.damage
+            print("You increased your damage to %d" % player.damage)
     else:
         print("Command Not Found")
