@@ -33,7 +33,7 @@ class Sword(Weapon):
 
 class WoodSword(Sword):
     def __init__(self):
-        super(WoodSword, self).__init__("Wooden Sword", 5, 60, "A wooden sword. It's not the best option",
+        super(WoodSword, self).__init__("Wooden Sword", 15, 60, "A wooden sword. It's not the best option",
                                         ["wood sword", "sword", "wooden sword"])
 
 
@@ -46,21 +46,21 @@ class Rapier(Sword):
 
 class DullSword(Sword):
     def __init__(self):
-        super(DullSword, self).__init__("Dull Sword", 2, 25, "A dull sword. It has not been well maintained and is on"
-                                                             " the verge of breaking.",
+        super(DullSword, self).__init__("Dull Sword", 10, 25, "A dull sword. It has not been well maintained and is on"
+                                                              " the verge of breaking.",
                                         ["sword", "dull sword", "dullsword"])
 
 
 class BroadSword(Sword):
     def __init__(self):
-        super(BroadSword, self).__init__("Broadsword", 10, 40, "This sword is quite heavy and will wear out quickly"
+        super(BroadSword, self).__init__("Broadsword", 25, 40, "This sword is quite heavy and will wear out quickly"
                                                                "but does massive damage.",
                                          ["broadsword", "sword", "broad sword", "sword"])
 
 
 class CrysKnife(Sword):
     def __init__(self):
-        super(CrysKnife, self).__init__("Crysknife", 6, 100, "This knife is made from the teeth of a worm. While not"
+        super(CrysKnife, self).__init__("Crysknife", 8, 100, "This knife is made from the teeth of a worm. While not"
                                                              " very sharp, it will undergo a lot of use before it"
                                                              " breaks.",
                                         ["knife", "crysknife"])
@@ -284,8 +284,8 @@ class Enemy(object):
 
 class BaseSoldier(Enemy):
     def __init__(self):
-        super(BaseSoldier, self).__init__("Imperial", 50, 0, "A basic Imperial soldier. He is not well equipped and"
-                                                             " does not have a shield.")
+        super(BaseSoldier, self).__init__("Imperial", 50, 0, DullSword(), "A basic Imperial soldier. He is not well "
+                                                                          "equipped and does not have a shield.")
 
 
 class Captain(Enemy):
@@ -345,7 +345,8 @@ class Worm(Enemy):
 
 class Dummy(Enemy):
     def __init__(self):
-        super(Dummy, self).__init__("Dummy", 1000000000000, 0, "A training dummy. You could hit it, if you wanted to.")
+        super(Dummy, self).__init__("Dummy", 1000000000000, 0, None, "A training dummy. You could hit it, "
+                                                                     "if you wanted to.")
 
 
 half_shield = HalfShield()
@@ -371,12 +372,10 @@ rapier = Rapier()
 
 
 baron = Baron()
-sard1 = Sardaukar1()
 worm = Worm()
 tooth = Tooth()
 fremen = Fremen()
 soldier = BaseSoldier()
-# sard2.attack(dummy)
 
 
 class Room(object):
@@ -400,7 +399,7 @@ class Room(object):
 
 
 class Player(object):
-    def __init__(self, starting_location, suit=None, weapon=None, wallet=0, defense=0):
+    def __init__(self, starting_location, suit=None, weapon=None, wallet=0, defense=0, eweap=None, earmor=None):
         self.current_location = starting_location
         self.inventory = []
         self.sandslide = False
@@ -410,7 +409,9 @@ class Player(object):
         self.health = 200
         self.defense = defense
         self.consum = 0
-        self.damage = 10
+        self.damage = 4
+        self.equiparmor = eweap
+        self.equipweapon = earmor
 
     def degrade(self):
         if self.suit.health > 0 and self.current_location.indoor is False:
@@ -423,12 +424,12 @@ class Player(object):
 
     def take_damage(self, damage: int):
         if self.defense > damage:
-            print("No damage taken")
+            print("You took no damage.")
         else:
             self.health -= damage - self.defense
             if self.health <= 0:
                 self.health = 0
-            print("You have %d health left" % self.health)
+        print("You have %d health left" % self.health)
 
     def move(self, new_location):
         """ This moves the player to a new room
@@ -658,9 +659,10 @@ player = Player(DESERT1)
 playing = True
 directions = ['north', 'south', 'east', 'west', 'up', 'down']
 short_directions = ['n', 's', 'e', 'w', 'u', 'd']
+print('''You are the lost heir to the ''')
 while playing:
+    print("_ _ _ _ _ _ _ _ _ _ _")
     print()
-    print("___________")
     print(player.current_location.name)
     print(player.current_location.desc)
     if player.current_location.characters is None or player.current_location.characters is []:
@@ -707,9 +709,6 @@ while playing:
             grab = i
             """if len(player.current_location.items) > 1 and item in "all":
                 player.inventory.append(player.current_location.items)"""
-            print(item)
-            print(i)
-            print(grab.grab)
             if item.lower() in grab.grab or item.lower() in grab.name.lower():
                 if type(grab) is Objects.Money:
                     player.wallet += grab.value
@@ -718,8 +717,6 @@ while playing:
                     player.inventory.append(grab)
                     player.current_location.items.remove(grab)
                     print("You added %s to your inventory" % grab.name)
-            elif item.lower() not in grab.grab or item != grab.name.lower():
-                print("I don't know what you want to take.")
             elif item.lower() in ["", " "]:
                 print("You have to actually take something.")
             elif range(len(player.current_location.items)) == 0:
@@ -729,11 +726,9 @@ while playing:
         for i in player.inventory:
             item = i
             print(item.name)
-    elif "purchase " in command.lower() or "p " in command.lower():
+    elif "purchase " in command.lower():
         if "purchase " in command.lower():
             item = command[9:]
-        elif "p " in command.lower():
-            item = command[2:]
         else:
             item = input("What do you want to purchase?")
         for thing in player.current_location.items:
@@ -746,32 +741,34 @@ while playing:
                 print("You are too poor to purchase such an item, peasant.")
             elif player.current_location != MARKET:
                 print("Bold of you to assume you could purchase something while not at a market.")
-    elif "attack " in command.lower() or "hit" in command.lower() or "murder" in command.lower():
+    elif "attack " in command.lower() or "hit" in command.lower() or "murder" in command.lower() or\
+            "attack" in command.lower():
         if len(command.lower().split()) == 4:
             jac = command.lower().split()
             target = jac[1]
             weapon = jac[3]
-            print(target)
-            print(weapon)
         else:
             weapon = input("What do you want to attack with? >_")
-            target = input("Who do you want to attack?")
+            target = input("Who do you want to attack? >_")
         for i in player.current_location.characters:
             char = i
             if target.lower() in char.name.lower():
                 target = char
-                print(target)
-        for g in player.inventory:
-            item = g
-            if weapon.lower() in item.name.lower() or weapon in item.grab.lower():
-                player.weapon = item
-                player.damage = player.weapon.damage + player.consum
-        if weapon not in player.inventory:
+        if weapon.lower() in player.equipweapon.name.lower() or weapon.lower() in player.equipweapon.grab:
+            player.weapon = player.equipweapon
+            player.damage = player.weapon.damage + player.consum
+        else:
+            for g in player.inventory:
+                if weapon.lower() in g.name.lower() or weapon in g.grab:
+                    player.weapon = g
+                    player.damage = player.weapon.damage + player.consum
+        if weapon.lower() not in player.inventory and weapon.lower() not in player.equipweapon.name and\
+                weapon.lower() not in player.equipweapon.grab:
             print("You cannot use that because you do not have it.")
         if player.weapon.durability <= 0 or player.weapon.durability - 1 == 0:
             print("The weapon broke and the attack failed.")
         elif target.health <= 0:
-                print("You're attacking a dead person")
+            print("You're attacking a dead person")
         else:
             target.take_damage(player.damage)
             if target.health - player.damage > 0:
@@ -779,21 +776,41 @@ while playing:
                     target.health -= player.damage
             if target.health <= 0:
                 print("%s died." % target.name)
+                player.current_location.characters.remove(target)
             player.weapon.use()
+            player.take_damage(target.weapon.damage)
+            print("You were attacked for %d damage and have %d health left." % (target.weapon.damage - player.defense,
+                                                                                player.health))
     elif "consume" in command.lower() or "use" in command.lower() or "eat" in command.lower() or\
             "drink" in command.lower():
         temp = command.lower().split()
         obj = temp[1]
         for i in player.inventory:
-            item = i
-            if obj in item.name or obj in item.grab:
-                obj = item
-            player.inventory.remove(item)
+            if obj in i.name or obj in i.grab:
+                obj = i
+            player.inventory.remove(i)
         if issubclass(type(obj), Food):
             player.health += obj.health
             print("You increased your health to %d" % player.health)
-        elif issubclass(type(player.consum), Objects.Potion):
-            player.damage += obj.damage
-            print("You increased your damage to %d" % player.damage)
+        elif issubclass(type(obj), Potion):
+            player.consum += obj.damage
+            print("You increased your damage by %d" % player.consum)
+    elif "equip " in command.lower() or "equip" in command.lower():
+        if len(command.lower().split()) == 2:
+            templist = command.lower().split()
+            goal = templist[1]
+        else:
+            goal = input("What do you want to equip? >_")
+        for i in player.inventory:
+            if goal.lower() in i.name.lower() or goal.lower() in i.grab:
+                goal = i
+                player.inventory.remove(goal)
+        if issubclass(type(goal), Armor):
+            player.equiparmor = goal
+            print(player.equiparmor)
+            player.defense = player.equiparmor.defense
+        elif issubclass(type(goal), Weapon):
+            player.equipweapon = goal
+            print(player.equipweapon.name)
     else:
         print("Command Not Found")
