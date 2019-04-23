@@ -610,7 +610,7 @@ MARKET = Room("Arrakeen Market", "You find yourself at the central market of Arr
 
 SHIELD_WALL = Room("Shield Wall",
                    "The shield wall is the eastern boundary of the city. Venturing beyond is too dangerous.",
-                   None, None, None, "MARKET", None, None, [quart_shield2], [gi1, gi2])
+                   None, None, 'END', "MARKET", None, None, [quart_shield2], [gi1, gi2])
 # Region 3 - The Palace
 
 PALACE = Room("Palace Entrance", "You approach the massive palace. The massive gold throne and large, red banners"
@@ -650,6 +650,7 @@ HEAVEN = Room("Heaven", "You've found Heaven. Here, anything is possible as stac
               None, None, None, None, None, "SIETCH_BALBOA", [chicken1, chicken2, chicken3, chicken4, chicken5,
                                                               chicken6, chicken7], [], True)
 
+END = Room("The End", "You won", None, None, None, "SHIELD_WALL", None, None)
 # Region 4 - The Imperial
 
 
@@ -659,7 +660,18 @@ player = Player(DESERT1)
 playing = True
 directions = ['north', 'south', 'east', 'west', 'up', 'down']
 short_directions = ['n', 's', 'e', 'w', 'u', 'd']
-print('''You are the lost heir to the ''')
+print('''Welcome to the world of Dune. You are the lost prince who was usurped from power and are now on a quest to 
+take control of the planet. You will have to navigate the harsh desert environment and fight both the bandits, known 
+as Fremen, as well as the Imperials employed by the usurper. You have many different tools at your disposal. If there 
+is an item listed at the bottom of the text, you may use the take function to pick it up. It works best if you write 
+'take item' and list the item as it appears. You may also attack enemies. The format for this command is 'attack 
+enemy with weapon'. This attack can be performed either with the item you have equipped or an item in your inventory,
+ though the format is the same regardless. Consumables are also in this game, and 'use', 'drink', 'eat', or 'consume'
+ will activate this command. Depending on the type of consumable, it will either heal you or boost your damage. The 
+ format for using this command is the same as the take function. Equipping an item also follows this format, though 
+ the item must be in your inventory. Once an item is equipped, unequipping it discards the item.
+ Good luck on your travels, Prince.
+''')
 while playing:
     print("_ _ _ _ _ _ _ _ _ _ _")
     print()
@@ -684,6 +696,8 @@ while playing:
                 print("You can take " + thingy.name)
             else:
                 print("You see a " + thingy.name)
+    if player.current_location is "END":
+        playing = False
     command = input(">_")
     if command.lower() in short_directions:
         index = short_directions.index(command.lower())
