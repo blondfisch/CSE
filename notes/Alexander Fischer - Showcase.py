@@ -1,4 +1,3 @@
-import random
 import Objects
 
 
@@ -50,6 +49,10 @@ class DullSword(Sword):
                                                               " the verge of breaking.",
                                         ["sword", "dull sword", "dullsword"])
 
+class Fist(Sword):
+    def __init__(self):
+        super(Fist, self).__init__("Fist", 2, 10000000000000, "Your human fists. Pathetic",
+                                   ["fist", 'fists', "hands"])
 
 class BroadSword(Sword):
     def __init__(self):
@@ -549,7 +552,7 @@ DESERT4 = Room("Open Desert", "The sun beats down on the sandy desert all around
 FUNERAL_PLAIN = Room("Funeral Plain", "The expanse of the desert only grows larger as you come across the Funeral"
                                       " Plain,\n where the Fremen take the dead. You are completely outside the reaches"
                                       " of society with no clear paths ahead of you.",
-                     "GREAT_FLAT", "GREAT_FLAT", "DESERT4", "GREAT_FLAT", None, None, [dullsword1], [fremen1, fremen1])
+                     "GREAT_FLAT", "GREAT_FLAT", "DESERT4", "GREAT_FLAT", None, None, [dullsword1], [gi1, fremen1])
 
 GREAT_FLAT = Room("The Great Flat", "The farthest known point on the western half of the world. The only way out"
                                     " is back through the Funeral Plain. While here, a massive worm "
@@ -592,7 +595,7 @@ DESERT8 = Room("Open Desert", "The sun beats down on the sandy desert all around
 
 STREET1 = Room("Suburbs of Arrakeen", "Small houses line both sides of the dusty streets. Most of the doors are locked"
                                       " except for one orange house north of you. The street continues to the south.",
-               "POPEYES", "STREET2", "MARKET", "DESERT7", None, None, [], [gi1, gi2, gi1])
+               "POPEYES", "STREET2", "MARKET", "DESERT7", None, None, [], [sard1, gi2, gi1])
 
 STREET2 = Room("Streets of Arrakeen", "You find a small alley corner. As you enter, you notice Imperial guards on the"
                                       " opposite side looking out for any Fremen. You could continue east or head "
@@ -610,25 +613,25 @@ MARKET = Room("Arrakeen Market", "You find yourself at the central market of Arr
 
 SHIELD_WALL = Room("Shield Wall",
                    "The shield wall is the eastern boundary of the city. Venturing beyond is too dangerous.",
-                   None, None, 'END', "MARKET", None, None, [quart_shield2], [gi1, gi2])
+                   None, None, 'END', "MARKET", None, None, [quart_shield2], [sard1, gi2])
 # Region 3 - The Palace
 
 PALACE = Room("Palace Entrance", "You approach the massive palace. The massive gold throne and large, red banners"
                                  " hang down. The floor is velvet red carpet\n with the crest of the Harkonnens. "
                                  "The Council appears to meet the west and dine in a room to the east.",
-              None, "MARKET", "DINE", "COUNCIL", None, None, [broadsword1], [sard1, sard1], True)
+              None, "MARKET", "DINE", "COUNCIL", None, None, [broadsword1], [gi1, sard1], True)
 
 DINE = Room("Dining Hall", "The room is filled with a massive wooden table with food still sitting out, "
                            "accompanied by beautiful red decorations.\n"
                            "The massive banners hanging down symbol Imperial power. Above the head of the table is "
                            "the head of the bear that killed the old Duke.\n The entrance to the palace is to the west"
                            " and the private quarters are to the east.",
-            None, None, "BEDROOM", "PALACE", None, None, [bread1, spice4, water3], [sard1, sard2, captain], True)
+            None, None, "BEDROOM", "PALACE", None, None, [bread1, spice4, water3], [gi1, sard2, captain], True)
 
 BEDROOM = Room("Private Quarters", "This is the private quarters of the Imperial. The walls are lined with swords and "
                                    "shields,\n which can be used in the training area north of the room. The only exit"
                                    " leading towards the center of the palace is west.",
-               "TRAIN", None, None, "DINE", None, None, [full_shield1], [sard1, sard2], True)
+               "TRAIN", None, None, "DINE", None, None, [full_shield1], [gi1, sard2], True)
 
 TRAIN = Room("Training Room", " You enter a room of complete white. The only thing there is a small training dummy"
                               " with a sword in the center of the room.",
@@ -637,7 +640,7 @@ TRAIN = Room("Training Room", " You enter a room of complete white. The only thi
 COUNCIL = Room("Council", "The location where all of the official government business takes place. The room is bland,"
                           " with only a round table.\n There appears to be something hidden on the underside of the"
                           " table. The only way out is to the east.",
-               None, None, "PALACE", None, None, "WORM", [], [sard1, sard2, Objects.Baron], True)
+               None, None, "PALACE", None, None, "WORM", [], [sard1, gi1, Baron()], True)
 
 WORM = Room("Cellar", "You descend the hidden stairs to reveal a cellar. In the middle is a worm chained to the floor."
                       " \nIt appears that the Water of Life is being extracted from it and stored in containers along"
@@ -655,7 +658,7 @@ END = Room("The End", "You won", None, None, None, "SHIELD_WALL", None, None)
 
 
 # Characters
-player = Player(DESERT1)
+player = Player(COUNCIL)
 
 playing = True
 directions = ['north', 'south', 'east', 'west', 'up', 'down']
@@ -682,11 +685,7 @@ while playing:
     else:
         for i in range(len(player.current_location.characters)):
             character = player.current_location.characters[i]
-            if len(player.current_location.characters) == 1:
-                print("You are in a room with " + character.name)
-            else:
-                print("You are surrounded by:")
-                print(character.name)
+            print("You are in a room with " + character.name)
     if player.current_location.items is None or player.current_location.items is []:
         print("There is nothing for you to take.")
     else:
@@ -696,6 +695,8 @@ while playing:
                 print("You can take " + thingy.name)
             else:
                 print("You see a " + thingy.name)
+    if player.current_location is "COUNCIL" and player.current_location.characters is []:
+        print("Venture past the shield wall to escape the city.")
     if player.current_location is "END":
         playing = False
     command = input(">_")
