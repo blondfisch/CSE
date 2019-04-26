@@ -49,10 +49,12 @@ class DullSword(Sword):
                                                               " the verge of breaking.",
                                         ["sword", "dull sword", "dullsword"])
 
+
 class Fist(Sword):
     def __init__(self):
         super(Fist, self).__init__("Fist", 2, 10000000000000, "Your human fists. Pathetic",
                                    ["fist", 'fists', "hands"])
+
 
 class BroadSword(Sword):
     def __init__(self):
@@ -372,6 +374,7 @@ broadsword = BroadSword()
 dull = DullSword()
 wood_sword = WoodSword()
 rapier = Rapier()
+fist = Fist()
 
 
 baron = Baron()
@@ -404,7 +407,7 @@ class Room(object):
 class Player(object):
     def __init__(self, starting_location, suit=None, weapon=None, wallet=0, defense=0, eweap=None, earmor=None):
         self.current_location = starting_location
-        self.inventory = []
+        self.inventory = [fist]
         self.sandslide = False
         self.suit = suit
         self.weapon = weapon
