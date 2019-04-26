@@ -1,4 +1,3 @@
-import Objects
 
 
 class Item(object):
@@ -240,12 +239,12 @@ class Money(Item):
 
 class BigNote(Money):
     def __init__(self):
-        super(BigNote, self).__init__("100 note bill", 100)
+        super(BigNote, self).__init__("100 note bill", 100, ["money", "bignote", "big note"])
 
 
 class SmallNote(Money):
     def __init__(self):
-        super(SmallNote, self).__init__("10 note bill", 10)
+        super(SmallNote, self).__init__("10 note bill", 10, ["money", "smallnote"])
 
 
 class Enemy(object):
@@ -407,7 +406,7 @@ class Room(object):
 class Player(object):
     def __init__(self, starting_location, suit=None, weapon=None, wallet=0, defense=0, eweap=None, earmor=None):
         self.current_location = starting_location
-        self.inventory = [fist]
+        self.inventory = []
         self.sandslide = False
         self.suit = suit
         self.weapon = weapon
@@ -668,16 +667,19 @@ directions = ['north', 'south', 'east', 'west', 'up', 'down']
 short_directions = ['n', 's', 'e', 'w', 'u', 'd']
 print('''Welcome to the world of Dune. You are the lost prince who was usurped from power and are now on a quest to 
 take control of the planet. You will have to navigate the harsh desert environment and fight both the bandits, known 
-as Fremen, as well as the Imperials employed by the usurper. You have many different tools at your disposal. If there 
-is an item listed at the bottom of the text, you may use the take function to pick it up. It works best if you write 
-'take item' and list the item as it appears. You may also attack enemies. The format for this command is 'attack 
-enemy with weapon'. This attack can be performed either with the item you have equipped or an item in your inventory,
- though the format is the same regardless. Consumables are also in this game, and 'use', 'drink', 'eat', or 'consume'
- will activate this command. Depending on the type of consumable, it will either heal you or boost your damage. The 
- format for using this command is the same as the take function. Equipping an item also follows this format, though 
- the item must be in your inventory. Once an item is equipped, unequipping it discards the item.
+as Fremen, as well as the Imperials and Sardaukar employed by the usurper. You have many different tools at your 
+disposal. If there is an item listed at the bottom of the text, you may use the take function to pick it up. 
+It works best if you write 'take item' and list the item as it appears. You may also attack enemies. The format for 
+this command is 'attack enemy with weapon'. This attack can be performed either with the item you have equipped or an 
+item in your inventory, though the format is the same regardless. Consumables are also in this game, and
+ 'use', 'drink', 'eat', or 'consume' will activate this command. Depending on the type of consumable, it will either 
+ heal you or boost your damage. The format for using this command is the same as the take function. Equipping an item 
+ also follows this format, though the item must be in your inventory. Once an item is equipped, unequipping it discards 
+ the item.
+ 
  Good luck on your travels, Prince.
 ''')
+player.inventory.append(fist)
 while playing:
     print("_ _ _ _ _ _ _ _ _ _ _")
     print()
@@ -728,7 +730,7 @@ while playing:
             """if len(player.current_location.items) > 1 and item in "all":
                 player.inventory.append(player.current_location.items)"""
             if item.lower() in grab.grab or item.lower() in grab.name.lower():
-                if type(grab) is Objects.Money:
+                if type(grab) is Money:
                     player.wallet += grab.value
                     print("You added %d coins to your wallet" % grab.value)
                 else:
