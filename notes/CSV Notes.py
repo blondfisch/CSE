@@ -1,5 +1,5 @@
 import csv
-
+import os
 
 def validate(num: str):
     first_num = int(num[0])
@@ -18,6 +18,10 @@ def length_check(num: str):
         print("Not all are 16 numbers.")
         return False
 
+
+def reverse_it(string):
+    return string[::-1]
+
 # with open("Book1.csv", "r") as old_csv:
   #  with open("MyNewFile.csv", "w", newline='') as new_csv:
    #     print("writing the file for wiebelord")
@@ -30,10 +34,11 @@ def length_check(num: str):
         #    writer.writerow(row)
             # print(old_number)
 
-
+reverse_it("pizaa")
 with open("Book1.csv", "r") as old_csv:
     with open("MyNewFile.csv", "w", newline='') as new_csv:
         print("writing the file for wiebelord")
+        print(reverse_it("Jacajkal;djflaksjfdk"))
         reader = csv.reader(old_csv)
         writer = csv.writer(new_csv)
         for row in reader:
@@ -41,3 +46,7 @@ with open("Book1.csv", "r") as old_csv:
             if validate(old_number):
                 writer.writerow(row)
 print("ok")
+def validate_card_number(num: str):
+    ????
+
+print(validate_card_number("1234567890123456"))
