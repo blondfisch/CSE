@@ -3,12 +3,16 @@ print("Welcome to the heist. Remember, there's always someone watching")
 
 
 def drop_digit(string):
+    global final_digit
     final_digit = string[15]
+    final_digit = int(final_digit)
+    global dropped
     dropped = string[0:15]
     return dropped
 
 
 def reverse_it(string):
+    global reversed_num
     reversed_num = string[::-1]
     return reversed_num
 
@@ -26,37 +30,38 @@ def length_check(num: str):
 
 
 def multiply(string):
-    my_list = []
-    number_list = list(string)
-    for i in range(len(number_list)):
+    global fixed_list
+    fixed_list = []
+    my_list = list(string)
+    new_num = []
+    temp = -1
+    for i in range(len(string)):
+        num = string[i]
         if i % 2 == 0:
-            i = int(number_list[i])
-            new_num = i * 2
-            if new_num > 9:
-                new_num -= 9
-            my_list.append(new_num)
-    return my_list
-
-
-print(multiply("603"))
+            place = i
+            i = int(string[place])
+            num = i * 2
+            if num > 9:
+                num -= 9
+        fixed_list.append(num)
+    return fixed_list
 
 
 def addition(num):
+    global numlist
     numlist = 0
     templist = num
-    templist = list(templist)
     for i in range(len(templist)):
         integ = int(templist[i])
         numlist += integ
     return numlist
 
 
-def modulus(string, last_digit):
-    string = string % 10
-    if string == last_digit:
-        return True
-    else:
-        return False
+def modulus(string):
+    global ending
+    ending = string % 10
+    ending = int(ending)
+    return ending
 
 
 def validate_number(start_num):
@@ -64,10 +69,13 @@ def validate_number(start_num):
         drop_digit(start_num)
         reverse_it(dropped)
         multiply(reversed_num)
-        addition(my_list)
-        if modulus(numlist, final_digit):
+        addition(fixed_list)
+        modulus(numlist)
+        if ending == final_digit:
+            "its a valid number"
             return True
         else:
+            "no"
             return False
 
 
@@ -78,5 +86,7 @@ with open("Book1.csv", "r") as old_csv:
         writer = csv.writer(new_csv)
         for row in reader:
             old_number = row[0]
-            if validate_number(old_number) is True:
+            print(old_number)
+            if not validate_number(old_number):
                 writer.writerow(row)
+print("ok")
