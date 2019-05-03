@@ -86,7 +86,6 @@ with open("Book1.csv", "r") as old_csv:
         writer = csv.writer(new_csv)
         for row in reader:
             old_number = row[0]
-            print(old_number)
             if not validate_number(old_number):
                 writer.writerow(row)
 print("ok")
