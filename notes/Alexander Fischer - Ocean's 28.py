@@ -46,7 +46,7 @@ def multiply(string):
         fixed_list.append(num)
     return fixed_list
 
-
+# comments are cool
 def addition(num):
     global numlist
     numlist = 0
