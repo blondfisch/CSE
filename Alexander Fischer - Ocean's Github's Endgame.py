@@ -95,7 +95,8 @@ def name_counter(string):
         print(office_counter)
     elif clothes_count(string, clothes_counter):
         print(clothes_counter)
-    cereal_count(string, cereal_counter)
+    elif cereal_count(string, cereal_counter):
+        print(cereal_counter)
     snacks_count(string, snacks_counter)
     baby_count(string, baby_counter)
     fruits_count(string, fruits_counter)
