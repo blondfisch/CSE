@@ -21,8 +21,15 @@ with open("Sales Records.csv", "r") as old_csv:
 
         for item in items.items():
             averages[item_type] = profit / units_sold
+print("Total Profit")
 for key, item in items.items():
     print(key, end=": ")
     print("${:,}".format(round(item, 2)))
     print()
-print(averages)
+print("Profit per unit")
+for key, item in averages.items():
+    print(key, end=": ")
+    print("${:,}".format(round(item, 2)))
+    print()
+print("The Keep the Koala Chlamydiah Foundation asks that investors specialize in Cosmetics because it provides the "
+      "best price per unit and the most total sales.")
