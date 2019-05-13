@@ -11,20 +11,18 @@ with open("Sales Records.csv", "r") as old_csv:
             continue
         item_type = row[2]
         profit = float(row[13])
-        units = float(row[8])
+        units_sold = float(row[8])
+        unit_cost = row[10]
+        unit_price = row[9]
         try:
-            items[item_type]["profits"] += profit
-            items[item_type]["units"] += units
+            items[item_type] += profit
         except KeyError:
-            items[item_type] = {}
-            averages[item_type] = {}
-            items[item_type]["profits"] = profit
-            items[item_type]["units"] = units
+            items[item_type] = profit
 
         for item in items.items():
-            averages[item]["average"] = profit / units
+            averages[item_type] = profit / units_sold
 for key, item in items.items():
     print(key, end=": ")
-    print("${:,}".format(round(item["profits"], 2)))
+    print("${:,}".format(round(item, 2)))
     print()
-print(items)
+print(averages)
