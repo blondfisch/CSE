@@ -6,7 +6,7 @@ averages = {}
 with open("Sales Records.csv", "r") as old_csv:
     reader = csv.reader(old_csv)
     high_total = 0
-    key = "wiebe"
+    high_total_key = "wiebe"
     print("Wiebelord......")
     for row in reader:
         if row[0] == 'Region':
