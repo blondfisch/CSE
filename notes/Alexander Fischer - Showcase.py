@@ -335,7 +335,7 @@ class Sardaukar2(Enemy):
 class Emperor(Enemy):
     def __init__(self):
         super(Emperor, self).__init__("The Emperor", 500, 50, BroadSword(), "The leader of the known universe stands "
-                                                                            "before you. This man has killed hundreds"
+                                                                             "before you. This man has killed hundreds"
                                                                             " and is a"
                                                                             " machine. He wears his imperial shield.")
 
@@ -660,7 +660,7 @@ END = Room("The End", "You won", None, None, None, "SHIELD_WALL", None, None)
 
 
 # Characters
-player = Player(COUNCIL)
+player = Player(DESERT1)
 
 playing = True
 directions = ['north', 'south', 'east', 'west', 'up', 'down']
@@ -679,6 +679,9 @@ item in your inventory, though the format is the same regardless. Consumables ar
  
  Good luck on your travels, Prince.
 ''')
+start = input("type start to begin")
+if "start" in start.lower():
+    playing = True
 player.inventory.append(fist)
 while playing:
     print("_ _ _ _ _ _ _ _ _ _ _")
