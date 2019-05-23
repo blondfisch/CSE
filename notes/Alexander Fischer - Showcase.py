@@ -404,6 +404,8 @@ class Room(object):
 
 
 class Player(object):
+    equipweapon: object
+
     def __init__(self, starting_location, suit=None, weapon=None, wallet=0, defense=0, eweap=None, earmor=None):
         self.current_location = starting_location
         self.inventory = []
@@ -766,28 +768,28 @@ while playing:
                 print("Bold of you to assume you could purchase something while not at a market.")
     elif "attack " in command.lower() or "hit" in command.lower() or "murder" in command.lower() or\
             "attack" in command.lower():
-        if len(command.lower().split()) == 4:
-            jac = command.lower().split()
+        jac = command.lower().split()
+        if len(jac) == 4:
             target = jac[1]
             weapon = jac[3]
-        else:
-            weapon = input("What do you want to attack with? >_")
-            target = input("Who do you want to attack? >_")
+        elif len(jac) == 2:
+            target = jac[1]
+            try:
+                weapon = player.equipweapon.name
+                player.weapon = player.equipweapon
+                player.damage = player.weapon.damage + player.consum
+            except AttributeError:
+                weapon = input("What do you want to attack with? >_")
+                for g in player.inventory:
+                    if weapon.lower() in g.name.lower() or weapon.lower() in g.grab:
+                        player.weapon = g
+                        player.damage = player.weapon.damage + player.consum
+                    else:
+                        print("You cannot use that weapon because you do not have it")
         for i in player.current_location.characters:
             char = i
             if target.lower() in char.name.lower():
                 target = char
-        if weapon.lower() in player.equipweapon.name.lower() or weapon.lower() in player.equipweapon.grab:
-            player.weapon = player.equipweapon
-            player.damage = player.weapon.damage + player.consum
-        else:
-            for g in player.inventory:
-                if weapon.lower() in g.name.lower() or weapon in g.grab:
-                    player.weapon = g
-                    player.damage = player.weapon.damage + player.consum
-        if weapon.lower() not in player.inventory and weapon.lower() not in player.equipweapon.name and\
-                weapon.lower() not in player.equipweapon.grab:
-            print("You cannot use that because you do not have it.")
         if player.weapon.durability <= 0 or player.weapon.durability - 1 == 0:
             print("The weapon broke and the attack failed.")
         elif target.health <= 0:
@@ -795,8 +797,8 @@ while playing:
         else:
             target.take_damage(player.damage)
             if target.health - player.damage > 0:
-                    print("You attack %s for %d damage" % (target.name, player.damage))
-                    target.health -= player.damage
+                print("You attack %s for %d damage" % (target.name, player.damage))
+                target.health -= player.damage
             if target.health <= 0:
                 print("%s died." % target.name)
                 player.current_location.characters.remove(target)
@@ -830,10 +832,12 @@ while playing:
                 player.inventory.remove(goal)
         if issubclass(type(goal), Armor):
             player.equiparmor = goal
-            print(player.equiparmor)
             player.defense = player.equiparmor.defense
+            print("You equipped your %s. You currently have %d armor points." % (player.equiparmor.name,
+                                                                                 player.equiparmor.defense))
         elif issubclass(type(goal), Weapon):
             player.equipweapon = goal
-            print(player.equipweapon.name)
+            print("You have equipped your %s. It does %d damage." % (player.equipweapon.name,
+                                                                     player.equipweapon.damage))
     else:
         print("Command Not Found")
