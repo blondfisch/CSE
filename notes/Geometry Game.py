@@ -69,4 +69,6 @@ for i in range(0, 1000000):
 print(profits)
 print(wins)
 average = float(profits / total)
-print("You basically lost %d every round" % average)
+percentage = (wins / 1000000) * 100
+print("Every round, your profits changed by $%d" % average)
+print("You won about %d percent of the rounds." % percentage)
