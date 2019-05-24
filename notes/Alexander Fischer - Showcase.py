@@ -171,7 +171,7 @@ class Life(Potion):
 
 class Spice(Potion):
     def __init__(self):
-        super(Spice, self).__init__("The Spice", "An addicting substance but it grants special strengths. Your attacks"
+        super(Spice, self).__init__("Spice", "An addicting substance but it grants special strengths. Your attacks"
                                                  " will do more damage, but you will need to keep consuming spice.",
                                     20, ["spice", "the spice", "melange"])
 
@@ -335,16 +335,16 @@ class Sardaukar2(Enemy):
 class Emperor(Enemy):
     def __init__(self):
         super(Emperor, self).__init__("The Emperor", 500, 50, BroadSword(), "The leader of the known universe stands "
-                                                                             "before you. This man has killed hundreds"
+                                                                            "before you. This man has killed hundreds"
                                                                             " and is a"
                                                                             " machine. He wears his imperial shield.")
 
 
 class Worm(Enemy):
     def __init__(self):
-        super(Worm, self).__init__("Worm", 1000, 0, Tooth(), "A worm. A massive creature stretching over one thousand"
-                                                             " yards. You could fight the massive creature but will "
-                                                             "likely be crushed.")
+        super(Worm, self).__init__("Worm", 100000, 0, Tooth(), "A worm. A massive creature stretching over one thousand"
+                                                               " yards. You could fight the massive creature but will "
+                                                               "likely be crushed.")
 
 
 class Dummy(Enemy):
@@ -406,7 +406,7 @@ class Room(object):
 class Player(object):
     equipweapon: object
 
-    def __init__(self, starting_location, suit=None, weapon=None, wallet=0, defense=0, eweap=None, earmor=None):
+    def __init__(self, starting_location, suit=None, weapon=Fist(), wallet=0, defense=0, eweap=None, earmor=None):
         self.current_location = starting_location
         self.inventory = []
         self.sandslide = False
@@ -509,10 +509,23 @@ water8 = Water()
 # Characters
 gi1 = BaseSoldier()
 gi2 = Sardaukar2()
+gi3 = BaseSoldier()
+gi4 = BaseSoldier()
+
 worm1 = Worm()
 fremen1 = Fremen()
+fremen2 = Fremen()
+fremen3 = Fremen()
+fremen4 = Fremen()
+fremen5 = Fremen()
+fremen6 = Fremen()
+fremen7 = Fremen()
+fremen8 = Fremen()
+fremen9 = Fremen()
+
 captain = Captain
 sard1 = Sardaukar1()
+sard3 = Sardaukar1()
 sard2 = Sardaukar2()
 
 # Rooms
@@ -533,12 +546,12 @@ SPICE_ROOMS = Room("Spice Rooms", "Spice is stacked in boxes in for ceremonies. 
 
 FREMEN_PIT = Room("Fremen Pit", "A massive room with seating similar to a coliseum. Battle marks from swords line the"
                                 " walls of the center pit.\n There is a staircase descending downwards and a path"
-                                " leading east.", None, None, "SIETCH", None, None, "WATER", [crysknife1], [fremen1])
+                                " leading east.", None, None, "SIETCH", None, None, "WATER", [crysknife1], [fremen2])
 
 WATER = Room("Water Storage", 'The water storage area of the sietch. You see tanks of water containing hundreds of'
                               ' liters kept in storage, all carefully counted for the tribe.\n The only way out is the'
                               ' staircase leading up.',
-             None, None, None, None, "FREMEN_PIT", None, [water1, water1, water1], [fremen1])
+             None, None, None, None, "FREMEN_PIT", None, [water1, water1, water1], [fremen3])
 
 DESERT2 = Room("Open Desert", "The sun beats down on the sandy desert all around you. You need to find a way out of"
                               " the desert\n before the lack of water or Imperials kill you. This time, however, there"
@@ -547,7 +560,7 @@ DESERT2 = Room("Open Desert", "The sun beats down on the sandy desert all around
 
 DESERT3 = Room("Open Desert", "The sun beats down on the sandy desert all around you. You need to find a way out of"
                               " the desert\n before the lack of water or Imperials kill you.",
-               "DESERT6", 'DESERT5', 'DESERT7', 'DESERT1', None, None, [wood_sword1], [fremen1])
+               "DESERT6", 'DESERT5', 'DESERT7', 'DESERT1', None, None, [wood_sword1], [fremen4])
 
 DESERT4 = Room("Open Desert", "The sun beats down on the sandy desert all around you. You need to find a way out of"
                               " the desert\n before the lack of water or Imperials kill you.",
@@ -556,7 +569,7 @@ DESERT4 = Room("Open Desert", "The sun beats down on the sandy desert all around
 FUNERAL_PLAIN = Room("Funeral Plain", "The expanse of the desert only grows larger as you come across the Funeral"
                                       " Plain,\n where the Fremen take the dead. You are completely outside the reaches"
                                       " of society with no clear paths ahead of you.",
-                     "GREAT_FLAT", "GREAT_FLAT", "DESERT4", "GREAT_FLAT", None, None, [dullsword1], [gi1, fremen1])
+                     "GREAT_FLAT", "GREAT_FLAT", "DESERT4", "GREAT_FLAT", None, None, [dullsword1], [gi1, fremen9])
 
 GREAT_FLAT = Room("The Great Flat", "The farthest known point on the western half of the world. The only way out"
                                     " is back through the Funeral Plain. While here, a massive worm "
@@ -565,12 +578,12 @@ GREAT_FLAT = Room("The Great Flat", "The farthest known point on the western hal
 
 DESERT5 = Room("Open Desert", "The sun beats down on the sandy desert all around you. You need to find a way out of"
                               " the desert\n before the lack of water or Imperials kill you.",
-               "DESERT3", None, "DESERT8", "DESERT2", None, None, [], [fremen1, fremen1])
+               "DESERT3", None, "DESERT8", "DESERT2", None, None, [], [fremen6, fremen7])
 
 
 DESERT6 = Room("Open Desert", "The sun beats down on the sandy desert all around you. You need to find a way out of"
                               " the desert\n before the lack of water or Imperials kill you.",
-               "ROCKFACE", "DESERT3", None, None, None, None, [], [fremen1])
+               "ROCKFACE", "DESERT3", None, None, None, None, [], [fremen5])
 
 ROCKFACE = Room("Cliff side", "You come upon a cliff side in the desert. It is blocking the north and east, but it"
                               " appears scalable.",
@@ -585,7 +598,7 @@ PATROL_STATION = Room("Imperial Patrol Station", " As you make your way back to 
                                                  "Imperial soldiers surround the massive stone barracks.\n"
                                                  " As you approach,"
                                                  "a guard notices you, and you realize you can only escape to the west",
-                      None, None, None, "ROCKFACE", None, None, [], [gi1, captain])
+                      None, None, None, "ROCKFACE", None, None, [], [gi4, captain])
 
 DESERT7 = Room("Open Desert", "The sun beats down on the sandy desert all around you. You need to find a way out of"
                               " the desert\n before the lack of water or Imperials kill you.",
@@ -593,7 +606,7 @@ DESERT7 = Room("Open Desert", "The sun beats down on the sandy desert all around
 
 DESERT8 = Room("Open Desert", "The sun beats down on the sandy desert all around you. You need to find a way out of"
                               " the desert\n before the lack of water or Imperials kill you.",
-               "DESERT7", None, None, "DESERT5", None, None, [], [fremen1])
+               "DESERT7", None, None, "DESERT5", None, None, [], [fremen8])
 
 # Region 2 - The City
 
@@ -617,7 +630,7 @@ MARKET = Room("Arrakeen Market", "You find yourself at the central market of Arr
 
 SHIELD_WALL = Room("Shield Wall",
                    "The shield wall is the eastern boundary of the city. Venturing beyond is too dangerous.",
-                   None, None, 'END', "MARKET", None, None, [quart_shield2], [sard1, gi2])
+                   None, None, 'END', "MARKET", None, None, [quart_shield2], [sard3, gi3])
 # Region 3 - The Palace
 
 PALACE = Room("Palace Entrance", "You approach the massive palace. The massive gold throne and large, red banners"
@@ -769,6 +782,9 @@ while playing:
     elif "attack " in command.lower() or "hit" in command.lower() or "murder" in command.lower() or\
             "attack" in command.lower():
         jac = command.lower().split()
+        target = jac[1]
+        if target in "enemy ":
+            target = input("That doesn't work. Who do you want to attack?")
         if len(jac) == 4:
             target = jac[1]
             weapon = jac[3]
@@ -790,8 +806,12 @@ while playing:
             char = i
             if target.lower() in char.name.lower():
                 target = char
+            else:
+                print("I don't know who you are attacking.")
         if player.weapon.durability <= 0 or player.weapon.durability - 1 == 0:
             print("The weapon broke and the attack failed.")
+        elif target not in player.current_location.characters:
+            print("You cannot attack them")
         elif target.health <= 0:
             print("You're attacking a dead person")
         else:
@@ -809,7 +829,7 @@ while playing:
     elif "consume" in command.lower() or "use" in command.lower() or "eat" in command.lower() or\
             "drink" in command.lower():
         temp = command.lower().split()
-        obj = temp[1]
+        obj = " ".join(temp[1:])
         for i in player.inventory:
             if obj in i.name or obj in i.grab:
                 obj = i
@@ -821,9 +841,10 @@ while playing:
             player.consum += obj.damage
             print("You increased your damage by %d" % player.consum)
     elif "equip " in command.lower() or "equip" in command.lower():
-        if len(command.lower().split()) == 2:
+        if len(command.lower().split()) >= 2:
             templist = command.lower().split()
-            goal = templist[1]
+            goal = " ".join(templist[1:])
+            print(goal)
         else:
             goal = input("What do you want to equip? >_")
         for i in player.inventory:
