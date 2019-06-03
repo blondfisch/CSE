@@ -41,14 +41,14 @@ print(challenge4(-5))
 
 
 def challenge5(radius):
-    return math.pi * radius ** 3
+    return math.pi * radius ** 2
 
 
 print("The circle has an area of %s units." % challenge5(4))
 
 
 def challenge6(radius):
-    return 4/3 * radius * math.pi
+    return 4/3 * radius ** 3 * math.pi
 
 
 print(challenge6(5))
