@@ -3,10 +3,9 @@
 # evil damages: hopelessness, stress, deceit
 # good damges: Mr. Rogers = optimism, Bob Ross = tranquility, Carl Sagan = ensurement (matched up vertically with good strengths)
 # tranquility weak to deceit
-# ensurement weak to chaos
+# ensurement weak to hopelessness
 # optimism weak to stress
-
-playername = input("Please enter your name: ")
+playername = input("Before you enter the fever dream, what is your name? >_")
 
 
 class Player(object):
@@ -20,6 +19,7 @@ class Player(object):
         self.weak = ["hopelessness", "stress", "deceit"]
 
     def take_dmg(self, enemy, dmg_type, dmg: int):
+        global playing
         evade = random.randint(0, 10)
         if evade == 1:
             print("You evaded the attack!")
@@ -43,26 +43,23 @@ class Player(object):
                                                                                          player.health))
 
     def move(self, new_location):
-        """ This moves the player to a new room
-
-        :param new_location: The room object of which you are going to
-        """
         self.current_location = new_location
 
     def find_next_room(self, direction):
-        """This method searches the current room to see if a room exists in that direction.
-
-        :param direction: The direction that you want to move to
-        :return: The room object if it exists, or none if it does not
-        """
         name_of_room = getattr(self.current_location, direction)
         return globals()[name_of_room]
 
 
 class NPC(object):
-    def __init__(self, name, description):
+    def __init__(self, name, description, quality, weak):
         self.name = name
         self.description = description
+        self.quality = quality
+        self.weak = weak
+
+    def bestow(self):
+        player.weapon.dmg_type.append(self.quality)
+        player.weak.remove(self.weak)
 
 
 class Carl_Sagan(NPC):
@@ -70,15 +67,19 @@ class Carl_Sagan(NPC):
         super(NPC, self).__init__(name, description)
         self.name = name
         self.descritption = description
+        self.dialogue1 = "Insert words here"
+        self.dialogue2 = "Insert more words here. You have learned how to do the ensuring"
+        self.dialogue3 = "You have defeated the ultimate evil. Congratulations on your victory"
 
 
 class Enemy(object):
-    def __init__(self, name, desc, hp, dmg_type, weak=None):
+    def __init__(self, name, desc, hp, dmg_type, attack_dmg, weak=None):
         self.name = name
         self.desc = desc
         self.hp = hp
         self.dmg_type = dmg_type
         self.weak = weak
+        self.attack_dmg = attack_dmg
 
     def take_dmg(self, dmg_type, dmg: int):
         if self.weak in dmg_type:
@@ -101,6 +102,39 @@ class Enemy(object):
                                                                                                  self.hp))
 
 
+class Slime(Enemy):
+    def __init(self, name, desc, hp, dmg_type, attack_dmg, weak=None):
+        super(Slime, self).__init__(name, desc, hp, dmg_type, attack_dmg, weak)
+        self.name = name
+        self.desc = desc
+        self.hp = hp
+        self.dmg_type = dmg_type
+        self.weak = weak
+        self.attack_dmg = attack_dmg
+
+
+class Hopeless_Slime(Slime):
+    def __init__(self):
+        super(Hopeless_Slime, self).__init__("Hopeless Slime", "A ball of goo that instills a feeling of hopelessness"
+                                                               " within you.", 10, "hopelessness", 5, "optimism")
+
+
+slime_test = Hopeless_Slime()
+
+
+class Stress_Slime(Slime):
+    def __init__(self):
+        super(Stress_Slime, self).__init__("Stressful Slime", "A ball of goo that makes your heart race as you are"
+                                                              "filled with a sense of pure stress.", 10, "stress",
+                                           "tranquility")
+
+
+class Deceit_Slime(Slime):
+    def __init__(self):
+        super(Deceit_Slime, self).__init__("Deceitful Slime", "A ball of goo that seems to be made of lies and deceit.",
+                                           10, "deceit", "ensurement")
+
+
 class Object(object):
     def __init__(self, name):
         self.name = name
@@ -114,6 +148,10 @@ class Weapon(Object):
         self.dmg = dmg
         self.dmg_type = ["normal"]
 
+
+class Sword(Weapon):
+    def __init__(self):
+        super(Sword, self).__init__("")
 
 class Consumable(Object):
     def __init__(self, name, desc):
@@ -149,6 +187,5 @@ player = Player(None, None)
 playing = True
 
 while playing:
-    print("hi")
-
+    print("no")
 
